@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log a Request — Disclosure Desk</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.875rem; color: #C7D2FE; text-decoration: none; transition: background-color 0.15s, color 0.15s; }
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: white; }
+    .nav-item.active { background: rgba(255,255,255,0.12); color: white; font-weight: 500; border-left: 2px solid white; padding-left: calc(0.75rem - 2px); }
+    .field-label { display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 0.375rem; }
+    .field-hint { font-size: 0.75rem; color: #94a3b8; margin-top: 0.375rem; line-height: 1.5; }
+    .field-input { width: 100%; padding: 0.625rem 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.625rem; font-size: 0.875rem; color: #0f172a; background: white; transition: border-color 0.15s, box-shadow 0.15s; font-family: 'Inter', sans-serif; }
+    .field-input:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .field-input::placeholder { color: #94a3b8; }
+    select.field-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1rem; padding-right: 2.5rem; }
+    .section-card { background: white; border-radius: 1rem; border: 1px solid #f1f5f9; padding: 1.75rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .section-card.muted { background: #fafbff; border-color: #eef2ff; }
+    .section-title { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1.25rem; }
+    .section-title.light { color: #94a3b8; }
+    .toggle-wrap { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; }
+    .toggle { position: relative; width: 2.5rem; height: 1.375rem; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track { position: absolute; inset: 0; background: #e2e8f0; border-radius: 9999px; transition: background 0.2s; }
+    .toggle input:checked + .toggle-track { background: #4f46e5; }
+    .toggle-thumb { position: absolute; top: 2px; left: 2px; width: 1rem; height: 1rem; background: white; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s; }
+    .toggle input:checked ~ .toggle-thumb { transform: translateX(1.125rem); }
+  </style>
+</head>
+<body class="bg-[#F5F7FF] min-h-screen">
+
+  <!-- Sidebar -->
+  <aside style="background:#1E1B4B" class="fixed inset-y-0 left-0 w-60 flex flex-col z-20">
+    <div class="flex items-center gap-2.5 px-5 py-5 border-b border-white/10">
+      <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+      <span class="text-white font-bold text-base tracking-tight">Disclosure Desk</span>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      <a href="dashboard.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Dashboard
+      </a>
+      <a href="requests.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        My Requests
+      </a>
+      <a href="new-request.html" class="nav-item active">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Log a Request
+      </a>
+      <a href="draft-request.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        </svg>
+        Draft a Request
+      </a>
+      <a href="agency-insights.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Agency Insights
+        <span class="ml-auto text-[10px] bg-indigo-400/30 text-indigo-200 px-1.5 py-0.5 rounded font-semibold">Pro</span>
+      </a>
+      <a href="settings.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Settings
+      </a>
+    </nav>
+    <div class="px-3 py-4 border-t border-white/10">
+      <div class="flex items-center gap-3 px-2">
+        <div class="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center flex-shrink-0">
+          <span class="text-white text-xs font-bold">JD</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-white text-sm font-medium truncate">Jane Doe</p>
+          <p class="text-indigo-300 text-xs truncate">jane@example.com</p>
+        </div>
+        <a href="index.html" class="text-indigo-300 hover:text-white transition-colors" title="Log out">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="ml-60 min-h-screen bg-[#F5F7FF]">
+
+    <div class="max-w-2xl mx-auto px-8 pt-10 pb-16">
+      <div class="mb-8">
+        <h1 class="text-2xl font-bold text-slate-900">Log a FOIA Request</h1>
+        <p class="text-sm text-slate-500 mt-1.5">Track a request you've already sent. Have a request to write? Use the <a href="draft-request.html" class="text-indigo-600 hover:text-indigo-800">Draft a Request &rarr;</a> tool.</p>
+      </div>
+
+      <form id="newRequestForm" onsubmit="saveRequest(event)">
+
+        <!-- Section 1: Which agency? -->
+        <div class="section-card">
+          <div class="section-title">Which agency?</div>
+          <div class="space-y-5">
+            <div>
+              <label class="field-label" for="agency">Agency name <span class="text-rose-400">*</span></label>
+              <input type="text" id="agency" name="agency" class="field-input" placeholder="e.g. New York Police Department or U.S. Environmental Protection Agency" required />
+              <p class="field-hint">Enter the full agency name, e.g. "New York Police Department" or "U.S. Environmental Protection Agency"</p>
+            </div>
+            <div>
+              <label class="field-label" for="jurisdiction">Jurisdiction <span class="text-rose-400">*</span></label>
+              <select id="jurisdiction" name="jurisdiction" class="field-input">
+                <option value="Federal FOIA">Federal FOIA</option>
+                <option value="NY FOIL">New York FOIL</option>
+                <option value="CA PRA">California Public Records Act</option>
+                <option value="TX PIA">Texas Public Information Act</option>
+                <option value="FL Sunshine">Florida Sunshine Law</option>
+                <option value="Other">Other state or local law</option>
+              </select>
+              <p class="field-hint">This determines the legal deadline and appeal process.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: What did you request? -->
+        <div class="section-card">
+          <div class="section-title">What did you request?</div>
+          <div class="space-y-5">
+            <div>
+              <label class="field-label" for="subject">In one sentence, what did you ask for? <span class="text-rose-400">*</span></label>
+              <input type="text" id="subject" name="subject" class="field-input" placeholder="e.g. Internal emails about PFAS contamination in local water supply" required />
+              <p class="field-hint">This is for your own reference. Keep it short and descriptive.</p>
+            </div>
+            <div>
+              <label class="field-label" for="description">Full description <span class="text-slate-400 font-normal">(optional)</span></label>
+              <textarea id="description" name="description" rows="4" class="field-input resize-none" placeholder="Paste in the text of your request if you'd like to keep a record of exactly what you asked for."></textarea>
+              <p class="field-hint">Paste in the text of your request if you'd like to keep a record of exactly what you asked for.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Tracking info (de-emphasized) -->
+        <div class="section-card muted">
+          <div class="section-title light">Tracking info &mdash; optional</div>
+          <div class="space-y-5">
+            <div>
+              <label class="field-label" for="dateSubmitted">When did you send it?</label>
+              <input type="date" id="dateSubmitted" name="dateSubmitted" class="field-input" value="2026-05-06" />
+              <p class="field-hint">Used to calculate the statutory deadline.</p>
+            </div>
+            <div>
+              <label class="field-label" for="trackingNumber">Confirmation or tracking number</label>
+              <input type="text" id="trackingNumber" name="trackingNumber" class="field-input" placeholder="e.g. EPA-HQ-2026-001234" />
+              <p class="field-hint">Many agencies send this in their acknowledgment email. You can add it later.</p>
+            </div>
+            <div>
+              <label class="field-label" for="deadline">Response deadline</label>
+              <input type="date" id="deadline" name="deadline" class="field-input" />
+              <p class="field-hint">Federal FOIA: 20 business days from receipt. NY FOIL: 20 business days. Leave blank if you're not sure — you can update it later.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Set up reminders (Pro) -->
+        <div class="section-card" style="background: #fefeff; border-color: #e0e7ff;">
+          <div class="flex items-center justify-between mb-4">
+            <div class="section-title mb-0">Set up reminders</div>
+            <span class="text-[10px] bg-indigo-100 text-indigo-600 font-semibold px-2 py-0.5 rounded uppercase tracking-wide">Pro</span>
+          </div>
+
+          <label class="toggle-wrap mb-5">
+            <span class="toggle">
+              <input type="checkbox" id="remindersEnabled" checked onchange="toggleReminders(this)" />
+              <span class="toggle-track"></span>
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="text-sm font-medium text-slate-700">Email me reminders before this deadline</span>
+          </label>
+
+          <div id="reminderOptions" class="space-y-3 pl-1">
+            <p class="text-xs font-medium text-slate-500 mb-2">Remind me:</p>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" name="reminder_14" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-600">2 weeks before deadline</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" name="reminder_7" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-600">1 week before deadline</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" name="reminder_3" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-600">3 days before deadline</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" name="reminder_1" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-600">1 day before deadline</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="flex items-center gap-5 mt-4">
+          <a href="requests.html" class="text-sm text-slate-500 hover:text-slate-700 transition-colors">Cancel</a>
+          <button
+            type="submit"
+            id="saveBtn"
+            class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Save Request
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <script>
+    function toggleReminders(checkbox) {
+      const opts = document.getElementById('reminderOptions');
+      opts.style.opacity = checkbox.checked ? '1' : '0.4';
+      opts.style.pointerEvents = checkbox.checked ? '' : 'none';
+    }
+
+    function saveRequest(e) {
+      e.preventDefault();
+      const btn = document.getElementById('saveBtn');
+      btn.textContent = 'Saving…';
+      btn.disabled = true;
+      setTimeout(() => { window.location.href = 'requests.html'; }, 700);
+    }
+  </script>
+</body>
+</html>

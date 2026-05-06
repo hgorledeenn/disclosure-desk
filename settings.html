@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — Disclosure Desk</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.875rem; color: #C7D2FE; text-decoration: none; transition: background-color 0.15s, color 0.15s; }
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: white; }
+    .nav-item.active { background: rgba(255,255,255,0.12); color: white; font-weight: 500; border-left: 2px solid white; padding-left: calc(0.75rem - 2px); }
+    .field-label { display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 0.375rem; }
+    .field-input { width: 100%; padding: 0.625rem 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.625rem; font-size: 0.875rem; color: #0f172a; background: white; transition: border-color 0.15s, box-shadow 0.15s; font-family: 'Inter', sans-serif; }
+    .field-input:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .field-input::placeholder { color: #94a3b8; }
+    .tab-btn { padding: 0.625rem 0; font-size: 0.875rem; font-weight: 500; border-bottom: 2px solid transparent; color: #64748b; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; transition: all 0.15s; margin-right: 2rem; white-space: nowrap; }
+    .tab-btn.active { border-bottom-color: #4f46e5; color: #4f46e5; }
+    .tab-btn:hover:not(.active) { color: #1e293b; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .toggle { position: relative; display: inline-flex; align-items: center; cursor: pointer; gap: 0.75rem; }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track { width: 2.5rem; height: 1.375rem; background: #e2e8f0; border-radius: 9999px; transition: background 0.2s; position: relative; flex-shrink: 0; }
+    .toggle input:checked + .toggle-track { background: #4f46e5; }
+    .toggle-thumb { position: absolute; top: 2px; left: 2px; width: 1rem; height: 1rem; background: white; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s; }
+    .toggle input:checked ~ .toggle-thumb { transform: translateX(1.125rem); }
+  </style>
+</head>
+<body class="bg-[#F5F7FF] min-h-screen">
+
+  <!-- Sidebar -->
+  <aside style="background:#1E1B4B" class="fixed inset-y-0 left-0 w-60 flex flex-col z-20">
+    <div class="flex items-center gap-2.5 px-5 py-5 border-b border-white/10">
+      <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+      <span class="text-white font-bold text-base tracking-tight">Disclosure Desk</span>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      <a href="dashboard.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Dashboard
+      </a>
+      <a href="requests.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        My Requests
+      </a>
+      <a href="new-request.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Log a Request
+      </a>
+      <a href="draft-request.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        </svg>
+        Draft a Request
+      </a>
+      <a href="agency-insights.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Agency Insights
+        <span class="ml-auto text-[10px] bg-indigo-400/30 text-indigo-200 px-1.5 py-0.5 rounded font-semibold">Pro</span>
+      </a>
+      <a href="settings.html" class="nav-item active">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Settings
+      </a>
+    </nav>
+    <div class="px-3 py-4 border-t border-white/10">
+      <div class="flex items-center gap-3 px-2">
+        <div class="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center flex-shrink-0">
+          <span class="text-white text-xs font-bold">JD</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-white text-sm font-medium truncate">Jane Doe</p>
+          <p class="text-indigo-300 text-xs truncate">jane@example.com</p>
+        </div>
+        <a href="index.html" class="text-indigo-300 hover:text-white transition-colors" title="Log out">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="ml-60 min-h-screen bg-[#F5F7FF]">
+
+    <div class="px-10 pt-10 pb-0">
+      <h1 class="text-2xl font-bold text-slate-900">Settings</h1>
+    </div>
+
+    <!-- Tabs -->
+    <div class="px-10 mt-6 border-b border-slate-200">
+      <div class="flex">
+        <button class="tab-btn active" onclick="switchTab('profile', this)">Profile</button>
+        <button class="tab-btn" onclick="switchTab('notifications', this)">Notifications</button>
+        <button class="tab-btn" onclick="switchTab('account', this)">Account</button>
+      </div>
+    </div>
+
+    <div class="px-10 py-8 max-w-lg">
+
+      <!-- PROFILE TAB -->
+      <div id="tab-profile" class="tab-panel active">
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7">
+          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-6">Profile</h2>
+          <div class="space-y-5">
+            <div>
+              <label class="field-label" for="fullName">Full name</label>
+              <input type="text" id="fullName" class="field-input" value="Jane Doe" />
+            </div>
+            <div>
+              <label class="field-label" for="profileEmail">Email address</label>
+              <input type="email" id="profileEmail" class="field-input" value="jane@example.com" />
+            </div>
+            <div>
+              <label class="field-label" for="organization">Organization</label>
+              <input type="text" id="organization" class="field-input" value="The City NYC" />
+            </div>
+            <div>
+              <label class="field-label" for="jobTitle">Job title</label>
+              <input type="text" id="jobTitle" class="field-input" value="Investigative Reporter" />
+            </div>
+          </div>
+          <button onclick="showSaved(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors">
+            Save changes
+          </button>
+        </div>
+      </div>
+
+      <!-- NOTIFICATIONS TAB -->
+      <div id="tab-notifications" class="tab-panel">
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7">
+          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">When should we email you?</h2>
+          <p class="text-sm text-slate-500 mb-6 mt-1">Reminders go to <span class="font-medium text-slate-700">jane@example.com</span></p>
+
+          <div class="space-y-4 mb-7">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-700">2 weeks before deadline</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-700">1 week before deadline</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-700">3 days before deadline</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-slate-700">1 day before deadline</span>
+            </label>
+          </div>
+
+          <div class="pt-5 border-t border-slate-100">
+            <label class="toggle">
+              <input type="checkbox" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              <span class="text-sm text-slate-700 font-medium">Weekly digest email</span>
+            </label>
+            <p class="text-xs text-slate-400 mt-1.5 pl-14">A summary of all active requests, sent every Monday.</p>
+          </div>
+
+          <button onclick="showSaved(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors">
+            Save changes
+          </button>
+        </div>
+      </div>
+
+      <!-- ACCOUNT TAB -->
+      <div id="tab-account" class="tab-panel">
+        <!-- Change password -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7 mb-5">
+          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-5">Change password</h2>
+          <div class="space-y-4">
+            <div>
+              <label class="field-label">Current password</label>
+              <input type="password" class="field-input" placeholder="Enter your current password" />
+            </div>
+            <div>
+              <label class="field-label">New password</label>
+              <input type="password" class="field-input" placeholder="At least 8 characters" />
+            </div>
+            <div>
+              <label class="field-label">Confirm new password</label>
+              <input type="password" class="field-input" placeholder="Repeat new password" />
+            </div>
+          </div>
+          <button onclick="showSaved(this)" class="mt-6 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors">
+            Update password
+          </button>
+        </div>
+
+        <!-- Export data -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7 mb-5">
+          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Export your data</h2>
+          <p class="text-sm text-slate-500 mb-5">Download all your FOIA requests and notes as a CSV file.</p>
+          <button
+            onclick="alert('CSV export — demo only. In production this would download all 10 requests.')"
+            class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
+          >
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Export all requests (CSV)
+          </button>
+        </div>
+
+        <!-- Danger zone -->
+        <div class="bg-white rounded-2xl border border-rose-200 shadow-sm p-7">
+          <h2 class="text-sm font-semibold text-rose-700 uppercase tracking-wider mb-2">Danger zone</h2>
+          <p class="text-sm text-slate-500 mb-5">These actions cannot be undone.</p>
+          <button
+            onclick="alert('Account deletion — demo only. Your account and all data would be permanently removed.')"
+            class="px-4 py-2.5 text-sm font-medium text-white bg-rose-600 hover:bg-rose-700 rounded-lg transition-colors"
+          >
+            Delete my account
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function switchTab(tabName, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
+    function showSaved(btn) {
+      const orig = btn.textContent;
+      btn.textContent = 'Saved!';
+      btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+      btn.classList.add('bg-emerald-600');
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.classList.remove('bg-emerald-600');
+        btn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
