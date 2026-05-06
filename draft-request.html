@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draft a Request — Disclosure Desk</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.875rem; color: #C7D2FE; text-decoration: none; transition: background-color 0.15s, color 0.15s; }
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: white; }
+    .nav-item.active { background: rgba(255,255,255,0.12); color: white; font-weight: 500; border-left: 2px solid white; padding-left: calc(0.75rem - 2px); }
+
+    /* Field styles matching design system */
+    .field-label { display: block; font-size: 0.875rem; font-weight: 500; color: #334155; margin-bottom: 0.375rem; }
+    .field-hint { font-size: 0.75rem; color: #94a3b8; margin-top: 0.375rem; line-height: 1.5; }
+    .field-input { width: 100%; padding: 0.625rem 0.875rem; border: 1px solid #e2e8f0; border-radius: 0.625rem; font-size: 0.875rem; color: #0f172a; background: white; transition: border-color 0.15s, box-shadow 0.15s; font-family: 'Inter', sans-serif; }
+    .field-input:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .field-input::placeholder { color: #94a3b8; }
+    select.field-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1rem; padding-right: 2.5rem; }
+
+    /* Toggle */
+    .toggle-wrap { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; }
+    .toggle { position: relative; width: 2.5rem; height: 1.375rem; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track { position: absolute; inset: 0; background: #e2e8f0; border-radius: 9999px; transition: background 0.2s; }
+    .toggle input:checked + .toggle-track { background: #4f46e5; }
+    .toggle-thumb { position: absolute; top: 2px; left: 2px; width: 1rem; height: 1rem; background: white; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s; }
+    .toggle input:checked ~ .toggle-thumb { transform: translateX(1.125rem); }
+
+    /* Step progress */
+    .step-connector { flex: 1; height: 2px; background: #e2e8f0; }
+    .step-connector.done { background: #4f46e5; }
+
+    /* Letter preview */
+    .letter-box {
+      background: #F8F9FC;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 1.5rem 1.75rem;
+      font-family: 'Courier New', 'Courier', monospace;
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: #1e293b;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Checkbox grid */
+    .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.25rem; }
+  </style>
+</head>
+<body class="bg-[#F5F7FF] min-h-screen">
+
+  <!-- Sidebar -->
+  <aside style="background:#1E1B4B" class="fixed inset-y-0 left-0 w-60 flex flex-col z-20">
+    <div class="flex items-center gap-2.5 px-5 py-5 border-b border-white/10">
+      <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+      <span class="text-white font-bold text-base tracking-tight">Disclosure Desk</span>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      <a href="dashboard.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Dashboard
+      </a>
+      <a href="requests.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        My Requests
+      </a>
+      <a href="new-request.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Log a Request
+      </a>
+      <a href="draft-request.html" class="nav-item active">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        </svg>
+        Draft a Request
+        <span style="margin-left:auto;font-size:10px;background:rgba(165,180,252,0.2);color:#A5B4FC;padding:2px 6px;border-radius:4px;font-weight:600">Pro</span>
+      </a>
+      <a href="agency-insights.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Agency Insights
+        <span style="margin-left:auto;font-size:10px;background:rgba(165,180,252,0.2);color:#A5B4FC;padding:2px 6px;border-radius:4px;font-weight:600">Pro</span>
+      </a>
+      <a href="settings.html" class="nav-item">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Settings
+      </a>
+    </nav>
+    <div class="px-3 py-4 border-t border-white/10">
+      <div class="flex items-center gap-3 px-2">
+        <div class="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center flex-shrink-0">
+          <span class="text-white text-xs font-bold">JD</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-white text-sm font-medium truncate">Jane Doe</p>
+          <p class="text-indigo-300 text-xs truncate">jane@example.com</p>
+        </div>
+        <a href="index.html" class="text-indigo-300 hover:text-white transition-colors" title="Log out">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="ml-60 min-h-screen" style="background:#F5F7FF">
+    <div class="max-w-2xl mx-auto px-8 pt-10 pb-16">
+
+      <!-- Page header -->
+      <div class="mb-8">
+        <h1 class="text-2xl font-bold text-slate-900">Draft a FOIA Request</h1>
+        <p class="text-sm text-slate-500 mt-2 leading-relaxed">Answer four quick questions and we'll generate a complete, ready-to-send request letter.</p>
+      </div>
+
+      <!-- Wizard card -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 px-8 pt-8 pb-10">
+
+        <!-- Step progress bar -->
+        <div class="flex items-center mb-10" id="stepProgress">
+          <!-- Step nodes injected by JS -->
+        </div>
+
+        <!-- ── STEP 1: Agency ───────────────────────────────────────────── -->
+        <div id="step1">
+          <h2 class="text-lg font-semibold text-slate-900 mb-1">Which agency are you requesting records from?</h2>
+          <p class="text-sm text-slate-500 mb-6">Tell us about the agency so we can use the correct law and deadline in your letter.</p>
+
+          <div class="space-y-5">
+
+            <!-- Jurisdiction -->
+            <div>
+              <label class="field-label" for="jurisdiction">Jurisdiction <span class="text-rose-400">*</span></label>
+              <select id="jurisdiction" class="field-input">
+                <option value="">Select a law…</option>
+                <option value="Federal FOIA">Federal FOIA</option>
+                <option value="Alabama Open Records Act">Alabama Open Records Act</option>
+                <option value="Alaska Public Records Act">Alaska Public Records Act</option>
+                <option value="Arizona Public Records Law">Arizona Public Records Law</option>
+                <option value="Arkansas FOIA">Arkansas FOIA</option>
+                <option value="California Public Records Act">California Public Records Act</option>
+                <option value="Colorado CORA">Colorado CORA</option>
+                <option value="Connecticut FOIA">Connecticut FOIA</option>
+                <option value="Delaware FOIA">Delaware FOIA</option>
+                <option value="Florida Sunshine Law">Florida Sunshine Law</option>
+                <option value="Georgia Open Records Act">Georgia Open Records Act</option>
+                <option value="Hawaii Uniform Information Practices Act">Hawaii Uniform Information Practices Act</option>
+                <option value="Idaho Public Records Act">Idaho Public Records Act</option>
+                <option value="Illinois FOIA">Illinois FOIA</option>
+                <option value="Indiana Access to Public Records Act">Indiana Access to Public Records Act</option>
+                <option value="Iowa Open Records Law">Iowa Open Records Law</option>
+                <option value="Kansas Open Records Act">Kansas Open Records Act</option>
+                <option value="Kentucky Open Records Act">Kentucky Open Records Act</option>
+                <option value="Louisiana Public Records Law">Louisiana Public Records Law</option>
+                <option value="Maine FOAA">Maine FOAA</option>
+                <option value="Maryland Public Information Act">Maryland Public Information Act</option>
+                <option value="Massachusetts Public Records Law">Massachusetts Public Records Law</option>
+                <option value="Michigan FOIA">Michigan FOIA</option>
+                <option value="Minnesota Data Practices Act">Minnesota Data Practices Act</option>
+                <option value="Mississippi Public Records Act">Mississippi Public Records Act</option>
+                <option value="Missouri Sunshine Law">Missouri Sunshine Law</option>
+                <option value="Montana FOIA">Montana FOIA</option>
+                <option value="Nebraska Public Records Act">Nebraska Public Records Act</option>
+                <option value="Nevada Public Records Act">Nevada Public Records Act</option>
+                <option value="New Hampshire Right-to-Know Law">New Hampshire Right-to-Know Law</option>
+                <option value="New Jersey Open Public Records Act">New Jersey Open Public Records Act</option>
+                <option value="New Mexico Inspection of Public Records Act">New Mexico Inspection of Public Records Act</option>
+                <option value="New York Freedom of Information Law (FOIL)">New York Freedom of Information Law (FOIL)</option>
+                <option value="North Carolina Public Records Law">North Carolina Public Records Law</option>
+                <option value="North Dakota Open Records Law">North Dakota Open Records Law</option>
+                <option value="Ohio Public Records Act">Ohio Public Records Act</option>
+                <option value="Oklahoma Open Records Act">Oklahoma Open Records Act</option>
+                <option value="Oregon Public Records Law">Oregon Public Records Law</option>
+                <option value="Pennsylvania Right-to-Know Law">Pennsylvania Right-to-Know Law</option>
+                <option value="Rhode Island Access to Public Records Act">Rhode Island Access to Public Records Act</option>
+                <option value="South Carolina FOIA">South Carolina FOIA</option>
+                <option value="South Dakota Open Records Law">South Dakota Open Records Law</option>
+                <option value="Tennessee Public Records Act">Tennessee Public Records Act</option>
+                <option value="Texas Public Information Act">Texas Public Information Act</option>
+                <option value="Utah Government Records Access and Management Act">Utah Government Records Access and Management Act</option>
+                <option value="Vermont Public Records Act">Vermont Public Records Act</option>
+                <option value="Virginia FOIA">Virginia FOIA</option>
+                <option value="Washington Public Records Act">Washington Public Records Act</option>
+                <option value="West Virginia FOIA">West Virginia FOIA</option>
+                <option value="Wisconsin Open Records Law">Wisconsin Open Records Law</option>
+                <option value="Wyoming Public Records Act">Wyoming Public Records Act</option>
+                <option value="Other">Other</option>
+              </select>
+              <p class="field-hint">This determines the legal deadline and your appeal rights. Federal agencies use the federal FOIA; state and local agencies use your state's open records law.</p>
+            </div>
+
+            <!-- Agency name + preview panel -->
+            <div>
+              <label class="field-label" for="agencyName">Agency name <span class="text-rose-400">*</span></label>
+              <input type="text" id="agencyName" class="field-input" placeholder="e.g. Environmental Protection Agency, NYPD, Chicago Police Department" />
+              <p class="field-hint">Use the full official name. For federal agencies, you can look up FOIA contacts at <a href="https://www.foia.gov" target="_blank" class="text-indigo-600 hover:text-indigo-800">foia.gov</a>.</p>
+
+              <!-- Agency insights preview -->
+              <div id="agencyInsightPreview" class="hidden mt-3 p-4 bg-indigo-50 border border-indigo-100 rounded-xl">
+                <div class="flex items-center justify-between mb-2">
+                  <p class="text-xs font-semibold text-indigo-700 uppercase tracking-wider">Disclosure Desk data for <span id="previewAgencyName" class="normal-case font-semibold"></span></p>
+                  <a href="agency-insights.html" class="text-xs text-indigo-600 hover:text-indigo-800">View full breakdown &rarr;</a>
+                </div>
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="text-center">
+                    <p id="wizPreviewAvg" class="text-lg font-bold text-slate-900">—</p>
+                    <p class="text-xs text-slate-500">avg response</p>
+                  </div>
+                  <div class="text-center">
+                    <p id="wizPreviewCompliance" class="text-lg font-bold text-slate-900">—</p>
+                    <p class="text-xs text-slate-500">within deadline</p>
+                  </div>
+                  <div class="text-center">
+                    <p id="wizPreviewSuccess" class="text-lg font-bold text-slate-900">—</p>
+                    <p class="text-xs text-slate-500">received response</p>
+                  </div>
+                </div>
+                <p id="wizPreviewSample" class="text-xs text-slate-400 mt-2 text-center"></p>
+              </div>
+            </div>
+
+            <!-- Officer name -->
+            <div>
+              <label class="field-label" for="officerName">FOIA / records officer name <span class="text-slate-400 font-normal">(optional)</span></label>
+              <input type="text" id="officerName" class="field-input" placeholder="e.g. John Smith, FOIA Officer" />
+              <p class="field-hint">Addressing the request to a named officer can help, but "FOIA Officer" works fine if you don't know.</p>
+            </div>
+
+            <!-- Agency address -->
+            <div>
+              <label class="field-label" for="agencyAddress">Agency mailing address <span class="text-slate-400 font-normal">(optional)</span></label>
+              <textarea id="agencyAddress" rows="3" class="field-input resize-none" placeholder="123 Main St&#10;Washington, DC 20001"></textarea>
+              <p class="field-hint">Include if you're mailing or faxing. Most agencies accept email submissions — check their website.</p>
+            </div>
+
+          </div>
+
+          <!-- Step 1 footer -->
+          <div class="flex justify-end mt-8">
+            <button onclick="goToStep(2)" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              Next &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- ── STEP 2: Records ──────────────────────────────────────────── -->
+        <div id="step2" style="display:none">
+          <h2 class="text-lg font-semibold text-slate-900 mb-1">What records are you looking for?</h2>
+          <p class="text-sm text-slate-500 mb-6">Describe the records specifically. You don't need to justify why you want them.</p>
+
+          <div class="space-y-5">
+
+            <!-- Description -->
+            <div>
+              <label class="field-label" for="recordDescription">Describe the records you want <span class="text-rose-400">*</span></label>
+              <textarea id="recordDescription" rows="6" class="field-input resize-none" placeholder="e.g. All contracts and payments between [agency] and [vendor], 2020 to present, including performance reports and any audits." oninput="updateCharCount()"></textarea>
+              <div class="flex items-center justify-between mt-1">
+                <p class="field-hint" style="margin-top:0">Be specific about record types and relevant names or programs. You don't need to explain why you want them — just what you're looking for.</p>
+                <p id="charCount" class="text-xs text-slate-400 ml-4 flex-shrink-0">0 characters</p>
+              </div>
+            </div>
+
+            <!-- Date range -->
+            <div>
+              <label class="field-label">Date range <span class="text-slate-400 font-normal">(optional)</span></label>
+              <div class="flex items-center gap-3">
+                <div class="flex-1">
+                  <label class="text-xs text-slate-500 mb-1 block">From</label>
+                  <input type="date" id="dateFrom" class="field-input" />
+                </div>
+                <div class="flex-1">
+                  <label class="text-xs text-slate-500 mb-1 block">To</label>
+                  <input type="date" id="dateTo" class="field-input" />
+                </div>
+                <div class="flex items-center gap-2 mt-5 flex-shrink-0">
+                  <input type="checkbox" id="toPresent" onchange="toggleToPresent(this)" class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <label for="toPresent" class="text-sm text-slate-600 cursor-pointer whitespace-nowrap">To present</label>
+                </div>
+              </div>
+              <p class="field-hint">Limiting the date range makes requests faster to process. Use the narrowest range that covers what you need.</p>
+            </div>
+
+            <!-- Record types -->
+            <div>
+              <label class="field-label">Record types <span class="text-slate-400 font-normal">(optional)</span></label>
+              <div class="checkbox-grid mt-2">
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" name="recType" value="Emails and correspondence" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Emails and correspondence</span>
+                </label>
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" name="recType" value="Reports and internal memos" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Reports and internal memos</span>
+                </label>
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" name="recType" value="Contracts and procurement records" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Contracts and procurement records</span>
+                </label>
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" name="recType" value="Data and spreadsheets" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Data and spreadsheets</span>
+                </label>
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" name="recType" value="Policies and procedures" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Policies and procedures</span>
+                </label>
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" name="recType" value="Photographs or video" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Photographs or video</span>
+                </label>
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" name="recType" value="Meeting minutes or agendas" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Meeting minutes or agendas</span>
+                </label>
+                <label class="flex items-start gap-2.5 cursor-pointer" id="otherTypeLabel">
+                  <input type="checkbox" name="recType" value="Other" id="otherTypeCheck" onchange="toggleOtherType(this)" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">Other</span>
+                </label>
+              </div>
+              <div id="otherTypeInput" class="hidden mt-2">
+                <input type="text" id="otherTypeText" class="field-input" placeholder="Describe other record types…" />
+              </div>
+              <p class="field-hint">Checking these helps route your request but isn't required.</p>
+            </div>
+
+          </div>
+
+          <!-- Step 2 footer -->
+          <div class="flex items-center justify-between mt-8">
+            <button onclick="goToStep(1)" class="text-sm text-slate-500 hover:text-slate-800 transition-colors font-medium">
+              &larr; Back
+            </button>
+            <button onclick="goToStep(3)" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              Next &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- ── STEP 3: About you ────────────────────────────────────────── -->
+        <div id="step3" style="display:none">
+          <h2 class="text-lg font-semibold text-slate-900 mb-1">About you — this helps with your fee waiver request</h2>
+
+          <!-- Blue intro card -->
+          <div class="bg-sky-50 border border-sky-100 rounded-xl px-4 py-3 mb-6">
+            <p class="text-sm text-sky-800 leading-relaxed">Journalists and public interest researchers are typically entitled to fee waivers that eliminate search and copying charges. We'll include the right language automatically.</p>
+          </div>
+
+          <div class="space-y-5">
+
+            <div>
+              <label class="field-label" for="fullName">Full name <span class="text-rose-400">*</span></label>
+              <input type="text" id="fullName" class="field-input" placeholder="Jane Doe" />
+            </div>
+
+            <div>
+              <label class="field-label" for="jobTitle">Job title <span class="text-slate-400 font-normal">(optional)</span></label>
+              <input type="text" id="jobTitle" class="field-input" placeholder="Reporter, Investigative Journalist, Research Fellow, Student…" />
+            </div>
+
+            <div>
+              <label class="field-label" for="organization">Publication or organization <span class="text-slate-400 font-normal">(optional)</span></label>
+              <input type="text" id="organization" class="field-input" placeholder="e.g. The City NYC" />
+              <p class="field-hint">The agency uses this to determine if you qualify for a news media fee waiver.</p>
+            </div>
+
+            <div>
+              <label class="field-label" for="requesterEmail">Email address <span class="text-rose-400">*</span></label>
+              <input type="email" id="requesterEmail" class="field-input" placeholder="jane@example.com" />
+              <p class="field-hint">The agency will use this to send their response and any follow-up questions.</p>
+            </div>
+
+          </div>
+
+          <!-- Fee waiver card -->
+          <div class="mt-6 p-4 bg-indigo-50 border border-indigo-100 rounded-xl">
+            <label class="toggle-wrap mb-3">
+              <span class="toggle">
+                <input type="checkbox" id="feeWaiverToggle" checked onchange="toggleFeeWaiver(this)" />
+                <span class="toggle-track"></span>
+                <span class="toggle-thumb"></span>
+              </span>
+              <span class="text-sm font-semibold text-slate-800">Request a fee waiver</span>
+            </label>
+            <p id="feeWaiverHelp" class="text-xs text-slate-500 leading-relaxed mb-3">A fee waiver eliminates search and duplication charges. We'll include standard waiver language in your letter.</p>
+            <div id="feeWaiverTextArea">
+              <label class="field-label text-xs" for="publicInterest">Why is this request in the public interest?</label>
+              <textarea id="publicInterest" rows="3" class="field-input resize-none text-sm" placeholder="This information will inform the public's understanding of [topic] and is relevant to ongoing news coverage."></textarea>
+              <p class="field-hint">One or two sentences is enough. This appears in the letter to justify the waiver.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 footer -->
+          <div class="flex items-center justify-between mt-8">
+            <button onclick="goToStep(2)" class="text-sm text-slate-500 hover:text-slate-800 transition-colors font-medium">
+              &larr; Back
+            </button>
+            <button onclick="goToStep(4)" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              Generate my letter &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- ── STEP 4: Your Letter ──────────────────────────────────────── -->
+        <div id="step4" style="display:none">
+          <h2 class="text-lg font-semibold text-slate-900 mb-1">Your draft letter is ready</h2>
+          <p class="text-sm text-slate-500 mb-5">Review it below, then copy or download it. Edit as needed before sending.</p>
+
+          <!-- Letter preview -->
+          <div class="letter-box" id="letterPreview"></div>
+
+          <!-- Action buttons -->
+          <div class="flex flex-wrap items-center gap-3 mt-5">
+            <button
+              onclick="copyLetter()"
+              id="copyBtn"
+              class="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              Copy to clipboard
+            </button>
+            <button
+              onclick="downloadLetter()"
+              class="flex items-center gap-2 px-5 py-2.5 border border-slate-300 hover:border-slate-400 text-slate-700 hover:text-slate-900 text-sm font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download as .txt
+            </button>
+            <a
+              href="new-request.html"
+              class="flex items-center gap-2 px-5 py-2.5 border border-slate-300 hover:border-indigo-300 hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 text-sm font-semibold rounded-lg transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              Save as draft in my requests &rarr;
+            </a>
+          </div>
+
+          <!-- Disclaimer -->
+          <p class="text-xs text-slate-400 mt-4 leading-relaxed">This is a starting point — review before sending. Disclosure Desk is not a law firm and this is not legal advice.</p>
+
+          <!-- Step 4 back -->
+          <div class="mt-6 pt-5 border-t border-slate-100">
+            <button onclick="goToStep(3)" class="text-sm text-slate-500 hover:text-slate-800 transition-colors font-medium">
+              &larr; Edit information
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /card -->
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script>
+    // ── State ─────────────────────────────────────────────────────────────────
+    let currentStep = 1;
+    const TOTAL_STEPS = 4;
+    const STEP_LABELS = ['Agency', 'Records', 'About You', 'Your Letter'];
+
+    // ── Step navigation ───────────────────────────────────────────────────────
+    function goToStep(n) {
+      if (n === 2 && !validateStep1()) return;
+      if (n === 3 && !validateStep2()) return;
+      if (n === 4 && !validateStep3()) return;
+
+      if (n === 4) buildLetter();
+
+      currentStep = n;
+      for (let i = 1; i <= TOTAL_STEPS; i++) {
+        const el = document.getElementById('step' + i);
+        if (el) el.style.display = i === n ? 'block' : 'none';
+      }
+      renderProgress();
+      window.scrollTo(0, 0);
+    }
+
+    // ── Validation ────────────────────────────────────────────────────────────
+    function validateStep1() {
+      const jurisdiction = document.getElementById('jurisdiction').value;
+      const agencyName = document.getElementById('agencyName').value.trim();
+      if (!jurisdiction) { alert('Please select a jurisdiction.'); return false; }
+      if (!agencyName) { alert('Please enter an agency name.'); return false; }
+      return true;
+    }
+
+    function validateStep2() {
+      const desc = document.getElementById('recordDescription').value.trim();
+      if (!desc) { alert('Please describe the records you are requesting.'); return false; }
+      return true;
+    }
+
+    function validateStep3() {
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('requesterEmail').value.trim();
+      if (!name) { alert('Please enter your full name.'); return false; }
+      if (!email) { alert('Please enter your email address.'); return false; }
+      return true;
+    }
+
+    // ── Progress bar ──────────────────────────────────────────────────────────
+    function renderProgress() {
+      const container = document.getElementById('stepProgress');
+      let html = '';
+      for (let i = 1; i <= TOTAL_STEPS; i++) {
+        // Node
+        if (i < currentStep) {
+          // Completed: indigo fill with checkmark
+          html += `<div class="flex flex-col items-center" style="min-width:2.5rem">
+            <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <span class="text-xs text-indigo-600 font-medium mt-1 whitespace-nowrap">${STEP_LABELS[i-1]}</span>
+          </div>`;
+        } else if (i === currentStep) {
+          // Current: indigo fill, white number
+          html += `<div class="flex flex-col items-center" style="min-width:2.5rem">
+            <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0 ring-4 ring-indigo-100">
+              <span class="text-white text-xs font-bold">${i}</span>
+            </div>
+            <span class="text-xs text-indigo-700 font-semibold mt-1 whitespace-nowrap">${STEP_LABELS[i-1]}</span>
+          </div>`;
+        } else {
+          // Upcoming: gray circle
+          html += `<div class="flex flex-col items-center" style="min-width:2.5rem">
+            <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0">
+              <span class="text-slate-500 text-xs font-semibold">${i}</span>
+            </div>
+            <span class="text-xs text-slate-400 mt-1 whitespace-nowrap">${STEP_LABELS[i-1]}</span>
+          </div>`;
+        }
+        // Connector line (not after the last step)
+        if (i < TOTAL_STEPS) {
+          const lineClass = i < currentStep ? 'bg-indigo-600' : 'bg-slate-200';
+          html += `<div class="flex-1 h-0.5 mx-2 ${lineClass} mt-[-1rem]"></div>`;
+        }
+      }
+      container.innerHTML = html;
+    }
+
+    // ── Character count ───────────────────────────────────────────────────────
+    function updateCharCount() {
+      const len = document.getElementById('recordDescription').value.length;
+      document.getElementById('charCount').textContent = len + ' character' + (len === 1 ? '' : 's');
+    }
+
+    // ── To-present toggle ─────────────────────────────────────────────────────
+    function toggleToPresent(cb) {
+      const dateTo = document.getElementById('dateTo');
+      dateTo.disabled = cb.checked;
+      if (cb.checked) dateTo.value = '';
+      dateTo.style.opacity = cb.checked ? '0.4' : '1';
+    }
+
+    // ── Other record type ─────────────────────────────────────────────────────
+    function toggleOtherType(cb) {
+      const wrap = document.getElementById('otherTypeInput');
+      wrap.classList.toggle('hidden', !cb.checked);
+    }
+
+    // ── Fee waiver toggle ─────────────────────────────────────────────────────
+    function toggleFeeWaiver(cb) {
+      const area = document.getElementById('feeWaiverTextArea');
+      const help = document.getElementById('feeWaiverHelp');
+      area.style.display = cb.checked ? 'block' : 'none';
+      if (!cb.checked) {
+        help.textContent = 'Without a fee waiver, you may be charged for search time and copying. You can request one separately.';
+      } else {
+        help.textContent = 'A fee waiver eliminates search and duplication charges. We\'ll include standard waiver language in your letter.';
+      }
+    }
+
+    // ── Agency insights preview ───────────────────────────────────────────────
+    function checkAgencyInsight(val) {
+      const panel = document.getElementById('agencyInsightPreview');
+      if (!val || val.length < 3) { panel.classList.add('hidden'); return; }
+      const q = val.toLowerCase();
+      const match = AGENCY_INSIGHTS.find(a =>
+        a.agency.toLowerCase().includes(q) || a.abbr.toLowerCase().includes(q)
+      );
+      if (!match) { panel.classList.add('hidden'); return; }
+      document.getElementById('previewAgencyName').textContent = match.abbr;
+      document.getElementById('wizPreviewAvg').textContent = match.avgDays + ' days';
+      document.getElementById('wizPreviewCompliance').textContent = match.withinDeadline + '%';
+      document.getElementById('wizPreviewSuccess').textContent = match.successRate + '%';
+      document.getElementById('wizPreviewSample').textContent = 'Based on ' + match.dataPoints.toLocaleString() + ' requests in our community data.';
+      panel.classList.remove('hidden');
+    }
+
+    document.getElementById('agencyName').addEventListener('input', function() {
+      checkAgencyInsight(this.value);
+    });
+
+    // ── Jurisdiction → legal citation map ─────────────────────────────────────
+    function getLegalCitation(jurisdiction) {
+      const map = {
+        'Federal FOIA': 'the Freedom of Information Act (5 U.S.C. § 552)',
+        'New York Freedom of Information Law (FOIL)': 'the New York Freedom of Information Law (Public Officers Law § 84 et seq.)',
+        'California Public Records Act': 'the California Public Records Act (Government Code § 7920 et seq.)',
+        'Texas Public Information Act': 'the Texas Public Information Act (Government Code Chapter 552)',
+        'Illinois FOIA': 'the Illinois Freedom of Information Act (5 ILCS 140)'
+      };
+      if (map[jurisdiction]) return map[jurisdiction];
+      // Fallback: "the [jurisdiction]"
+      return 'the ' + jurisdiction;
+    }
+
+    // ── Date formatting ───────────────────────────────────────────────────────
+    function formatDateForLetter(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    function getTodayForLetter() {
+      return 'May 6, 2026';
+    }
+
+    // ── Build letter ──────────────────────────────────────────────────────────
+    function buildLetter() {
+      const jurisdiction = document.getElementById('jurisdiction').value;
+      const agencyName = document.getElementById('agencyName').value.trim();
+      const officerName = document.getElementById('officerName').value.trim() || 'FOIA Officer';
+      const agencyAddress = document.getElementById('agencyAddress').value.trim();
+
+      const recordDesc = document.getElementById('recordDescription').value.trim();
+      const dateFrom = document.getElementById('dateFrom').value;
+      const dateTo = document.getElementById('dateTo').value;
+      const toPresent = document.getElementById('toPresent').checked;
+
+      const checkedTypes = Array.from(document.querySelectorAll('input[name="recType"]:checked'))
+        .map(cb => {
+          if (cb.value === 'Other') {
+            const other = document.getElementById('otherTypeText').value.trim();
+            return other || 'Other records';
+          }
+          return cb.value;
+        });
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const jobTitle = document.getElementById('jobTitle').value.trim();
+      const org = document.getElementById('organization').value.trim();
+      const email = document.getElementById('requesterEmail').value.trim();
+      const feeWaiver = document.getElementById('feeWaiverToggle').checked;
+      const publicInterest = document.getElementById('publicInterest').value.trim();
+
+      const legalCitation = getLegalCitation(jurisdiction);
+      const today = getTodayForLetter();
+
+      // Build address block
+      let addressBlock = officerName + '\n' + agencyName;
+      if (agencyAddress) addressBlock += '\n' + agencyAddress;
+
+      // Date range paragraph
+      let dateRangePara = '';
+      if (dateFrom) {
+        const endStr = toPresent ? 'present' : (dateTo ? formatDateForLetter(dateTo) : 'present');
+        dateRangePara = '\nI request records covering the period from ' + formatDateForLetter(dateFrom) + ' to ' + endStr + '.';
+      }
+
+      // Record types paragraph
+      let typesPara = '';
+      if (checkedTypes.length > 0) {
+        typesPara = '\nThe records I am seeking include, but are not limited to: ' + checkedTypes.join(', ') + '.';
+      }
+
+      // Fee waiver paragraph
+      let feeWaiverPara = '';
+      if (feeWaiver) {
+        let waiverText = 'I request a full waiver of all applicable fees. This request is made in the public interest';
+        if (publicInterest) waiverText += ' because ' + publicInterest;
+        waiverText += '.';
+        if (jobTitle || org) {
+          waiverText += ' I am a' + (jobTitle ? ' ' + jobTitle : '') + (org ? ' at ' + org + ', a news media organization' : '') + '.';
+        }
+        feeWaiverPara = '\nFEE WAIVER: ' + waiverText;
+      } else {
+        feeWaiverPara = '\nFEE WAIVER: I am prepared to pay reasonable fees for this request. Please notify me before incurring costs exceeding $25.';
+      }
+
+      // Closing block
+      let closingParts = [fullName];
+      if (jobTitle) closingParts.push(jobTitle);
+      if (org) closingParts.push(org);
+      if (email) closingParts.push(email);
+      closingParts.push(today);
+
+      const letter =
+`${today}
+
+${addressBlock}
+
+Re: ${jurisdiction} Records Request
+
+Dear ${officerName}:
+
+I am writing to request access to records under ${legalCitation}.
+
+I am requesting the following records: ${recordDesc}
+${dateRangePara}${typesPara}
+${feeWaiverPara}
+
+Please provide records in electronic format where available. If any portion of this request is denied, please provide a written explanation citing specific exemptions, and release all reasonably segregable non-exempt portions.
+
+Please confirm receipt of this request and provide an estimated completion date.
+
+Thank you,
+
+${closingParts.join('\n')}`;
+
+      document.getElementById('letterPreview').textContent = letter;
+    }
+
+    // ── Clipboard ─────────────────────────────────────────────────────────────
+    function copyLetter() {
+      const text = document.getElementById('letterPreview').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg> Copied!';
+        btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+        btn.classList.add('bg-emerald-600');
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+          btn.classList.remove('bg-emerald-600');
+        }, 2000);
+      }).catch(() => {
+        alert('Could not copy — please select and copy the text manually.');
+      });
+    }
+
+    // ── Download ──────────────────────────────────────────────────────────────
+    function downloadLetter() {
+      const text = document.getElementById('letterPreview').textContent;
+      const agency = document.getElementById('agencyName').value.trim().replace(/\s+/g, '-').toLowerCase() || 'agency';
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'foia-request-' + agency + '.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    renderProgress();
+  </script>
+</body>
+</html>

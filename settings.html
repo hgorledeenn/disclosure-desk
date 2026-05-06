@@ -70,7 +70,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
         Agency Insights
-        <span class="ml-auto text-[10px] bg-indigo-400/30 text-indigo-200 px-1.5 py-0.5 rounded font-semibold">Pro</span>
+        <span style="margin-left:auto;font-size:10px;background:rgba(165,180,252,0.2);color:#A5B4FC;padding:2px 6px;border-radius:4px;font-weight:600">Pro</span>
       </a>
       <a href="settings.html" class="nav-item active">
         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,9 +99,9 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="ml-60 min-h-screen bg-[#F5F7FF]">
+  <main class="ml-60 min-h-screen" style="background:#F5F7FF">
 
-    <div class="px-10 pt-10 pb-0">
+    <div class="px-10 pt-8 pb-0">
       <h1 class="text-2xl font-bold text-slate-900">Settings</h1>
     </div>
 
@@ -119,7 +119,7 @@
       <!-- PROFILE TAB -->
       <div id="tab-profile" class="tab-panel active">
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7">
-          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-6">Profile</h2>
+          <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-6">Profile</h2>
           <div class="space-y-5">
             <div>
               <label class="field-label" for="fullName">Full name</label>
@@ -138,7 +138,7 @@
               <input type="text" id="jobTitle" class="field-input" value="Investigative Reporter" />
             </div>
           </div>
-          <button onclick="showSaved(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors">
+          <button onclick="showSaved(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
             Save changes
           </button>
         </div>
@@ -147,8 +147,8 @@
       <!-- NOTIFICATIONS TAB -->
       <div id="tab-notifications" class="tab-panel">
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7">
-          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">When should we email you?</h2>
-          <p class="text-sm text-slate-500 mb-6 mt-1">Reminders go to <span class="font-medium text-slate-700">jane@example.com</span></p>
+          <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">When should we email you?</h2>
+          <p class="text-sm text-slate-500 mb-6 mt-1.5">Reminders go to <span class="font-medium text-slate-700">jane@example.com</span></p>
 
           <div class="space-y-4 mb-7">
             <label class="flex items-center gap-3 cursor-pointer">
@@ -178,7 +178,7 @@
             <p class="text-xs text-slate-400 mt-1.5 pl-14">A summary of all active requests, sent every Monday.</p>
           </div>
 
-          <button onclick="showSaved(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors">
+          <button onclick="showSaved(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
             Save changes
           </button>
         </div>
@@ -188,7 +188,7 @@
       <div id="tab-account" class="tab-panel">
         <!-- Change password -->
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7 mb-5">
-          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-5">Change password</h2>
+          <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-5">Change password</h2>
           <div class="space-y-4">
             <div>
               <label class="field-label">Current password</label>
@@ -203,14 +203,14 @@
               <input type="password" class="field-input" placeholder="Repeat new password" />
             </div>
           </div>
-          <button onclick="showSaved(this)" class="mt-6 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors">
+          <button onclick="showSaved(this)" class="mt-6 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
             Update password
           </button>
         </div>
 
         <!-- Export data -->
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7 mb-5">
-          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Export your data</h2>
+          <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Export your data</h2>
           <p class="text-sm text-slate-500 mb-5">Download all your FOIA requests and notes as a CSV file.</p>
           <button
             onclick="alert('CSV export — demo only. In production this would download all 10 requests.')"
@@ -225,7 +225,7 @@
 
         <!-- Danger zone -->
         <div class="bg-white rounded-2xl border border-rose-200 shadow-sm p-7">
-          <h2 class="text-sm font-semibold text-rose-700 uppercase tracking-wider mb-2">Danger zone</h2>
+          <h2 class="text-xs font-semibold text-rose-600 uppercase tracking-wider mb-2">Danger zone</h2>
           <p class="text-sm text-slate-500 mb-5">These actions cannot be undone.</p>
           <button
             onclick="alert('Account deletion — demo only. Your account and all data would be permanently removed.')"

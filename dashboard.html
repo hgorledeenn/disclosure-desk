@@ -58,7 +58,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
         Agency Insights
-        <span class="ml-auto text-[10px] bg-indigo-400/30 text-indigo-200 px-1.5 py-0.5 rounded font-semibold">Pro</span>
+        <span style="margin-left:auto;font-size:10px;background:rgba(165,180,252,0.2);color:#A5B4FC;padding:2px 6px;border-radius:4px;font-weight:600">Pro</span>
       </a>
       <a href="settings.html" class="nav-item">
         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,81 +89,70 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="ml-60 min-h-screen bg-[#F5F7FF]">
+  <main class="ml-60 min-h-screen" style="background:#F5F7FF">
 
-    <!-- Greeting + Quick Action -->
-    <div class="px-10 pt-10 pb-2 flex items-start justify-between">
+    <!-- Greeting -->
+    <div class="px-10 pt-8 pb-0 flex items-start justify-between">
       <div>
         <h1 class="text-2xl font-bold text-slate-900">Good morning, Jane.</h1>
-        <p class="text-sm text-slate-500 mt-1">Wednesday, May 6, 2026</p>
+        <p class="text-sm text-slate-400 mt-1">Wednesday, May 6, 2026</p>
       </div>
       <a href="new-request.html" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors mt-1">+ Log a new request &rarr;</a>
     </div>
 
-    <div class="px-10 py-8 space-y-8 max-w-3xl">
+    <div class="px-10 pb-12 max-w-3xl space-y-6 mt-6">
 
       <!-- Section 1: Needs Attention -->
       <section>
-        <div class="flex items-center gap-2.5 mb-4">
-          <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Needs Attention</h2>
-          <span id="attentionCount" class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold bg-rose-100 text-rose-700 rounded-full"></span>
+        <div class="flex items-center gap-2.5 mb-3">
+          <span class="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0"></span>
+          <h2 class="text-sm font-semibold text-slate-700">Needs Attention</h2>
+          <span id="attentionCount" class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-xs font-bold bg-rose-100 text-rose-700 rounded-full"></span>
         </div>
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden" id="attentionCard">
           <!-- populated by JS -->
         </div>
       </section>
 
-      <!-- Section 2: At a glance — inline stats -->
+      <!-- Section 2: At a glance -->
       <section>
-        <div class="flex items-center gap-8 py-2">
-          <span class="text-sm text-slate-500"><span class="font-bold text-slate-900 text-base">10</span> total requests</span>
-          <span class="text-slate-300">&middot;</span>
+        <div class="flex items-center gap-5 py-1 flex-wrap">
+          <span class="text-sm text-slate-500"><span class="font-bold text-slate-900 text-base">10</span> total</span>
+          <span class="text-slate-300 text-base">&middot;</span>
           <span class="text-sm text-slate-500"><span class="font-bold text-slate-900 text-base">5</span> overdue</span>
-          <span class="text-slate-300">&middot;</span>
+          <span class="text-slate-300 text-base">&middot;</span>
           <span class="text-sm text-slate-500"><span class="font-bold text-slate-900 text-base">1</span> due this week</span>
-          <span class="text-slate-300">&middot;</span>
+          <span class="text-slate-300 text-base">&middot;</span>
           <span class="text-sm text-slate-500"><span class="font-bold text-slate-900 text-base">2</span> completed</span>
         </div>
       </section>
 
       <!-- Section 3: Recent updates -->
       <section>
-        <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Recent updates</h2>
+        <h2 class="text-sm font-semibold text-slate-700 mb-3">Recent updates</h2>
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm divide-y divide-slate-50">
           <div class="px-6 py-4">
-            <div class="flex items-start gap-3">
-              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-16 flex-shrink-0">May 1</span>
-              <div>
-                <span class="text-sm font-medium text-indigo-600">NYPD ShotSpotter</span>
-                <span class="text-sm text-slate-600"> &mdash; Second follow-up sent. No response from FOIL unit.</span>
-              </div>
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-14 flex-shrink-0">May 1</span>
+              <p class="text-sm text-slate-600 leading-relaxed"><span class="font-medium text-indigo-600">NYPD ShotSpotter</span> &mdash; Second follow-up sent. No response from FOIL unit.</p>
             </div>
           </div>
           <div class="px-6 py-4">
-            <div class="flex items-start gap-3">
-              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-16 flex-shrink-0">Apr 28</span>
-              <div>
-                <span class="text-sm font-medium text-indigo-600">NYC DOE School Safety</span>
-                <span class="text-sm text-slate-600"> &mdash; Request submitted via OpenRecords portal.</span>
-              </div>
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-14 flex-shrink-0">Apr 28</span>
+              <p class="text-sm text-slate-600 leading-relaxed"><span class="font-medium text-indigo-600">NYC DOE School Safety</span> &mdash; Request submitted via OpenRecords portal.</p>
             </div>
           </div>
           <div class="px-6 py-4">
-            <div class="flex items-start gap-3">
-              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-16 flex-shrink-0">Apr 24</span>
-              <div>
-                <span class="text-sm font-medium text-indigo-600">EPA South Bronx</span>
-                <span class="text-sm text-slate-600"> &mdash; Extension expired with no response. Status: still in progress on EPA tracker.</span>
-              </div>
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-14 flex-shrink-0">Apr 24</span>
+              <p class="text-sm text-slate-600 leading-relaxed"><span class="font-medium text-indigo-600">EPA South Bronx</span> &mdash; Extension expired with no response.</p>
             </div>
           </div>
           <div class="px-6 py-4">
-            <div class="flex items-start gap-3">
-              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-16 flex-shrink-0">Apr 15</span>
-              <div>
-                <span class="text-sm font-medium text-indigo-600">NYC DSS Shelters</span>
-                <span class="text-sm text-slate-600"> &mdash; Contested agency extension notice &mdash; insufficient justification under FOIL.</span>
-              </div>
+            <div class="flex items-start gap-4">
+              <span class="text-xs text-slate-400 whitespace-nowrap pt-0.5 w-14 flex-shrink-0">Apr 15</span>
+              <p class="text-sm text-slate-600 leading-relaxed"><span class="font-medium text-indigo-600">NYC DSS Shelters</span> &mdash; Contested agency extension notice.</p>
             </div>
           </div>
           <div class="px-6 py-4 text-center">
@@ -191,7 +180,7 @@
 
       if (items.length === 0) {
         countBadge.textContent = '0';
-        countBadge.className = 'inline-flex items-center justify-center w-5 h-5 text-xs font-bold bg-emerald-100 text-emerald-700 rounded-full';
+        countBadge.className = 'inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-xs font-bold bg-emerald-100 text-emerald-700 rounded-full';
         card.innerHTML = `
           <div class="px-6 py-8 flex items-center gap-3">
             <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,11 +208,12 @@
           borderColor = 'border-amber-400';
         }
         const isLast = idx === items.length - 1;
-        return `<div class="flex items-center gap-4 px-5 py-4 ${isLast ? '' : 'border-b border-slate-50'} hover:bg-slate-50/60 transition-colors group">
-          <div class="w-0.5 h-10 ${borderColor} rounded-full flex-shrink-0"></div>
+        const shortSubject = r.subject.length > 65 ? r.subject.substring(0, 65) + '…' : r.subject;
+        return `<div class="flex items-center gap-4 pl-5 pr-5 py-3.5 ${isLast ? '' : 'border-b border-slate-50'} hover:bg-slate-50/60 transition-colors">
+          <div class="w-0.5 h-9 rounded-full flex-shrink-0 border-l-4 ${borderColor}" style="border-left-width:3px;border-left-style:solid"></div>
           <span class="inline-block bg-slate-100 text-slate-600 text-xs font-semibold px-2 py-0.5 rounded flex-shrink-0">${r.agencyAbbr || r.agency}</span>
           <div class="flex-1 min-w-0">
-            <div class="text-sm font-medium text-slate-800 truncate">${r.subject.length > 68 ? r.subject.substring(0, 68) + '…' : r.subject}</div>
+            <div class="text-sm font-medium text-slate-800 truncate">${shortSubject}</div>
           </div>
           <div class="flex items-center gap-4 flex-shrink-0">
             <span class="text-sm ${labelClass}">${label}</span>

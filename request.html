@@ -57,7 +57,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
         Agency Insights
-        <span class="ml-auto text-[10px] bg-indigo-400/30 text-indigo-200 px-1.5 py-0.5 rounded font-semibold">Pro</span>
+        <span style="margin-left:auto;font-size:10px;background:rgba(165,180,252,0.2);color:#A5B4FC;padding:2px 6px;border-radius:4px;font-weight:600">Pro</span>
       </a>
       <a href="settings.html" class="nav-item">
         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="ml-60 min-h-screen bg-[#F5F7FF]" id="mainContent">
+  <main class="ml-60 min-h-screen" style="background:#F5F7FF" id="mainContent">
     <!-- Populated by JS -->
   </main>
 
@@ -96,22 +96,10 @@
       submitted:    { label: 'Submitted',        cls: 'bg-slate-50 text-slate-500 border border-slate-200' },
       acknowledged: { label: 'Waiting',          cls: 'bg-sky-50 text-sky-700 border border-sky-200' },
       processing:   { label: 'Processing',       cls: 'bg-amber-50 text-amber-700 border border-amber-200' },
-      responded:    { label: 'Done',             cls: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
+      responded:    { label: 'Responded',        cls: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
       appealed:     { label: 'Appeal filed',     cls: 'bg-orange-50 text-orange-700 border border-orange-200' },
       closed:       { label: 'Done',             cls: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
       overdue:      { label: 'Follow up needed', cls: 'bg-rose-50 text-rose-700 border border-rose-200' }
-    };
-
-    // Colors for agency abbreviation badge
-    const AGENCY_BADGE_COLORS = {
-      'NYPD': 'bg-blue-100 text-blue-800',
-      'EPA': 'bg-green-100 text-green-800',
-      'FBI': 'bg-slate-100 text-slate-700',
-      'MTA': 'bg-sky-100 text-sky-800',
-      'NYC DOC': 'bg-orange-100 text-orange-800',
-      'NYC HPD': 'bg-violet-100 text-violet-800',
-      'NYC DSS': 'bg-rose-100 text-rose-800',
-      'NYC DOE': 'bg-amber-100 text-amber-800',
     };
 
     function plainBadge(status) {
@@ -119,9 +107,12 @@
       return `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${s.cls}">${s.label}</span>`;
     }
 
-    function agencyBadge(abbr) {
-      const cls = AGENCY_BADGE_COLORS[abbr] || 'bg-indigo-100 text-indigo-800';
-      return `<span class="inline-flex items-center rounded-lg px-3 py-1 text-sm font-bold ${cls}">${abbr}</span>`;
+    function jurisdictionBadge(jx) {
+      if (!jx) return '';
+      const cls = jx === 'Federal FOIA'
+        ? 'bg-sky-100 text-sky-700'
+        : 'bg-indigo-100 text-indigo-700';
+      return `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${cls}">${jx}</span>`;
     }
 
     function renderRequest() {
@@ -151,12 +142,12 @@
         }
       }
 
-      // Key facts
-      const facts = [];
-      if (req.submitted) facts.push(`<span class="text-slate-500">Submitted</span> <span class="text-slate-800 font-medium">${formatDate(req.submitted)}</span>`);
-      if (req.trackingNumber) facts.push(`<span class="text-slate-500">Tracking</span> <span class="text-slate-800 font-medium">${req.trackingNumber}</span>`);
-      if (req.contactName) facts.push(`<span class="text-slate-500">Contact</span> <span class="text-slate-800 font-medium">${req.contactName}</span>`);
-      if (req.contactEmail) facts.push(`<a href="mailto:${req.contactEmail}" class="text-indigo-600 hover:text-indigo-800 font-medium">${req.contactEmail}</a>`);
+      // Key facts line
+      const factParts = [];
+      if (req.submitted) factParts.push(`Submitted ${formatDate(req.submitted)}`);
+      if (req.trackingNumber) factParts.push(`Tracking: ${req.trackingNumber}`);
+      if (req.contactEmail) factParts.push(`<a href="mailto:${req.contactEmail}" class="text-indigo-600 hover:text-indigo-800">${req.contactEmail}</a>`);
+      const factsHTML = factParts.join(' &middot; ');
 
       // Timeline
       const timelineHTML = [...req.notes].reverse().map((note, idx) => {
@@ -193,23 +184,66 @@
           <div class="text-sm text-slate-400 mb-5">
             <a href="requests.html" class="hover:text-indigo-600 transition-colors">My Requests</a>
             <span class="mx-1.5">/</span>
-            <span class="text-slate-600">${req.agencyFull}</span>
+            <span class="text-slate-600">${req.agencyAbbr || req.agency}</span>
           </div>
 
-          <!-- Header -->
-          <div class="flex items-start gap-3 flex-wrap mb-1">
-            ${agencyBadge(req.agencyAbbr || req.agency)}
+          <!-- Header badges row -->
+          <div class="flex items-center gap-2.5 flex-wrap mb-2">
+            <span class="inline-flex items-center rounded-lg px-3 py-1 text-sm font-bold bg-indigo-100 text-indigo-800">${req.agencyAbbr || req.agency}</span>
             ${plainBadge(req.status)}
-            ${daysText ? `<span class="text-sm ${daysClass} self-center">${daysText}</span>` : ''}
+            ${jurisdictionBadge(req.jurisdiction)}
+            ${daysText ? `<span class="text-sm ${daysClass}">${daysText}</span>` : ''}
           </div>
-          <h1 class="text-2xl font-bold text-slate-900 mt-2">${req.agencyFull}</h1>
-          <p class="text-sm text-slate-500 mt-1 max-w-2xl leading-relaxed">${req.subject}</p>
+
+          <!-- Agency full name -->
+          <h1 class="text-2xl font-bold text-slate-900 mt-1">${req.agencyFull}</h1>
+          <p class="text-sm text-slate-500 mt-1.5 max-w-2xl leading-relaxed">${req.subject}</p>
 
           <!-- Key facts -->
-          ${facts.length > 0 ? `<div class="flex flex-wrap items-center gap-x-5 gap-y-1 mt-4 text-sm">${facts.map(f => `<span>${f}</span>`).join('<span class="text-slate-300">&middot;</span>')}</div>` : ''}
+          ${factsHTML ? `<p class="text-sm text-slate-500 mt-3">${factsHTML}</p>` : ''}
         </div>
 
         <div class="px-10 py-8 max-w-2xl space-y-6">
+
+          <!-- Community Data card -->
+          ${(function() {
+            const q = (req.agencyAbbr || req.agency || '').toLowerCase();
+            const agencyFull = (req.agencyFull || '').toLowerCase();
+            const match = AGENCY_INSIGHTS.find(a =>
+              a.agency.toLowerCase().includes(q) ||
+              a.abbr.toLowerCase().includes(q) ||
+              q.includes(a.abbr.toLowerCase()) ||
+              agencyFull.includes(a.agency.toLowerCase())
+            );
+            if (match) {
+              return `<section class="bg-indigo-50 border border-indigo-100 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <h2 class="text-xs font-semibold text-indigo-700 uppercase tracking-wider">Community Data: ${match.abbr}</h2>
+                  <a href="agency-insights.html" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">View agency breakdown &rarr;</a>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="text-center">
+                    <p class="text-xl font-bold text-slate-900">${match.avgDays} days</p>
+                    <p class="text-xs text-slate-500 mt-0.5">avg response</p>
+                  </div>
+                  <div class="text-center">
+                    <p class="text-xl font-bold text-slate-900">${match.withinDeadline}%</p>
+                    <p class="text-xs text-slate-500 mt-0.5">within deadline</p>
+                  </div>
+                  <div class="text-center">
+                    <p class="text-xl font-bold text-slate-900">${match.successRate}%</p>
+                    <p class="text-xs text-slate-500 mt-0.5">success rate</p>
+                  </div>
+                </div>
+                <p class="text-xs text-slate-400 mt-3 text-center">Based on ${match.dataPoints.toLocaleString()} requests in our community data.</p>
+              </section>`;
+            } else {
+              return `<section class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
+                <h2 class="text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-1">Community Data</h2>
+                <p class="text-sm text-slate-500">No community data yet for this agency.</p>
+              </section>`;
+            }
+          })()}
 
           <!-- Notes & Timeline -->
           <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
@@ -247,8 +281,23 @@
             </div>
           </section>
 
+          <!-- Email Reminders -->
+          <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+            <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Email Reminders</h2>
+            <div class="space-y-2.5">
+              ${(req.reminderDays || []).map(d => {
+                const label = d === 14 ? '2 weeks before deadline' : d === 7 ? '1 week before deadline' : d === 3 ? '3 days before deadline' : d === 1 ? '1 day before deadline' : `${d} days before`;
+                return `<label class="flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                  <span class="text-sm text-slate-600">${label}</span>
+                </label>`;
+              }).join('')}
+            </div>
+            ${req.reminderDays && req.reminderDays.length > 0 ? '<p class="text-xs text-slate-400 mt-3">Reminders go to jane@example.com</p>' : ''}
+          </section>
+
           <!-- Quick actions -->
-          <div class="flex items-center gap-6 pt-1 pb-6">
+          <div class="flex items-center gap-6 pt-1 pb-6 flex-wrap">
             <button onclick="alert('Status updated to Responded — demo only')" class="text-sm text-slate-500 hover:text-emerald-700 transition-colors font-medium">
               Mark as responded
             </button>
