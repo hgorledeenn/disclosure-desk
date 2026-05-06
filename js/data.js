@@ -7,7 +7,7 @@ const MOCK_USER = {
   name: 'Jane Doe',
   email: 'jane@example.com',
   initials: 'JD',
-  organization: 'The City NYC',
+  organization: 'Disclosure Desk News',
   role: 'Investigative Reporter'
 };
 
