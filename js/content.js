@@ -48,6 +48,18 @@ const COPY = {
     viewPricingLabel: "View pricing",
   },
 
+  // ── Stats bar (between hero and pricing) ─────────────────────
+  stats: {
+    label:            "Disclosure Desk by the numbers",
+    requests:         "24,000+",
+    requestsLabel:    "FOIA requests logged",
+    agencies:         "600+",
+    agenciesLabel:    "agencies covered",
+    fulfillmentRate:  "66%",
+    fulfillmentLabel: "average fulfillment rate",
+  },
+
+
   // ── Right panel: login form ──────────────────────────────────
   login: {
     headline:           "Welcome back",

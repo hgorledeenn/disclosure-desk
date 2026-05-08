@@ -27,6 +27,7 @@ html.dark .border-slate-100 { border-color: #334155 !important; }
 html.dark .border-slate-200 { border-color: #475569 !important; }
 html.dark .border-slate-300 { border-color: #64748b !important; }
 html.dark .divide-slate-100 > * + * { border-color: #334155 !important; }
+html.dark .divide-slate-200 > * + * { border-color: #475569 !important; }
 
 /* ── Form inputs (site-wide .field-input class) ──────────────────── */
 html.dark .field-input {
