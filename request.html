@@ -141,35 +141,39 @@
       const req = getRequestById(requestId);
       if (!req) return;
 
-      document.title = `${req.agencyFull} — Disclosure Desk`;
+      document.title = `${req.agency} — Disclosure Desk`;
 
       const days = getDaysUntilDeadline(req.deadline);
-      let daysText = '';
-      let daysClass = '';
-      if (req.deadline && req.status !== 'closed' && req.status !== 'responded') {
+      const isResolved = req.status === 'closed' || req.status === 'responded';
+
+      // Deadline urgency box (top-right of header)
+      let urgencyBoxHTML = '';
+      if (req.deadline && !isResolved) {
+        let boxStyle, numStyle, label;
         if (days < 0) {
-          daysText = `${Math.abs(days)} days overdue`;
-          daysClass = 'text-rose-600 font-semibold';
+          boxStyle = 'background:#FFF1F2;border:1px solid #FECDD3;';
+          numStyle  = 'color:#E11D48;';
+          label     = `day${Math.abs(days) === 1 ? '' : 's'} overdue`;
         } else if (days <= 3) {
-          daysText = `${days} day${days === 1 ? '' : 's'} left`;
-          daysClass = 'text-rose-600 font-semibold';
+          boxStyle = 'background:#FFF1F2;border:1px solid #FECDD3;';
+          numStyle  = 'color:#E11D48;';
+          label     = `day${days === 1 ? '' : 's'} left`;
         } else if (days <= 7) {
-          daysText = `${days} days left`;
-          daysClass = 'text-amber-600 font-semibold';
+          boxStyle = 'background:#FFFBEB;border:1px solid #FDE68A;';
+          numStyle  = 'color:#D97706;';
+          label     = 'days left';
         } else {
-          daysText = `${days} days left`;
-          daysClass = 'text-slate-500';
+          boxStyle = 'background:#F8FAFC;border:1px solid #E2E8F0;';
+          numStyle  = 'color:#334155;';
+          label     = 'days left';
         }
+        urgencyBoxHTML = `<div class="flex-shrink-0 rounded-2xl px-7 py-4 text-center" style="${boxStyle}">
+          <div class="text-4xl font-bold leading-none" style="${numStyle}">${Math.abs(days)}</div>
+          <div class="text-xs text-slate-500 mt-1.5 whitespace-nowrap">${label}</div>
+        </div>`;
       }
 
-      // Key facts line
-      const factParts = [];
-      if (req.submitted) factParts.push(`Submitted ${formatDate(req.submitted)}`);
-      if (req.trackingNumber) factParts.push(`Tracking: ${req.trackingNumber}`);
-      if (req.contactEmail) factParts.push(`<a href="mailto:${req.contactEmail}" class="text-indigo-600 hover:text-indigo-800">${req.contactEmail}</a>`);
-      const factsHTML = factParts.join(' &middot; ');
-
-      // Timeline
+      // Full timeline (left column)
       const timelineHTML = [...req.notes].reverse().map((note, idx) => {
         const isLast = idx === req.notes.length - 1;
         return `<div class="flex gap-3.5">
@@ -184,149 +188,194 @@
         </div>`;
       }).join('');
 
+      // Abbreviated recent activity (right sidebar — last 4 notes)
+      const recentHTML = [...req.notes].reverse().slice(0, 4).map((note, idx, arr) => {
+        const short = note.text.length > 90 ? note.text.slice(0, 90) + '…' : note.text;
+        const isLast = idx === arr.length - 1;
+        return `<div class="${isLast ? '' : 'border-b border-slate-50'} py-2.5">
+          <div class="text-[11px] text-slate-400 mb-0.5">${formatDate(note.date)}</div>
+          <div class="text-xs text-slate-600 leading-relaxed">${short}</div>
+        </div>`;
+      }).join('');
+
       // Documents
-      let docsListHTML = '';
-      if (req.documents && req.documents.length > 0) {
-        docsListHTML = req.documents.map(doc => `
+      const docsListHTML = (req.documents && req.documents.length > 0)
+        ? req.documents.map(doc => `
           <a href="#" onclick="event.preventDefault()" class="flex items-center gap-2.5 py-2 hover:text-indigo-700 transition-colors group">
             <svg class="w-4 h-4 text-slate-400 group-hover:text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <span class="text-sm text-slate-600 group-hover:text-indigo-700">${doc}</span>
-          </a>`).join('');
-      } else {
-        docsListHTML = '<p class="text-sm text-slate-400 py-2">No documents attached yet.</p>';
-      }
+          </a>`).join('')
+        : '<p class="text-sm text-slate-400 py-1">No documents attached yet.</p>';
+
+      // Community data (right sidebar)
+      const q = (req.agencyAbbr || req.agency || '').toLowerCase();
+      const agencyLower = (req.agency || '').toLowerCase();
+      const match = AGENCY_INSIGHTS.find(a =>
+        a.agency.toLowerCase().includes(q) ||
+        a.abbr.toLowerCase().includes(q) ||
+        q.includes(a.abbr.toLowerCase()) ||
+        agencyLower.includes(a.agency.toLowerCase())
+      );
+      const communityHTML = match
+        ? `<div class="grid grid-cols-3 gap-2 mb-2">
+            <div class="text-center">
+              <p class="text-base font-bold text-slate-900">${match.avgDays}d</p>
+              <p class="text-[10px] text-slate-400 leading-snug">avg response</p>
+            </div>
+            <div class="text-center">
+              <p class="text-base font-bold text-slate-900">${match.withinDeadline}%</p>
+              <p class="text-[10px] text-slate-400 leading-snug">on time</p>
+            </div>
+            <div class="text-center">
+              <p class="text-base font-bold text-slate-900">${match.successRate}%</p>
+              <p class="text-[10px] text-slate-400 leading-snug">success</p>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-400 text-center">${match.dataPoints.toLocaleString()} community requests</p>`
+        : '<p class="text-xs text-slate-400">No community data yet for this agency.</p>';
+
+      // Reminders
+      const remindersHTML = (req.reminderDays || []).map(d => {
+        const label = d === 14 ? '2 weeks before' : d === 7 ? '1 week before' : d === 3 ? '3 days before' : d === 1 ? '1 day before' : `${d} days before`;
+        return `<label class="flex items-center gap-2.5 cursor-pointer py-0.5">
+          <input type="checkbox" checked class="w-3.5 h-3.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+          <span class="text-xs text-slate-600">${label}</span>
+        </label>`;
+      }).join('');
 
       const html = `
-        <div class="px-4 sm:px-6 lg:px-10 pt-10 pb-2">
-          <!-- Breadcrumb -->
-          <div class="text-sm text-slate-400 mb-5">
-            <a href="requests.html" class="hover:text-indigo-600 transition-colors">My Requests</a>
-            <span class="mx-1.5">/</span>
-            <span class="text-slate-600">${req.agencyAbbr || req.agency}</span>
+        <!-- ── Page header ───────────────────────────────────────── -->
+        <div class="bg-white border-b border-slate-100">
+          <div class="px-4 sm:px-6 lg:px-10 pt-8 pb-7">
+            <a href="dashboard.html" class="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-indigo-600 transition-colors mb-6">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Dashboard
+            </a>
+
+            <div class="flex items-start gap-6">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 flex-wrap mb-3">
+                  <span class="inline-flex items-center rounded-lg px-3 py-1 text-sm font-bold bg-indigo-100 text-indigo-800">${req.agencyAbbr || req.agency}</span>
+                  ${jurisdictionBadge(req.jurisdiction)}
+                  ${plainBadge(req.status)}
+                </div>
+                <h1 class="text-3xl font-bold text-slate-900 serif leading-tight">${req.agency}</h1>
+                <p class="text-base text-slate-500 mt-2.5 leading-relaxed">${req.subject}</p>
+              </div>
+              ${urgencyBoxHTML}
+            </div>
           </div>
-
-          <!-- Header badges row -->
-          <div class="flex items-center gap-2.5 flex-wrap mb-2">
-            <span class="inline-flex items-center rounded-lg px-3 py-1 text-sm font-bold bg-indigo-100 text-indigo-800">${req.agencyAbbr || req.agency}</span>
-            ${plainBadge(req.status)}
-            ${jurisdictionBadge(req.jurisdiction)}
-            ${daysText ? `<span class="text-sm ${daysClass}">${daysText}</span>` : ''}
-          </div>
-
-          <!-- Agency full name -->
-          <h1 class="text-2xl font-bold text-slate-900 mt-1 serif">${req.agencyFull}</h1>
-          <p class="text-sm text-slate-500 mt-1.5 max-w-2xl leading-relaxed">${req.subject}</p>
-
-          <!-- Key facts -->
-          ${factsHTML ? `<p class="text-sm text-slate-500 mt-3">${factsHTML}</p>` : ''}
         </div>
 
-        <div class="px-4 sm:px-6 lg:px-10 py-8 max-w-2xl space-y-6">
+        <!-- ── Two-column body ───────────────────────────────────── -->
+        <div class="px-4 sm:px-6 lg:px-10 py-8 flex flex-col lg:flex-row gap-6 items-start">
 
-          <!-- Community Data card -->
-          ${(function() {
-            const q = (req.agencyAbbr || req.agency || '').toLowerCase();
-            const agencyFull = (req.agencyFull || '').toLowerCase();
-            const match = AGENCY_INSIGHTS.find(a =>
-              a.agency.toLowerCase().includes(q) ||
-              a.abbr.toLowerCase().includes(q) ||
-              q.includes(a.abbr.toLowerCase()) ||
-              agencyFull.includes(a.agency.toLowerCase())
-            );
-            if (match) {
-              return `<section class="bg-indigo-50 border border-indigo-100 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-3">
-                  <h2 class="text-xs font-semibold text-indigo-700 uppercase tracking-wider">Community Data: ${match.abbr}</h2>
-                  <a href="agency-insights.html" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">View agency breakdown &rarr;</a>
-                </div>
-                <div class="grid grid-cols-3 gap-4">
-                  <div class="text-center">
-                    <p class="text-xl font-bold text-slate-900">${match.avgDays} days</p>
-                    <p class="text-xs text-slate-500 mt-0.5">avg response</p>
-                  </div>
-                  <div class="text-center">
-                    <p class="text-xl font-bold text-slate-900">${match.withinDeadline}%</p>
-                    <p class="text-xs text-slate-500 mt-0.5">within deadline</p>
-                  </div>
-                  <div class="text-center">
-                    <p class="text-xl font-bold text-slate-900">${match.successRate}%</p>
-                    <p class="text-xs text-slate-500 mt-0.5">success rate</p>
-                  </div>
-                </div>
-                <p class="text-xs text-slate-400 mt-3 text-center">Based on ${match.dataPoints.toLocaleString()} requests in our community data.</p>
-              </section>`;
-            } else {
-              return `<section class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
-                <h2 class="text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-1">Community Data</h2>
-                <p class="text-sm text-slate-500">No community data yet for this agency.</p>
-              </section>`;
-            }
-          })()}
+          <!-- Left: primary working area -->
+          <div class="flex-1 min-w-0 space-y-5">
 
-          <!-- Notes & Timeline -->
-          <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-            <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-5">Notes &amp; Timeline</h2>
-            <div class="mb-6">
-              <textarea
-                id="newNoteText"
-                rows="3"
-                class="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-700 placeholder-slate-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-sans"
-                placeholder="Add a note — follow-up call, status update, new information…"
-              ></textarea>
-              <div class="flex items-center justify-between mt-2">
-                <span class="text-xs text-slate-400">Will be dated today.</span>
-                <button onclick="addNote()" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition-colors">
-                  Save note
-                </button>
+            <!-- Notes & Timeline -->
+            <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+              <h2 class="text-sm font-semibold text-slate-700 mb-5">Notes &amp; Timeline</h2>
+              <div class="mb-6">
+                <textarea
+                  id="newNoteText"
+                  rows="3"
+                  class="w-full px-3.5 py-3 border border-slate-200 rounded-xl text-sm text-slate-700 placeholder-slate-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-sans"
+                  placeholder="Add a note — follow-up call, status update, new information…"
+                ></textarea>
+                <div class="flex items-center justify-between mt-2">
+                  <span class="text-xs text-slate-400">Will be dated today.</span>
+                  <button onclick="addNote()" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition-colors">
+                    Save note
+                  </button>
+                </div>
               </div>
-            </div>
-            <div id="timelineArea">${timelineHTML}</div>
-          </section>
+              <div id="timelineArea">${timelineHTML}</div>
+            </section>
 
-          <!-- Documents -->
-          <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-            <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Documents</h2>
-            <div class="mb-4 divide-y divide-slate-50">${docsListHTML}</div>
-            <div
-              onclick="alert('File upload — demo only')"
-              class="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center hover:border-indigo-300 hover:bg-indigo-50/50 transition-colors cursor-pointer"
-            >
-              <svg class="w-5 h-5 text-slate-300 mx-auto mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-              </svg>
-              <div class="text-sm text-slate-500 font-medium">Upload a document</div>
-              <div class="text-xs text-slate-400 mt-0.5">PDF, DOCX, or image</div>
-            </div>
-          </section>
+            <!-- Documents -->
+            <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+              <h2 class="text-sm font-semibold text-slate-700 mb-4">Documents</h2>
+              <div class="mb-4 divide-y divide-slate-50">${docsListHTML}</div>
+              <div
+                onclick="alert('File upload — demo only')"
+                class="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center hover:border-indigo-300 hover:bg-indigo-50/50 transition-colors cursor-pointer"
+              >
+                <svg class="w-5 h-5 text-slate-300 mx-auto mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                <div class="text-sm text-slate-500 font-medium">Upload a document</div>
+                <div class="text-xs text-slate-400 mt-0.5">PDF, DOCX, or image</div>
+              </div>
+            </section>
 
-          <!-- Email Reminders -->
-          <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-            <h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Email Reminders</h2>
-            <div class="space-y-2.5">
-              ${(req.reminderDays || []).map(d => {
-                const label = d === 14 ? '2 weeks before deadline' : d === 7 ? '1 week before deadline' : d === 3 ? '3 days before deadline' : d === 1 ? '1 day before deadline' : `${d} days before`;
-                return `<label class="flex items-center gap-3 cursor-pointer">
-                  <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
-                  <span class="text-sm text-slate-600">${label}</span>
-                </label>`;
-              }).join('')}
-            </div>
-            ${req.reminderDays && req.reminderDays.length > 0 ? '<p class="text-xs text-slate-400 mt-3">Reminders go to jane@example.com</p>' : ''}
-          </section>
+          </div>
 
-          <!-- Quick actions -->
-          <div class="flex items-center gap-6 pt-1 pb-6 flex-wrap">
-            <button onclick="alert('Status updated to Responded — demo only')" class="text-sm text-slate-500 hover:text-emerald-700 transition-colors font-medium">
-              Mark as responded
-            </button>
-            <button onclick="alert('Appeal filed — demo only')" class="text-sm text-slate-500 hover:text-orange-700 transition-colors font-medium">
-              File appeal
-            </button>
-            <button onclick="alert('Request closed — demo only')" class="text-sm text-slate-500 hover:text-slate-900 transition-colors font-medium">
-              Close request
-            </button>
+          <!-- Right: sticky sidebar -->
+          <div class="w-full lg:w-72 flex-shrink-0">
+            <div class="sticky top-6 space-y-4">
+
+              <!-- Request details -->
+              <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                <h2 class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-4">Request Details</h2>
+                <dl class="space-y-3">
+                  ${req.submitted ? `<div>
+                    <dt class="text-[11px] text-slate-400 mb-0.5">Filed</dt>
+                    <dd class="text-sm text-slate-700 font-medium">${formatDate(req.submitted)}</dd>
+                  </div>` : ''}
+                  ${req.deadline ? `<div>
+                    <dt class="text-[11px] text-slate-400 mb-0.5">Deadline</dt>
+                    <dd class="text-sm text-slate-700 font-medium">${formatDate(req.deadline)}</dd>
+                  </div>` : ''}
+                  ${req.trackingNumber ? `<div>
+                    <dt class="text-[11px] text-slate-400 mb-0.5">Tracking #</dt>
+                    <dd class="text-sm text-slate-700 font-mono tracking-tight">${req.trackingNumber}</dd>
+                  </div>` : ''}
+                  ${req.contactName ? `<div>
+                    <dt class="text-[11px] text-slate-400 mb-0.5">Contact</dt>
+                    <dd class="text-sm text-slate-700">${req.contactName}</dd>
+                    ${req.contactEmail ? `<dd class="mt-0.5"><a href="mailto:${req.contactEmail}" class="text-xs text-indigo-600 hover:text-indigo-800 break-all">${req.contactEmail}</a></dd>` : ''}
+                  </div>` : ''}
+                </dl>
+              </section>
+
+              <!-- Community data -->
+              <section class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
+                <div class="flex items-center justify-between mb-3">
+                  <h2 class="text-[11px] font-semibold text-indigo-700 uppercase tracking-wider">Community Data</h2>
+                  <a href="agency-insights.html" class="text-[11px] text-indigo-600 hover:text-indigo-800 font-medium">Details →</a>
+                </div>
+                ${communityHTML}
+              </section>
+
+              <!-- Email reminders -->
+              ${remindersHTML ? `<section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                <h2 class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Email Reminders</h2>
+                <div class="space-y-2">${remindersHTML}</div>
+                <p class="text-[10px] text-slate-400 mt-3">Sent to jane@example.com</p>
+              </section>` : ''}
+
+              <!-- Quick actions -->
+              <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                <h2 class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Actions</h2>
+                <div class="space-y-1.5">
+                  <button onclick="alert('Status updated — demo only')" class="w-full text-left text-sm text-slate-600 hover:text-emerald-700 py-1 font-medium transition-colors">Mark as responded</button>
+                  <button onclick="alert('Appeal filed — demo only')" class="w-full text-left text-sm text-slate-600 hover:text-orange-700 py-1 font-medium transition-colors">File appeal</button>
+                  <button onclick="alert('Request closed — demo only')" class="w-full text-left text-sm text-slate-600 hover:text-slate-900 py-1 font-medium transition-colors">Close request</button>
+                </div>
+              </section>
+
+              <!-- Recent activity (abbreviated timeline) -->
+              ${recentHTML ? `<section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                <h2 class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Recent Activity</h2>
+                ${recentHTML}
+              </section>` : ''}
+
+            </div>
           </div>
 
         </div>
