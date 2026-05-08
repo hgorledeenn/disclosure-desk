@@ -108,39 +108,39 @@
         <h1 class="text-2xl font-bold text-slate-900 serif" data-c="dashboard.greeting">Good morning, Jane.</h1>
         <p class="text-sm text-slate-400 mt-1" data-c="dashboard.date">Wednesday, May 6, 2026</p>
       </div>
-      <a href="new-request.html" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-3 sm:px-4 py-2.5 rounded-lg transition-colors shadow-sm flex-shrink-0">
+      <a href="new-request.html" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors shadow-sm">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
-        <span class="hidden sm:inline" data-c="dashboard.logRequestCta">Log a Request</span>
+        <span data-c="dashboard.logRequestCta">Log a Request</span>
       </a>
     </div>
 
     <!-- Stat boxes -->
-    <div class="px-4 sm:px-6 lg:px-10 mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+    <div class="px-4 sm:px-6 lg:px-10 mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
       <!-- In Progress -->
-      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-3 sm:p-5 border-t-4 border-indigo-400">
-        <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statInProgress">In Progress</p>
-        <p id="stat-inprogress" class="text-2xl sm:text-3xl font-bold text-indigo-600">—</p>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1" data-c="dashboard.statInProgressNote">active requests</p>
+      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-indigo-400">
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statInProgress">In Progress</p>
+        <p id="stat-inprogress" class="text-3xl font-bold text-indigo-600">—</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statInProgressNote">active requests</p>
       </div>
       <!-- Upcoming Deadlines -->
-      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-3 sm:p-5 border-t-4 border-amber-400">
-        <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statUpcoming">Upcoming</p>
-        <p id="stat-upcoming" class="text-2xl sm:text-3xl font-bold text-amber-600">—</p>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1" data-c="dashboard.statUpcomingNote">due within 7 days</p>
+      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-amber-400">
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statUpcoming">Upcoming Deadlines</p>
+        <p id="stat-upcoming" class="text-3xl font-bold text-amber-600">—</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statUpcomingNote">due within 7 days</p>
       </div>
       <!-- Overdue -->
-      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-3 sm:p-5 border-t-4 border-rose-400">
-        <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statOverdue">Overdue</p>
-        <p id="stat-overdue" class="text-2xl sm:text-3xl font-bold text-rose-600">—</p>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1" data-c="dashboard.statOverdueNote">need follow-up</p>
+      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-rose-400">
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statOverdue">Overdue</p>
+        <p id="stat-overdue" class="text-3xl font-bold text-rose-600">—</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statOverdueNote">need follow-up</p>
       </div>
       <!-- Completed -->
-      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-3 sm:p-5 border-t-4 border-emerald-400">
-        <p class="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statCompleted">Completed</p>
-        <p id="stat-completed" class="text-2xl sm:text-3xl font-bold text-emerald-600">—</p>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1" data-c="dashboard.statCompletedNote">requests resolved</p>
+      <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-emerald-400">
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statCompleted">Completed</p>
+        <p id="stat-completed" class="text-3xl font-bold text-emerald-600">—</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statCompletedNote">requests resolved</p>
       </div>
     </div>
 
@@ -151,45 +151,49 @@
       <div class="w-full lg:w-3/4 lg:pr-4">
 
         <!-- Header + filter pills -->
-        <div class="flex items-center justify-between mb-3 gap-2">
-          <span class="text-base font-semibold text-slate-700 flex-shrink-0">All Requests</span>
-          <div class="flex items-center gap-1.5 overflow-x-auto flex-nowrap pb-0.5 scrollbar-hide" id="filter-pills" style="-webkit-overflow-scrolling:touch">
-            <button data-filter="all"      class="filter-pill active-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors flex-shrink-0">All</button>
-            <button data-filter="overdue"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors flex-shrink-0">Overdue</button>
-            <button data-filter="duesoon"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors flex-shrink-0">Due Soon</button>
-            <button data-filter="active"   class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors flex-shrink-0">Active</button>
-            <button data-filter="done"     class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors flex-shrink-0">Done</button>
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <span class="text-base font-semibold text-slate-700">All Requests</span>
+          <div class="flex items-center gap-1.5 flex-wrap" id="filter-pills">
+            <button data-filter="all"      class="filter-pill active-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">All</button>
+            <button data-filter="overdue"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Overdue</button>
+            <button data-filter="duesoon"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Due Soon</button>
+            <button data-filter="active"   class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Active</button>
+            <button data-filter="done"     class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Done</button>
           </div>
         </div>
 
         <!-- Request rows card -->
         <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
-          <!-- Table header (desktop only) -->
-          <div class="hidden sm:flex items-center gap-3 px-4 py-2.5 border-b border-slate-100 bg-slate-50/80">
-            <button data-sort="org" class="sort-header flex-shrink-0 w-20 flex items-center justify-center gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
-              Org <span class="sort-caret">↕</span>
-            </button>
-            <span class="flex-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Request</span>
-            <button data-sort="filed" class="sort-header flex-shrink-0 w-16 flex items-center justify-end gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
-              Filed <span class="sort-caret">↕</span>
-            </button>
-            <span class="flex-shrink-0 w-12 text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-center">Law</span>
-            <button data-sort="status" class="sort-header flex-shrink-0 w-[76px] flex items-center justify-center gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
-              Status <span class="sort-caret">↕</span>
-            </button>
-            <button data-sort="deadline" class="sort-header flex-shrink-0 w-20 flex items-center justify-end gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
-              Deadline <span class="sort-caret">↕</span>
-            </button>
-          </div>
-          <div id="request-list">
-            <!-- populated by JS -->
+          <div class="overflow-x-auto" style="-webkit-overflow-scrolling:touch">
+            <div style="min-width:560px">
+              <!-- Table header -->
+              <div class="flex items-center gap-3 px-4 py-2.5 border-b border-slate-100 bg-slate-50/80">
+                <button data-sort="org" class="sort-header flex-shrink-0 w-20 flex items-center justify-center gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
+                  Org <span class="sort-caret">↕</span>
+                </button>
+                <span class="flex-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Request</span>
+                <button data-sort="filed" class="sort-header flex-shrink-0 w-16 flex items-center justify-end gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
+                  Filed <span class="sort-caret">↕</span>
+                </button>
+                <span class="flex-shrink-0 w-12 text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-center">Law</span>
+                <button data-sort="status" class="sort-header flex-shrink-0 w-[76px] flex items-center justify-center gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
+                  Status <span class="sort-caret">↕</span>
+                </button>
+                <button data-sort="deadline" class="sort-header flex-shrink-0 w-20 flex items-center justify-end gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
+                  Deadline <span class="sort-caret">↕</span>
+                </button>
+              </div>
+              <div id="request-list">
+                <!-- populated by JS -->
+              </div>
+            </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Right column: Recent updates (desktop only) -->
-      <div class="hidden lg:block lg:w-1/4">
+      <!-- Right column: Recent updates (1/4 width) -->
+      <div class="w-full lg:w-1/4">
         <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-4 sticky top-4">
           <h2 class="text-sm font-semibold text-slate-700 mb-3">Recent Updates</h2>
           <div id="recent-updates">
@@ -343,27 +347,13 @@
       const abbr = r.agencyAbbr.length > 9 ? r.agencyAbbr.slice(0, 9) + '…' : r.agencyAbbr;
       return `<a href="request.html#${r.id}"
           data-cat="${cat}"
-          class="req-row block px-4 py-3 border-b border-slate-50 last:border-b-0 hover:bg-slate-50 cursor-pointer no-underline">
-        <!-- Mobile card -->
-        <div class="flex items-center gap-3 sm:hidden">
-          <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 flex-shrink-0 w-14 text-center truncate">${abbr}</span>
-          <div class="flex-1 min-w-0">
-            <div class="text-sm text-slate-800 font-medium truncate">${r.subject}</div>
-            <div class="flex items-center gap-2 mt-1.5 flex-wrap">
-              ${compactStatusBadge(r)}
-              ${deadlineCol(r)}
-            </div>
-          </div>
-        </div>
-        <!-- Desktop row -->
-        <div class="hidden sm:flex items-center gap-3">
-          <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 flex-shrink-0 w-20 text-center truncate">${abbr}</span>
-          <span class="flex-1 text-sm text-slate-800 font-medium truncate">${r.subject}</span>
-          <span class="text-xs text-slate-400 flex-shrink-0 w-16 text-right">${shortDate(r.submitted)}</span>
-          ${jurisdictionBadge(r)}
-          ${compactStatusBadge(r)}
-          <span class="flex-shrink-0 w-20 text-right">${deadlineCol(r)}</span>
-        </div>
+          class="req-row flex items-center gap-3 px-4 py-3 border-b border-slate-50 last:border-b-0 hover:bg-slate-50 cursor-pointer no-underline">
+        <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600 flex-shrink-0 w-20 text-center truncate">${abbr}</span>
+        <span class="flex-1 text-sm text-slate-800 font-medium truncate">${r.subject}</span>
+        <span class="text-xs text-slate-400 flex-shrink-0 w-16 text-right">${shortDate(r.submitted)}</span>
+        ${jurisdictionBadge(r)}
+        ${compactStatusBadge(r)}
+        <span class="flex-shrink-0 w-20 text-right">${deadlineCol(r)}</span>
       </a>`;
     }
 
