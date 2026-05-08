@@ -180,8 +180,6 @@ const COPY = {
   // SIDEBAR NAVIGATION (appears on every app page)
   // ════════════════════════════════════════════════════════════
   nav: {
-    dashboard:      "Dashboard",
-    myRequests:     "My Requests",
     logRequest:     "Log a Request",
     draftRequest:   "Draft a Request",
     agencyInsights: "Agency Insights",
@@ -195,7 +193,7 @@ const COPY = {
   dashboard: {
     greeting:      "Good morning, Jane.",
     date:          "Friday, May 8, 2026",
-    logRequestCta: "+ Log a Request →",
+    logRequestCta: "Log a Request",
 
     // Four stat boxes at the top
     statInProgress:     "In Progress",
