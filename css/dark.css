@@ -1,0 +1,148 @@
+/* ================================================================
+   DARK MODE — DISCLOSURE DESK
+   Applied when <html class="dark"> is toggled by theme.js
+   ================================================================ */
+
+/* ── Page backgrounds ───────────────────────────────────────────── */
+html.dark body                              { background-color: #0f172a !important; color: #e2e8f0; }
+html.dark .bg-\[#F5F7FF\]                  { background-color: #0f172a !important; }
+html.dark main,
+html.dark [style*="background:#F5F7FF"]     { background-color: #0f172a !important; }
+html.dark .bg-white                         { background-color: #1e293b !important; }
+html.dark .bg-slate-50                      { background-color: #283548 !important; }
+html.dark .bg-slate-50\/80                  { background-color: rgba(30,41,59,0.85) !important; }
+html.dark .bg-slate-100                     { background-color: #334155 !important; }
+html.dark .bg-slate-200                     { background-color: #3d506a !important; }
+
+/* ── Text ────────────────────────────────────────────────────────── */
+html.dark .text-slate-900 { color: #f1f5f9 !important; }
+html.dark .text-slate-800 { color: #e2e8f0 !important; }
+html.dark .text-slate-700 { color: #cbd5e1 !important; }
+html.dark .text-slate-600 { color: #94a3b8 !important; }
+html.dark .text-slate-500 { color: #64748b !important; }
+html.dark .text-slate-400 { color: #475569 !important; }
+
+/* ── Borders ─────────────────────────────────────────────────────── */
+html.dark .border-slate-100 { border-color: #334155 !important; }
+html.dark .border-slate-200 { border-color: #475569 !important; }
+html.dark .border-slate-300 { border-color: #64748b !important; }
+html.dark .divide-slate-100 > * + * { border-color: #334155 !important; }
+
+/* ── Form inputs (site-wide .field-input class) ──────────────────── */
+html.dark .field-input {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+html.dark .field-input::placeholder { color: #475569 !important; }
+html.dark .field-label  { color: #cbd5e1 !important; }
+html.dark .field-hint   { color: #64748b !important; }
+
+/* Standard inputs (login page, settings) */
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="password"],
+html.dark input[type="date"],
+html.dark select,
+html.dark textarea {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+html.dark input::placeholder,
+html.dark textarea::placeholder { color: #475569 !important; }
+
+/* ── Labels (login / settings pages) ────────────────────────────── */
+html.dark label.block.text-sm.font-medium { color: #cbd5e1 !important; }
+
+/* ── Hover states ────────────────────────────────────────────────── */
+html.dark .hover\:bg-slate-50:hover  { background-color: #283548 !important; }
+html.dark .hover\:bg-slate-100:hover { background-color: #334155 !important; }
+
+/* ── Colored highlight boxes ─────────────────────────────────────── */
+html.dark .bg-indigo-50      { background-color: rgba(99,102,241,0.12) !important; }
+html.dark .border-indigo-100 { border-color: rgba(99,102,241,0.3) !important; }
+html.dark .text-indigo-700   { color: #a5b4fc !important; }
+html.dark .text-indigo-800   { color: #a5b4fc !important; }
+html.dark .bg-indigo-100     { background-color: rgba(99,102,241,0.2) !important; }
+html.dark .text-indigo-600   { color: #a5b4fc !important; }
+
+html.dark .bg-sky-50         { background-color: rgba(14,165,233,0.1) !important; }
+html.dark .border-sky-100    { border-color: rgba(14,165,233,0.2) !important; }
+html.dark .text-sky-800      { color: #7dd3fc !important; }
+
+html.dark .bg-amber-50       { background-color: rgba(245,158,11,0.1) !important; }
+html.dark .border-amber-100  { border-color: rgba(245,158,11,0.25) !important; }
+html.dark .bg-amber-100      { background-color: rgba(245,158,11,0.2) !important; }
+html.dark .text-amber-700    { color: #fcd34d !important; }
+html.dark .text-amber-800    { color: #fcd34d !important; }
+html.dark .text-amber-600    { color: #fcd34d !important; }
+
+html.dark .bg-rose-50        { background-color: rgba(244,63,94,0.1) !important; }
+html.dark .border-rose-100   { border-color: rgba(244,63,94,0.25) !important; }
+html.dark .bg-rose-100       { background-color: rgba(244,63,94,0.2) !important; }
+html.dark .text-rose-700     { color: #fca5a5 !important; }
+html.dark .text-rose-800     { color: #fca5a5 !important; }
+html.dark .text-rose-600     { color: #fca5a5 !important; }
+
+html.dark .bg-emerald-50     { background-color: rgba(16,185,129,0.1) !important; }
+html.dark .border-emerald-100{ border-color: rgba(16,185,129,0.25) !important; }
+html.dark .bg-emerald-100    { background-color: rgba(16,185,129,0.2) !important; }
+html.dark .text-emerald-700  { color: #6ee7b7 !important; }
+html.dark .text-emerald-600  { color: #6ee7b7 !important; }
+
+html.dark .bg-blue-50        { background-color: rgba(59,130,246,0.1) !important; }
+html.dark .border-blue-200   { border-color: rgba(59,130,246,0.25) !important; }
+html.dark .text-blue-700     { color: #93c5fd !important; }
+html.dark .text-blue-500     { color: #93c5fd !important; }
+
+/* ── Status badge text (ensure readability in dark) ──────────────── */
+html.dark .text-rose-500  { color: #fca5a5 !important; }
+html.dark .text-amber-500 { color: #fcd34d !important; }
+html.dark .text-green-600 { color: #6ee7b7 !important; }
+html.dark .text-green-700 { color: #6ee7b7 !important; }
+
+/* ── Letter preview (draft wizard) ───────────────────────────────── */
+html.dark .letter-box {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+/* ── Modal ───────────────────────────────────────────────────────── */
+html.dark #modalBox { background-color: #1e293b !important; }
+
+/* ── Sort header buttons (dashboard) ─────────────────────────────── */
+html.dark .sort-header         { color: #475569 !important; }
+html.dark .sort-header:hover,
+html.dark .sort-header.active  { color: #a5b4fc !important; }
+
+/* ── Step connector (draft wizard progress bar) ──────────────────── */
+html.dark .step-connector      { background: #334155 !important; }
+html.dark .step-connector.done { background: #4f46e5 !important; }
+
+/* ── Toggle track (reminders toggle in request / new-request pages) ── */
+html.dark .toggle-track { background: #334155 !important; }
+
+/* ── Shadows ─────────────────────────────────────────────────────── */
+html.dark .shadow-sm  { box-shadow: 0 1px 3px rgba(0,0,0,0.5) !important; }
+html.dark .shadow-md  { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5) !important; }
+html.dark .shadow-xl  { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.6) !important; }
+html.dark .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7) !important; }
+
+/* ── Urgency boxes in request.html (JS-generated inline styles) ──── */
+html.dark [style*="background:#FFF1F2"] { background: rgba(220,38,38,0.12) !important; }
+html.dark [style*="background:#FFFBEB"] { background: rgba(217,119,6,0.12)  !important; }
+html.dark [style*="background:#F8FAFC"] { background: #283548               !important; }
+html.dark [style*="#FECDD3"]            { border-color: rgba(220,38,38,0.3) !important; }
+html.dark [style*="#FDE68A"]            { border-color: rgba(217,119,6,0.3)  !important; }
+html.dark [style*="#E2E8F0"]            { border-color: #334155              !important; }
+
+/* ── index.html theme toggle button (light bg panels) ────────────── */
+html.dark .index-theme-btn {
+  border-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+html.dark .index-theme-btn:hover {
+  background-color: #283548 !important;
+}

@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Request — Disclosure Desk</title>
+  <script>
+    (function(){var s=localStorage.getItem('dd-theme');if(s==='dark'||(s===null&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}})();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/dark.css" />
   <style>
     body { font-family: 'Inter', sans-serif; }
     .serif { font-family: 'Playfair Display', Georgia, serif; }
@@ -75,6 +79,13 @@
         </svg>
         Settings
       </a>
+      <div class="mt-2 pt-2 border-t border-white/10">
+        <button onclick="toggleTheme()" class="theme-toggle-btn nav-item w-full" style="background:none;border:0;cursor:pointer;text-align:left">
+          <svg class="theme-icon-moon w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          <svg class="theme-icon-sun w-4 h-4 flex-shrink-0" style="display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+          <span class="theme-toggle-label">Dark mode</span>
+        </button>
+      </div>
     </nav>
     <div class="px-3 py-4 border-t border-white/10">
       <div class="flex items-center gap-3 px-2">
@@ -100,6 +111,7 @@
   </main>
 
   <script src="js/data.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/content.js"></script>
   <script src="js/apply-content.js"></script>
   <script>
