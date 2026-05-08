@@ -164,15 +164,15 @@
         <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
           <!-- Table header -->
           <div class="flex items-center gap-3 px-4 py-2.5 border-b border-slate-100 bg-slate-50/80">
-            <span class="flex-shrink-0 w-20"></span>
-            <button data-sort="request" class="sort-header flex-1 flex items-center gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
-              Request <span class="sort-caret">↕</span>
+            <button data-sort="org" class="sort-header flex-shrink-0 w-20 flex items-center justify-center gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
+              Org <span class="sort-caret">↕</span>
             </button>
+            <span class="flex-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Request</span>
             <button data-sort="filed" class="sort-header flex-shrink-0 w-16 flex items-center justify-end gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
               Filed <span class="sort-caret">↕</span>
             </button>
-            <span class="flex-shrink-0 w-12"></span>
-            <span class="flex-shrink-0 w-[76px]"></span>
+            <span class="flex-shrink-0 w-12 text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-center">Law</span>
+            <span class="flex-shrink-0 w-[76px] text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-center">Status</span>
             <button data-sort="deadline" class="sort-header flex-shrink-0 w-20 flex items-center justify-end gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
               Deadline <span class="sort-caret">↕</span>
             </button>
@@ -343,41 +343,78 @@
       </a>`;
     }
 
+    /* ── Sort + filter state ──────────────────────────────────── */
+    let sortCol = null;
+    let sortDir = 1;
+    let activeFilter = 'all';
+
+    function getDisplayRequests() {
+      if (sortCol === null) return sortedRequests();
+      return [...MOCK_REQUESTS].sort((a, b) => {
+        if (sortCol === 'org')   return sortDir * (a.agencyAbbr || '').localeCompare(b.agencyAbbr || '');
+        if (sortCol === 'filed') return sortDir * (a.submitted || '').localeCompare(b.submitted || '');
+        if (sortCol === 'deadline') {
+          const da = getDaysUntilDeadline(a.deadline) ?? 9999;
+          const db = getDaysUntilDeadline(b.deadline) ?? 9999;
+          return sortDir * (da - db);
+        }
+        return 0;
+      });
+    }
+
+    function applyFilter() {
+      document.querySelectorAll('.req-row').forEach(row => {
+        row.style.display = (activeFilter === 'all' || row.dataset.cat === activeFilter) ? '' : 'none';
+      });
+    }
+
     /* ── Render request list ──────────────────────────────────── */
     function renderRequests() {
-      const sorted = sortedRequests();
-      document.getElementById('request-list').innerHTML = sorted.map(buildRow).join('');
+      document.getElementById('request-list').innerHTML = getDisplayRequests().map(buildRow).join('');
+      applyFilter();
+    }
+
+    /* ── Sort headers ─────────────────────────────────────────── */
+    function initSortHeaders() {
+      document.querySelectorAll('.sort-header').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const col = btn.dataset.sort;
+          if (sortCol === col) { sortDir *= -1; } else { sortCol = col; sortDir = 1; }
+          document.querySelectorAll('.sort-header').forEach(b => {
+            const caret = b.querySelector('.sort-caret');
+            if (b.dataset.sort === sortCol) {
+              caret.textContent = sortDir === 1 ? '↑' : '↓';
+              b.classList.add('text-indigo-600');
+              b.classList.remove('text-slate-400');
+            } else {
+              caret.textContent = '↕';
+              b.classList.remove('text-indigo-600');
+              b.classList.add('text-slate-400');
+            }
+          });
+          renderRequests();
+        });
+      });
     }
 
     /* ── Filter pills ─────────────────────────────────────────── */
     function initFilterPills() {
       const pills = document.querySelectorAll('.filter-pill');
       pills.forEach(pill => {
-        // style inactive state
         if (!pill.classList.contains('active-pill')) {
           pill.classList.add('bg-white', 'border-slate-200', 'text-slate-600', 'hover:border-indigo-300');
         } else {
           pill.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
         }
-
         pill.addEventListener('click', () => {
-          // update pill styles
           pills.forEach(p => {
             p.classList.remove('active-pill', 'bg-indigo-600', 'text-white', 'border-indigo-600');
             p.classList.add('bg-white', 'border-slate-200', 'text-slate-600', 'hover:border-indigo-300');
           });
           pill.classList.add('active-pill', 'bg-indigo-600', 'text-white', 'border-indigo-600');
           pill.classList.remove('bg-white', 'border-slate-200', 'text-slate-600', 'hover:border-indigo-300');
-
-          const filter = pill.dataset.filter;
-          const rows = document.querySelectorAll('.req-row');
-          rows.forEach(row => {
-            if (filter === 'all') {
-              row.style.display = '';
-            } else {
-              row.style.display = (row.dataset.cat === filter) ? '' : 'none';
-            }
-          });
+          activeFilter = pill.dataset.filter;
+          applyFilter();
         });
       });
     }
@@ -435,6 +472,7 @@
     renderRequests();
     updatePillCounts();
     initFilterPills();
+    initSortHeaders();
     renderRecentUpdates();
   </script>
 </body>
