@@ -172,7 +172,9 @@
               Filed <span class="sort-caret">↕</span>
             </button>
             <span class="flex-shrink-0 w-12 text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-center">Law</span>
-            <span class="flex-shrink-0 w-[76px] text-[11px] font-semibold text-slate-400 uppercase tracking-wider text-center">Status</span>
+            <button data-sort="status" class="sort-header flex-shrink-0 w-[76px] flex items-center justify-center gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
+              Status <span class="sort-caret">↕</span>
+            </button>
             <button data-sort="deadline" class="sort-header flex-shrink-0 w-20 flex items-center justify-end gap-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider hover:text-slate-700 transition-colors">
               Deadline <span class="sort-caret">↕</span>
             </button>
@@ -353,6 +355,10 @@
       return [...MOCK_REQUESTS].sort((a, b) => {
         if (sortCol === 'org')   return sortDir * (a.agencyAbbr || '').localeCompare(b.agencyAbbr || '');
         if (sortCol === 'filed') return sortDir * (a.submitted || '').localeCompare(b.submitted || '');
+        if (sortCol === 'status') {
+          const order = { overdue: 0, duesoon: 1, active: 2, done: 3 };
+          return sortDir * ((order[getRowCategory(a)] ?? 4) - (order[getRowCategory(b)] ?? 4));
+        }
         if (sortCol === 'deadline') {
           const da = getDaysUntilDeadline(a.deadline) ?? 9999;
           const db = getDaysUntilDeadline(b.deadline) ?? 9999;
