@@ -673,6 +673,18 @@ const AGENCY_INSIGHTS = [
     distribution: [1, 2, 5, 9, 14, 31, 38]
   },
   {
+    id: 'ice',
+    agency: 'Dept. of Homeland Security — ICE',
+    abbr: 'DHS/ICE',
+    avgDays: 74,
+    dataPoints: 892,
+    withinDeadline: 5,
+    successRate: 47,
+    law: 'Federal FOIA',
+    jurisdiction: 'federal',
+    distribution: [1, 3, 6, 11, 20, 32, 27]
+  },
+  {
     id: 'dhs',
     agency: 'Department of Homeland Security',
     abbr: 'DHS',
@@ -743,6 +755,66 @@ const AGENCY_INSIGHTS = [
     law: 'Federal FOIA',
     jurisdiction: 'federal',
     distribution: [8, 33, 28, 17, 9, 4, 1]
+  },
+  {
+    id: 'dea',
+    agency: 'Drug Enforcement Administration',
+    abbr: 'DEA',
+    avgDays: 58,
+    dataPoints: 341,
+    withinDeadline: 9,
+    successRate: 54,
+    law: 'Federal FOIA',
+    jurisdiction: 'federal',
+    distribution: [1, 5, 9, 16, 26, 28, 15]
+  },
+  {
+    id: 'hud',
+    agency: 'Dept. of Housing and Urban Development',
+    abbr: 'HUD',
+    avgDays: 31,
+    dataPoints: 289,
+    withinDeadline: 27,
+    successRate: 73,
+    law: 'Federal FOIA',
+    jurisdiction: 'federal',
+    distribution: [5, 19, 24, 25, 16, 9, 2]
+  },
+  {
+    id: 'uscis',
+    agency: 'U.S. Citizenship and Immigration Services',
+    abbr: 'USCIS',
+    avgDays: 67,
+    dataPoints: 1104,
+    withinDeadline: 6,
+    successRate: 61,
+    law: 'Federal FOIA',
+    jurisdiction: 'federal',
+    distribution: [1, 3, 7, 13, 24, 31, 21]
+  },
+  {
+    id: 'cbp',
+    agency: 'U.S. Customs and Border Protection',
+    abbr: 'CBP',
+    avgDays: 55,
+    dataPoints: 678,
+    withinDeadline: 10,
+    successRate: 56,
+    law: 'Federal FOIA',
+    jurisdiction: 'federal',
+    distribution: [2, 6, 11, 18, 27, 25, 11]
+  },
+  {
+    id: 'fcc',
+    agency: 'Federal Communications Commission',
+    abbr: 'FCC',
+    avgDays: 43,
+    dataPoints: 224,
+    withinDeadline: 15,
+    successRate: 62,
+    law: 'Federal FOIA',
+    jurisdiction: 'federal',
+    distribution: [2, 10, 19, 25, 24, 14, 6]
   },
   // ── NY / Local agencies ───────────────────────────────────────────────────
   {
@@ -839,7 +911,7 @@ const AGENCY_INSIGHTS = [
   {
     id: 'nyc-mayor',
     agency: "NYC Mayor's Office",
-    abbr: 'NYC Mayor',
+    abbr: 'Mayor\'s Office',
     avgDays: 71,
     dataPoints: 203,
     withinDeadline: 4,
@@ -848,6 +920,84 @@ const AGENCY_INSIGHTS = [
     jurisdiction: 'state-local',
     state: 'NY',
     distribution: [1, 3, 8, 14, 22, 31, 21]
+  },
+  {
+    id: 'nyc-dot',
+    agency: 'NYC Department of Transportation',
+    abbr: 'NYC DOT',
+    avgDays: 35,
+    dataPoints: 478,
+    withinDeadline: 22,
+    successRate: 74,
+    law: 'NY FOIL',
+    jurisdiction: 'state-local',
+    state: 'NY',
+    distribution: [3, 17, 22, 26, 19, 10, 3]
+  },
+  {
+    id: 'fdny',
+    agency: 'New York City Fire Department',
+    abbr: 'FDNY',
+    avgDays: 28,
+    dataPoints: 612,
+    withinDeadline: 31,
+    successRate: 80,
+    law: 'NY FOIL',
+    jurisdiction: 'state-local',
+    state: 'NY',
+    distribution: [5, 22, 26, 23, 16, 6, 2]
+  },
+  {
+    id: 'nyc-dob',
+    agency: 'NYC Department of Buildings',
+    abbr: 'NYC DOB',
+    avgDays: 41,
+    dataPoints: 389,
+    withinDeadline: 17,
+    successRate: 69,
+    law: 'NY FOIL',
+    jurisdiction: 'state-local',
+    state: 'NY',
+    distribution: [2, 12, 19, 25, 24, 13, 5]
+  },
+  {
+    id: 'nyc-cchr',
+    agency: 'NYC Commission on Human Rights',
+    abbr: 'NYC CCHR',
+    avgDays: 33,
+    dataPoints: 156,
+    withinDeadline: 25,
+    successRate: 72,
+    law: 'NY FOIL',
+    jurisdiction: 'state-local',
+    state: 'NY',
+    distribution: [4, 18, 23, 26, 17, 9, 3]
+  },
+  {
+    id: 'nys-dec',
+    agency: 'NYS Dept. of Environmental Conservation',
+    abbr: 'NYS DEC',
+    avgDays: 29,
+    dataPoints: 447,
+    withinDeadline: 34,
+    successRate: 77,
+    law: 'NY FOIL',
+    jurisdiction: 'state-local',
+    state: 'NY',
+    distribution: [6, 23, 25, 22, 15, 7, 2]
+  },
+  {
+    id: 'nys-doh',
+    agency: 'NYS Department of Health',
+    abbr: 'NYS DOH',
+    avgDays: 26,
+    dataPoints: 523,
+    withinDeadline: 38,
+    successRate: 79,
+    law: 'NY FOIL',
+    jurisdiction: 'state-local',
+    state: 'NY',
+    distribution: [7, 26, 27, 21, 13, 5, 1]
   },
   // ── Other state / local agencies ─────────────────────────────────────────
   {
