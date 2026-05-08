@@ -32,12 +32,10 @@
     // Matches nav items by their href and replaces text from COPY.nav
     if (COPY.nav) {
       var hrefToKey = {
-        'dashboard.html':     'dashboard',
-        'requests.html':      'myRequests',
-        'new-request.html':   'logRequest',
-        'draft-request.html': 'draftRequest',
+        'new-request.html':     'logRequest',
+        'draft-request.html':   'draftRequest',
         'agency-insights.html': 'agencyInsights',
-        'settings.html':      'settings',
+        'settings.html':        'settings',
       };
       document.querySelectorAll('a.nav-item').forEach(function (link) {
         var href = link.getAttribute('href');

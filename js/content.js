@@ -167,7 +167,7 @@ const COPY = {
 
   // ── Footer ───────────────────────────────────────────────────
   footer: {
-    tagline:      "Built for journalists and public records researchers.",
+    tagline:      "Built for journalists.",
     copyrightYear: "2026",
     privacyLabel:  "Privacy",
     termsLabel:    "Terms",
@@ -194,7 +194,7 @@ const COPY = {
   // ════════════════════════════════════════════════════════════
   dashboard: {
     greeting:      "Good morning, Jane.",
-    date:          "Wednesday, May 6, 2026",
+    date:          "Friday, May 8, 2026",
     logRequestCta: "+ Log a Request →",
 
     // Four stat boxes at the top
@@ -251,7 +251,7 @@ const COPY = {
   // LOG A REQUEST PAGE (new-request.html)
   // ════════════════════════════════════════════════════════════
   logRequest: {
-    pageTitle:    "Log a FOIA Request",
+    pageTitle:    "Log a Records Request",
     pageSubtitle: "Track a request you've already sent. Writing a new one? Use the",
     pageSubtitleLink: "Draft a Request →",
 
@@ -260,7 +260,7 @@ const COPY = {
     agencyLabel:     "Agency name",
     agencyRequired:  "*",
     agencyPlaceholder: "e.g. New York Police Department",
-    agencyHint:      "Enter the full name, e.g. \"New York Police Department\". You can add more details later.",
+    agencyHint:      "Enter the full name of the agency. You can add more details later.",
 
     communityDataTitle: "Disclosure Desk community data",
     communityDataLink:  "View full breakdown →",
