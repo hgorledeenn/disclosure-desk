@@ -10,6 +10,8 @@
 
   function applyContent() {
     if (typeof COPY === 'undefined') return;
+
+    // ── Inject [data-c] elements ─────────────────────────────
     document.querySelectorAll('[data-c]').forEach(function (el) {
       var val = getVal(COPY, el.getAttribute('data-c'));
       if (val === undefined || val === null) return;
@@ -19,6 +21,41 @@
         el.textContent = val;
       }
     });
+
+    // ── Inject [data-c-placeholder] (input placeholders) ─────
+    document.querySelectorAll('[data-c-placeholder]').forEach(function (el) {
+      var val = getVal(COPY, el.getAttribute('data-c-placeholder'));
+      if (val !== undefined && val !== null) el.placeholder = val;
+    });
+
+    // ── Auto-update sidebar nav labels ───────────────────────
+    // Matches nav items by their href and replaces text from COPY.nav
+    if (COPY.nav) {
+      var hrefToKey = {
+        'dashboard.html':     'dashboard',
+        'requests.html':      'myRequests',
+        'new-request.html':   'logRequest',
+        'draft-request.html': 'draftRequest',
+        'agency-insights.html': 'agencyInsights',
+        'settings.html':      'settings',
+      };
+      document.querySelectorAll('a.nav-item').forEach(function (link) {
+        var href = link.getAttribute('href');
+        var key  = hrefToKey[href];
+        if (!key || !COPY.nav[key]) return;
+        // Walk child nodes and update the first non-empty text node
+        var nodes = link.childNodes;
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].nodeType === 3) {
+            var trimmed = nodes[i].textContent.trim();
+            if (trimmed.length > 0) {
+              nodes[i].textContent = nodes[i].textContent.replace(trimmed, COPY.nav[key]);
+              break;
+            }
+          }
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {

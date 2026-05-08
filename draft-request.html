@@ -781,7 +781,7 @@ ${closingParts.join('\n')}`;
       });
     }
 
-    // ── Download ──────────────────────────────────────────────────────────────
+    // ── Download ─────────────────────────────────────────────────────────────
     function downloadLetter() {
       const text = document.getElementById('letterPreview').textContent;
       const agency = document.getElementById('agencyName').value.trim().replace(/\s+/g, '-').toLowerCase() || 'agency';
@@ -796,8 +796,10 @@ ${closingParts.join('\n')}`;
       URL.revokeObjectURL(url);
     }
 
-    // ── Init ──────────────────────────────────────────────────────────────────
+    // ── Init ─────────────────────────────────────────────────────────────────
     renderProgress();
   </script>
+  <script src="js/content.js"></script>
+  <script src="js/apply-content.js"></script>
 </body>
 </html>

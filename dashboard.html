@@ -109,37 +109,37 @@
     <!-- Greeting row -->
     <div class="px-4 sm:px-6 lg:px-10 pt-8 pb-0 flex items-start justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-slate-900 serif">Good morning, Jane.</h1>
-        <p class="text-sm text-slate-400 mt-1">Wednesday, May 6, 2026</p>
+        <h1 class="text-2xl font-bold text-slate-900 serif" data-c="dashboard.greeting">Good morning, Jane.</h1>
+        <p class="text-sm text-slate-400 mt-1" data-c="dashboard.date">Wednesday, May 6, 2026</p>
       </div>
-      <a href="new-request.html" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors mt-1">+ Log a Request &rarr;</a>
+      <a href="new-request.html" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors mt-1" data-c="dashboard.logRequestCta">+ Log a Request →</a>
     </div>
 
     <!-- Stat boxes -->
     <div class="px-4 sm:px-6 lg:px-10 mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
       <!-- In Progress -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-indigo-400">
-        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">In Progress</p>
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statInProgress">In Progress</p>
         <p class="text-3xl font-bold text-indigo-600">14</p>
-        <p class="text-sm text-slate-500 mt-1">active requests</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statInProgressNote">active requests</p>
       </div>
       <!-- Upcoming Deadlines -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-amber-400">
-        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Upcoming Deadlines</p>
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statUpcoming">Upcoming Deadlines</p>
         <p class="text-3xl font-bold text-amber-600">4</p>
-        <p class="text-sm text-slate-500 mt-1">due within 7 days</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statUpcomingNote">due within 7 days</p>
       </div>
       <!-- Overdue -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-rose-400">
-        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Overdue</p>
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statOverdue">Overdue</p>
         <p class="text-3xl font-bold text-rose-600">5</p>
-        <p class="text-sm text-slate-500 mt-1">need follow-up</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statOverdueNote">need follow-up</p>
       </div>
       <!-- Completed -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-emerald-400">
-        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Completed</p>
+        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statCompleted">Completed</p>
         <p class="text-3xl font-bold text-emerald-600">6</p>
-        <p class="text-sm text-slate-500 mt-1">requests resolved</p>
+        <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statCompletedNote">requests resolved</p>
       </div>
     </div>
 
@@ -153,19 +153,22 @@
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <span class="text-base font-semibold text-slate-700">All Requests</span>
           <div class="flex items-center gap-1.5 flex-wrap" id="filter-pills">
-            <button data-filter="all"      class="filter-pill active-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">All (25)</button>
-            <button data-filter="overdue"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Overdue (5)</button>
-            <button data-filter="duesoon"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Due Soon (4)</button>
-            <button data-filter="active"   class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Active (14)</button>
-            <button data-filter="done"     class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Done (6)</button>
+            <button data-filter="all"      class="filter-pill active-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">All</button>
+            <button data-filter="overdue"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Overdue</button>
+            <button data-filter="duesoon"  class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Due Soon</button>
+            <button data-filter="active"   class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Active</button>
+            <button data-filter="done"     class="filter-pill text-xs font-medium px-2.5 py-1 rounded-full border transition-colors">Done</button>
           </div>
         </div>
 
         <!-- Request rows card -->
-        <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+        <div class="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden" style="max-height:520px;overflow-y:auto">
           <div id="request-list">
             <!-- populated by JS -->
           </div>
+        </div>
+        <div class="mt-2 text-right">
+          <a href="requests.html" class="text-xs text-indigo-500 hover:text-indigo-700 font-medium transition-colors">View all in My Requests →</a>
         </div>
 
       </div>
@@ -184,6 +187,8 @@
   </main>
 
   <script src="js/data.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/apply-content.js"></script>
   <script>
     /* ── Sidebar ─────────────────────────────────────────────── */
     function openSidebar() {
@@ -393,8 +398,31 @@
       }).join('');
     }
 
+    /* ── Dynamic pill counts ─────────────────────────────────── */
+    function updatePillCounts() {
+      const counts = {
+        all:     MOCK_REQUESTS.length,
+        overdue: MOCK_REQUESTS.filter(isOverdue).length,
+        duesoon: MOCK_REQUESTS.filter(isDueSoon).length,
+        active:  MOCK_REQUESTS.filter(isActive).length,
+        done:    MOCK_REQUESTS.filter(isDone).length,
+      };
+      const labels = {
+        all:     'All',
+        overdue: 'Overdue',
+        duesoon: 'Due Soon',
+        active:  'Active',
+        done:    'Done',
+      };
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        const f = pill.dataset.filter;
+        if (counts[f] !== undefined) pill.textContent = `${labels[f]} (${counts[f]})`;
+      });
+    }
+
     /* ── Init ─────────────────────────────────────────────────── */
     renderRequests();
+    updatePillCounts();
     initFilterPills();
     renderRecentUpdates();
   </script>

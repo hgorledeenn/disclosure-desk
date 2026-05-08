@@ -106,7 +106,7 @@
 
     <!-- Header -->
     <div class="px-4 sm:px-6 lg:px-10 pt-8 pb-6 flex items-center justify-between">
-      <h1 class="text-2xl font-bold text-slate-900 serif">My Requests</h1>
+      <h1 class="text-2xl font-bold text-slate-900 serif" data-c="requests.pageTitle">My Requests</h1>
       <a href="new-request.html" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2.5 rounded-lg transition-colors shadow-sm">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -169,6 +169,8 @@
   </main>
 
   <script src="js/data.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/apply-content.js"></script>
   <script>
     function openSidebar() {
       document.getElementById('sidebar').classList.remove('-translate-x-full');
@@ -238,7 +240,7 @@
         if (currentSearch) {
           const q = currentSearch.toLowerCase();
           return (r.agencyAbbr || '').toLowerCase().includes(q) ||
-                 (r.agencyFull || '').toLowerCase().includes(q) ||
+                 (r.agency || '').toLowerCase().includes(q) ||
                  r.subject.toLowerCase().includes(q);
         }
         return true;
@@ -270,7 +272,7 @@
           <td class="px-6 py-4">
             <div>
               <span class="inline-block bg-indigo-50 text-indigo-700 text-xs font-semibold px-2 py-0.5 rounded mb-1">${r.agencyAbbr || r.agency}</span>
-              <div class="text-xs text-slate-400 leading-snug">${r.agencyFull}</div>
+              <div class="text-xs text-slate-400 leading-snug">${r.agency}</div>
             </div>
           </td>
           <td class="px-4 py-4 max-w-xs">

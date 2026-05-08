@@ -32,11 +32,11 @@ const COPY = {
     // The two lines of the big hero headline (each is a separate line)
     headlineLine1: "Track your requests.",
     headlineLine2: "Never miss a deadline.",
-    subheadline: "The professional tool for journalists and researchers managing Freedom of Information Act requests.",
+    subheadline: "The professional tool, built by journalists, for journalists, managing Freedom of Information Act requests.",
 
     // Three feature bullet points on the left panel
     feature1Title: "Automated deadline reminders",
-    feature1Desc:  "Get email alerts 14, 7, 3, and 1 day before every deadline so you never miss a follow-up.",
+    feature1Desc:  "Get email alerts 2 weeks, 7 days and 1 day before every deadline so you never miss a follow-up.",
 
     feature2Title: "Centralized request dashboard",
     feature2Desc:  "Track every FOIA request across all agencies in one place — with status, documents, and notes.",
@@ -61,7 +61,7 @@ const COPY = {
     signInButton:       "Sign in to Disclosure Desk",
     noAccountText:      "Don't have an account?",
     signUpLink:         "Create one free",
-    footerNote:         "For journalists and public records researchers — built with transparency in mind.",
+    footerNote:         "For journalists, by journalists — built with transparency in mind.",
     mobilePricingLink:  "View pricing plans ↓",
   },
 
@@ -77,7 +77,7 @@ const COPY = {
     annualSavings:  "Save 30%",
 
     // ── Free tier ─────────────────────────────────────────────
-    freeName:        "Free",
+    freeName:        "Basic",
     freePrice:       "$0",
     freePriceUnit:   "/month",
     freeDescription: "For individuals getting started with public records.",
@@ -96,7 +96,7 @@ const COPY = {
     freeNotIncluded: [
       "Email deadline reminders",
       "Data insights & analytics",
-      "CSV export",
+      "Letter generation tool",
       "Unlimited requests",
     ],
 
