@@ -646,7 +646,7 @@ const AGENCY_INSIGHTS = [
     successRate: 72,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [3, 11, 18, 24, 22, 15, 7]
+    distribution: [2, 5, 7, 12, 22, 24, 14, 8, 5, 1]
   },
   {
     id: 'doj',
@@ -658,7 +658,7 @@ const AGENCY_INSIGHTS = [
     successRate: 65,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [2, 6, 12, 20, 28, 22, 10]
+    distribution: [1, 3, 4, 7, 14, 24, 20, 15, 9, 3]
   },
   {
     id: 'fbi',
@@ -670,7 +670,7 @@ const AGENCY_INSIGHTS = [
     successRate: 41,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [1, 2, 5, 9, 14, 31, 38]
+    distribution: [1, 1, 1, 2, 5, 8, 12, 18, 28, 24]
   },
   {
     id: 'ice',
@@ -682,7 +682,7 @@ const AGENCY_INSIGHTS = [
     successRate: 47,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [1, 3, 6, 11, 20, 32, 27]
+    distribution: [1, 2, 2, 3, 8, 12, 18, 22, 20, 12]
   },
   {
     id: 'dhs',
@@ -694,7 +694,7 @@ const AGENCY_INSIGHTS = [
     successRate: 58,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [2, 5, 10, 18, 25, 26, 14]
+    distribution: [1, 2, 4, 5, 10, 18, 24, 20, 12, 4]
   },
   {
     id: 'fda',
@@ -706,7 +706,7 @@ const AGENCY_INSIGHTS = [
     successRate: 71,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [4, 13, 21, 26, 20, 12, 4]
+    distribution: [2, 7, 8, 14, 24, 22, 13, 6, 3, 1]
   },
   {
     id: 'ftc',
@@ -718,7 +718,7 @@ const AGENCY_INSIGHTS = [
     successRate: 78,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [5, 24, 28, 22, 14, 5, 2]
+    distribution: [4, 14, 11, 18, 24, 16, 8, 3, 1, 1]
   },
   {
     id: 'hhs',
@@ -730,7 +730,7 @@ const AGENCY_INSIGHTS = [
     successRate: 74,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [4, 18, 27, 24, 16, 9, 2]
+    distribution: [3, 10, 9, 16, 24, 20, 11, 5, 2, 0]
   },
   {
     id: 'dod',
@@ -742,7 +742,7 @@ const AGENCY_INSIGHTS = [
     successRate: 45,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [1, 1, 3, 7, 11, 28, 49]
+    distribution: [0, 1, 1, 2, 5, 8, 11, 17, 28, 27]
   },
   {
     id: 'sec',
@@ -754,7 +754,7 @@ const AGENCY_INSIGHTS = [
     successRate: 81,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [8, 33, 28, 17, 9, 4, 1]
+    distribution: [6, 22, 13, 18, 19, 12, 5, 3, 1, 1]
   },
   {
     id: 'dea',
@@ -766,7 +766,7 @@ const AGENCY_INSIGHTS = [
     successRate: 54,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [1, 5, 9, 16, 26, 28, 15]
+    distribution: [1, 3, 5, 7, 14, 26, 22, 14, 6, 2]
   },
   {
     id: 'hud',
@@ -778,7 +778,7 @@ const AGENCY_INSIGHTS = [
     successRate: 73,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [5, 19, 24, 25, 16, 9, 2]
+    distribution: [4, 13, 10, 16, 22, 19, 9, 5, 2, 0]
   },
   {
     id: 'uscis',
@@ -790,7 +790,7 @@ const AGENCY_INSIGHTS = [
     successRate: 61,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [1, 3, 7, 13, 24, 31, 21]
+    distribution: [1, 2, 3, 4, 9, 16, 22, 22, 16, 5]
   },
   {
     id: 'cbp',
@@ -802,7 +802,7 @@ const AGENCY_INSIGHTS = [
     successRate: 56,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [2, 6, 11, 18, 27, 25, 11]
+    distribution: [1, 3, 6, 7, 14, 25, 22, 14, 6, 2]
   },
   {
     id: 'fcc',
@@ -814,7 +814,7 @@ const AGENCY_INSIGHTS = [
     successRate: 62,
     law: 'Federal FOIA',
     jurisdiction: 'federal',
-    distribution: [2, 10, 19, 25, 24, 14, 6]
+    distribution: [2, 6, 7, 11, 22, 26, 14, 7, 4, 1]
   },
   // ── NY / Local agencies ───────────────────────────────────────────────────
   {
@@ -828,7 +828,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [2, 9, 14, 27, 26, 16, 6]
+    distribution: [1, 4, 6, 9, 18, 26, 20, 10, 5, 1]
   },
   {
     id: 'nyc-doc',
@@ -841,7 +841,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [1, 5, 10, 18, 27, 26, 13]
+    distribution: [1, 2, 3, 5, 10, 18, 24, 22, 12, 3]
   },
   {
     id: 'nyc-doe',
@@ -854,7 +854,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [2, 13, 20, 25, 22, 13, 5]
+    distribution: [2, 6, 7, 11, 20, 25, 17, 8, 3, 1]
   },
   {
     id: 'nyc-hpd',
@@ -867,7 +867,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [4, 20, 26, 24, 15, 9, 2]
+    distribution: [3, 12, 9, 14, 24, 20, 11, 5, 2, 0]
   },
   {
     id: 'nyc-dss',
@@ -880,7 +880,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [1, 7, 12, 21, 29, 22, 8]
+    distribution: [1, 3, 4, 6, 14, 24, 24, 16, 7, 1]
   },
   {
     id: 'mta',
@@ -893,7 +893,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [3, 16, 22, 25, 19, 11, 4]
+    distribution: [2, 9, 8, 14, 22, 24, 13, 6, 2, 0]
   },
   {
     id: 'doccs',
@@ -906,7 +906,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [1, 11, 17, 23, 25, 17, 6]
+    distribution: [1, 4, 7, 9, 16, 24, 20, 12, 6, 1]
   },
   {
     id: 'nyc-mayor',
@@ -919,7 +919,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [1, 3, 8, 14, 22, 31, 21]
+    distribution: [0, 2, 2, 3, 8, 14, 20, 24, 20, 7]
   },
   {
     id: 'nyc-dot',
@@ -932,7 +932,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [3, 17, 22, 26, 19, 10, 3]
+    distribution: [3, 11, 8, 12, 24, 22, 12, 5, 2, 1]
   },
   {
     id: 'fdny',
@@ -945,7 +945,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [5, 22, 26, 23, 16, 6, 2]
+    distribution: [4, 16, 11, 14, 22, 18, 9, 4, 1, 1]
   },
   {
     id: 'nyc-dob',
@@ -958,7 +958,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [2, 12, 19, 25, 24, 13, 5]
+    distribution: [2, 6, 9, 11, 20, 24, 16, 8, 3, 1]
   },
   {
     id: 'nyc-cchr',
@@ -971,7 +971,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [4, 18, 23, 26, 17, 9, 3]
+    distribution: [3, 13, 9, 12, 22, 22, 11, 5, 2, 1]
   },
   {
     id: 'nys-dec',
@@ -984,7 +984,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [6, 23, 25, 22, 15, 7, 2]
+    distribution: [5, 18, 11, 12, 22, 18, 8, 4, 2, 0]
   },
   {
     id: 'nys-doh',
@@ -997,7 +997,7 @@ const AGENCY_INSIGHTS = [
     law: 'NY FOIL',
     jurisdiction: 'state-local',
     state: 'NY',
-    distribution: [7, 26, 27, 21, 13, 5, 1]
+    distribution: [6, 21, 11, 13, 20, 16, 8, 3, 2, 0]
   },
   // ── Other state / local agencies ─────────────────────────────────────────
   {
@@ -1011,7 +1011,7 @@ const AGENCY_INSIGHTS = [
     law: 'CA CPRA',
     jurisdiction: 'state-local',
     state: 'CA',
-    distribution: [22, 36, 22, 12, 5, 2, 1]
+    distribution: [20, 26, 12, 18, 12, 7, 3, 1, 1, 0]
   },
   {
     id: 'chicago-pd',
@@ -1024,7 +1024,7 @@ const AGENCY_INSIGHTS = [
     law: 'IL FOIA',
     jurisdiction: 'state-local',
     state: 'IL',
-    distribution: [2, 8, 15, 22, 25, 19, 9]
+    distribution: [1, 3, 6, 7, 16, 26, 22, 13, 5, 1]
   },
   {
     id: 'tx-dps',
@@ -1037,7 +1037,7 @@ const AGENCY_INSIGHTS = [
     law: 'TX PIA',
     jurisdiction: 'state-local',
     state: 'TX',
-    distribution: [45, 26, 15, 8, 4, 1, 1]
+    distribution: [38, 22, 11, 15, 8, 4, 1, 1, 0, 0]
   }
 ];
 
