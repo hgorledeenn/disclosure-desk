@@ -503,10 +503,6 @@
 
     // ── Step navigation ───────────────────────────────────────────────────────
     function goToStep(n) {
-      if (n === 2 && !validateStep1()) return;
-      if (n === 3 && !validateStep2()) return;
-      if (n === 4 && !validateStep3()) return;
-
       if (n === 4) buildLetter();
 
       currentStep = n;
