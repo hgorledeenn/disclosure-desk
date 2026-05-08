@@ -27,15 +27,16 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         </div>
-        <span class="serif" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;color:white">Disclosure Desk</span>
+        <span class="serif" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;color:white" data-c="brand.name">Disclosure Desk</span>
       </div>
 
       <!-- Center Content -->
       <div>
         <h1 class="text-4xl font-bold leading-tight mb-4 serif">
-          Track your requests.<br />Never miss a deadline.
+          <span data-c="hero.headlineLine1">Track your requests.</span><br />
+          <span data-c="hero.headlineLine2">Never miss a deadline.</span>
         </h1>
-        <p class="text-indigo-200 text-lg mb-10">
+        <p class="text-indigo-200 text-lg mb-10" data-c="hero.subheadline">
           The professional tool for journalists and researchers managing Freedom of Information Act requests.
         </p>
 
@@ -47,8 +48,8 @@
               </svg>
             </div>
             <div>
-              <div class="font-semibold">Automated deadline reminders</div>
-              <div class="text-indigo-200 text-sm mt-0.5">Get email alerts 14, 7, 3, and 1 day before every deadline so you never miss a follow-up.</div>
+              <div class="font-semibold" data-c="hero.feature1Title">Automated deadline reminders</div>
+              <div class="text-indigo-200 text-sm mt-0.5" data-c="hero.feature1Desc">Get email alerts 14, 7, 3, and 1 day before every deadline so you never miss a follow-up.</div>
             </div>
           </li>
           <li class="flex items-start gap-4">
@@ -58,8 +59,8 @@
               </svg>
             </div>
             <div>
-              <div class="font-semibold">Centralized request dashboard</div>
-              <div class="text-indigo-200 text-sm mt-0.5">Track every FOIA request across all agencies in one place — with status, documents, and notes.</div>
+              <div class="font-semibold" data-c="hero.feature2Title">Centralized request dashboard</div>
+              <div class="text-indigo-200 text-sm mt-0.5" data-c="hero.feature2Desc">Track every FOIA request across all agencies in one place — with status, documents, and notes.</div>
             </div>
           </li>
           <li class="flex items-start gap-4">
@@ -69,8 +70,8 @@
               </svg>
             </div>
             <div>
-              <div class="font-semibold">Document management & appeal tracking</div>
-              <div class="text-indigo-200 text-sm mt-0.5">Attach agency responses, track appeals, and keep a full audit trail for every request.</div>
+              <div class="font-semibold" data-c="hero.feature3Title">Document management & appeal tracking</div>
+              <div class="text-indigo-200 text-sm mt-0.5" data-c="hero.feature3Desc">Attach agency responses, track appeals, and keep a full audit trail for every request.</div>
             </div>
           </li>
         </ul>
@@ -78,9 +79,9 @@
 
       <!-- Footer with pricing link -->
       <div class="flex items-center justify-between">
-        <div class="text-indigo-300 text-sm">&copy; 2026 Disclosure Desk. Built for journalists.</div>
+        <div class="text-indigo-300 text-sm">&copy; <span data-c="footer.copyrightYear">2026</span> <span data-c="brand.name">Disclosure Desk</span>. <span data-c="hero.footerTagline">Built for journalists.</span></div>
         <a href="#pricing" class="text-indigo-200 hover:text-white text-sm inline-flex items-center gap-1.5 transition-colors">
-          View pricing
+          <span data-c="hero.viewPricingLabel">View pricing</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
@@ -99,13 +100,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
-          <span class="serif text-slate-800" style="font-size:20px;font-weight:700">Disclosure Desk</span>
+          <span class="serif text-slate-800" style="font-size:20px;font-weight:700" data-c="brand.name">Disclosure Desk</span>
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
           <div class="mb-7">
-            <h2 class="text-2xl font-bold text-slate-900 serif">Welcome back</h2>
-            <p class="text-slate-500 mt-1 text-sm">Sign in to your Disclosure Desk account</p>
+            <h2 class="text-2xl font-bold text-slate-900 serif" data-c="login.headline">Welcome back</h2>
+            <p class="text-slate-500 mt-1 text-sm" data-c="login.subheadline">Sign in to your Disclosure Desk account</p>
           </div>
 
           <!-- Demo Info Box -->
@@ -113,29 +114,30 @@
             <svg class="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
             </svg>
-            <p class="text-blue-700 text-sm">
-              <span class="font-semibold">Demo:</span> Use any email and password to log in.
+            <p class="text-blue-700 text-sm" data-c="login.demoNotice">
+              Demo: Use any email and password to log in.
             </p>
           </div>
 
           <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
             <div class="space-y-5">
               <div>
-                <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5">Email address</label>
+                <label for="email" class="block text-sm font-medium text-slate-700 mb-1.5" data-c="login.emailLabel">Email address</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value="jane@example.com"
                   class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                  data-c-placeholder="login.emailPlaceholder"
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
                 <div class="flex items-center justify-between mb-1.5">
-                  <label for="password" class="block text-sm font-medium text-slate-700">Password</label>
-                  <a href="#" class="text-xs text-indigo-600 hover:text-indigo-700 font-medium">Forgot password?</a>
+                  <label for="password" class="block text-sm font-medium text-slate-700" data-c="login.passwordLabel">Password</label>
+                  <a href="#" class="text-xs text-indigo-600 hover:text-indigo-700 font-medium" data-c="login.forgotPassword">Forgot password?</a>
                 </div>
                 <input
                   type="password"
@@ -155,31 +157,32 @@
                   checked
                   class="w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                 />
-                <label for="remember" class="text-sm text-slate-600">Remember me for 30 days</label>
+                <label for="remember" class="text-sm text-slate-600" data-c="login.rememberMe">Remember me for 30 days</label>
               </div>
             </div>
 
             <button
               type="submit"
               class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              data-c="login.signInButton"
             >
               Sign in to Disclosure Desk
             </button>
           </form>
 
           <p class="mt-6 text-center text-sm text-slate-500">
-            Don't have an account?
-            <a href="signup.html" class="text-indigo-600 hover:text-indigo-700 font-medium">Create one free</a>
+            <span data-c="login.noAccountText">Don't have an account?</span>
+            <a href="signup.html" class="text-indigo-600 hover:text-indigo-700 font-medium" data-c="login.signUpLink">Create one free</a>
           </p>
         </div>
 
-        <p class="text-center text-xs text-slate-400 mt-6">
-          For journalists and public records researchers &mdash; built with transparency in mind.
+        <p class="text-center text-xs text-slate-400 mt-6" data-c="login.footerNote">
+          For journalists and public records researchers — built with transparency in mind.
         </p>
 
         <!-- Mobile pricing link -->
         <p class="text-center text-xs text-slate-400 mt-3 lg:hidden">
-          <a href="#pricing" class="text-indigo-500 hover:text-indigo-700">View pricing plans ↓</a>
+          <a href="#pricing" class="text-indigo-500 hover:text-indigo-700" data-c="login.mobilePricingLink">View pricing plans ↓</a>
         </p>
       </div>
     </div>
@@ -191,21 +194,21 @@
 
       <!-- Section header -->
       <div class="text-center mb-14">
-        <p class="text-indigo-600 font-semibold text-sm uppercase tracking-wider mb-3">Pricing</p>
-        <h2 class="text-4xl font-bold text-slate-900 mb-4 serif">Simple, transparent pricing</h2>
-        <p class="text-slate-500 text-lg max-w-xl mx-auto">Start free. Upgrade when you need more power and automation.</p>
+        <p class="text-indigo-600 font-semibold text-sm uppercase tracking-wider mb-3" data-c="pricing.sectionLabel">Pricing</p>
+        <h2 class="text-4xl font-bold text-slate-900 mb-4 serif" data-c="pricing.headline">Simple, transparent pricing</h2>
+        <p class="text-slate-500 text-lg max-w-xl mx-auto" data-c="pricing.subheadline">Start free. Upgrade when you need more power and automation.</p>
 
         <!-- Billing toggle -->
         <div class="flex items-center justify-center gap-3 mt-8">
-          <span id="label-monthly" class="text-sm font-medium text-slate-900">Monthly</span>
+          <span id="label-monthly" class="text-sm font-medium text-slate-900" data-c="pricing.billingMonthly">Monthly</span>
           <label class="billing-toggle relative cursor-pointer">
             <input type="checkbox" id="billingToggle" class="sr-only" onchange="toggleBilling()" />
             <div class="toggle-track w-11 h-6 bg-slate-200 rounded-full transition-colors duration-200"></div>
             <div class="toggle-knob absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-200"></div>
           </label>
           <span id="label-annual" class="text-sm font-medium text-slate-500">
-            Annual
-            <span class="ml-1.5 bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full">Save 30%</span>
+            <span data-c="pricing.billingAnnual">Annual</span>
+            <span class="ml-1.5 bg-green-100 text-green-700 text-xs font-semibold px-2 py-0.5 rounded-full" data-c="pricing.annualSavings">Save 30%</span>
           </span>
         </div>
       </div>
@@ -216,157 +219,68 @@
         <!-- Free tier -->
         <div class="bg-white border border-slate-200 rounded-2xl p-8 flex flex-col shadow-sm">
           <div class="mb-6">
-            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Free</p>
+            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2" data-c="pricing.freeName">Free</p>
             <div class="flex items-end gap-1 mb-2">
-              <span class="text-4xl font-bold text-slate-900">$0</span>
-              <span class="text-slate-500 mb-1">/month</span>
+              <span class="text-4xl font-bold text-slate-900" data-c="pricing.freePrice">$0</span>
+              <span class="text-slate-500 mb-1" data-c="pricing.freePriceUnit">/month</span>
             </div>
-            <p class="text-slate-500 text-sm">For individuals getting started with public records.</p>
+            <p class="text-slate-500 text-sm" data-c="pricing.freeDescription">For individuals getting started with public records.</p>
           </div>
 
-          <a href="signup.html" class="block w-full text-center border border-slate-300 hover:border-indigo-400 hover:text-indigo-600 text-slate-700 font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors mb-8">
+          <a href="signup.html" class="block w-full text-center border border-slate-300 hover:border-indigo-400 hover:text-indigo-600 text-slate-700 font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors mb-8" data-c="pricing.freeCtaLabel">
             Get started free
           </a>
 
           <div class="space-y-3 flex-1">
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">What's included</p>
-
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Up to <strong>10 active</strong> FOIA requests</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Request status tracking</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Notes & document uploads</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Activity timeline</span>
-            </div>
-
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4" data-c="pricing.freeIncludedLabel">What's included</p>
+            <div id="free-included-list"></div>
             <div class="border-t border-slate-100 my-4"></div>
-
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-slate-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" /></svg>
-              <span class="text-sm text-slate-400">Email deadline reminders</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-slate-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" /></svg>
-              <span class="text-sm text-slate-400">Data insights & analytics</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-slate-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" /></svg>
-              <span class="text-sm text-slate-400">CSV export</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-slate-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" /></svg>
-              <span class="text-sm text-slate-400">Unlimited requests</span>
-            </div>
+            <div id="free-not-included-list"></div>
           </div>
         </div>
 
         <!-- Pro tier (highlighted) -->
         <div class="bg-indigo-600 rounded-2xl p-8 flex flex-col shadow-xl relative">
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
-            <span class="bg-indigo-900 text-indigo-100 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow">Most Popular</span>
+            <span class="bg-indigo-900 text-indigo-100 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow" data-c="pricing.proPopularBadge">Most Popular</span>
           </div>
 
           <div class="mb-6">
-            <p class="text-sm font-semibold text-indigo-200 uppercase tracking-wider mb-2">Pro</p>
+            <p class="text-sm font-semibold text-indigo-200 uppercase tracking-wider mb-2" data-c="pricing.proName">Pro</p>
             <div class="flex items-end gap-1 mb-2">
               <span id="pro-price" class="text-4xl font-bold text-white">$14</span>
-              <span class="text-indigo-300 mb-1" id="pro-billing">/month</span>
+              <span class="text-indigo-300 mb-1" id="pro-billing" data-c="pricing.proPriceUnit">/month</span>
             </div>
-            <p id="pro-billing-note" class="text-indigo-200 text-sm">Billed monthly. Cancel anytime.</p>
+            <p id="pro-billing-note" class="text-indigo-200 text-sm" data-c="pricing.proBillingMonthly">Billed monthly. Cancel anytime.</p>
           </div>
 
-          <a href="signup.html" class="block w-full text-center bg-white hover:bg-indigo-50 text-indigo-700 font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors mb-8">
+          <a href="signup.html" class="block w-full text-center bg-white hover:bg-indigo-50 text-indigo-700 font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors mb-8" data-c="pricing.proCtaLabel">
             Start 14-day free trial
           </a>
 
           <div class="space-y-3 flex-1">
-            <p class="text-xs font-semibold text-indigo-300 uppercase tracking-wider mb-4">Everything in Free, plus</p>
-
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-indigo-200 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-white"><strong>Unlimited</strong> active FOIA requests</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-indigo-200 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-white">Automated email deadline reminders</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-indigo-200 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-white">Data insights & analytics dashboard</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-indigo-200 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-white">Weekly summary digest emails</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-indigo-200 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-white">CSV & spreadsheet export</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-indigo-200 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-white">Priority email support</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-indigo-200 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-white">Configurable reminder schedules</span>
-            </div>
+            <p class="text-xs font-semibold text-indigo-300 uppercase tracking-wider mb-4" data-c="pricing.proIncludedLabel">Everything in Free, plus</p>
+            <div id="pro-features-list"></div>
           </div>
         </div>
 
         <!-- Institutional tier -->
         <div class="bg-white border border-slate-200 rounded-2xl p-8 flex flex-col shadow-sm">
           <div class="mb-6">
-            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">Institutional</p>
+            <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2" data-c="pricing.institutionalName">Institutional</p>
             <div class="flex items-end gap-1 mb-2">
-              <span class="text-4xl font-bold text-slate-900">Custom</span>
+              <span class="text-4xl font-bold text-slate-900" data-c="pricing.institutionalPrice">Custom</span>
             </div>
-            <p class="text-slate-500 text-sm">For newsrooms, research teams, and organizations.</p>
+            <p class="text-slate-500 text-sm" data-c="pricing.institutionalDescription">For newsrooms, research teams, and organizations.</p>
           </div>
 
-          <a href="mailto:hello@disclosuredesk.com" class="block w-full text-center bg-slate-900 hover:bg-slate-700 text-white font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors mb-8">
+          <a id="institutional-cta" href="mailto:hello@disclosuredesk.com" class="block w-full text-center bg-slate-900 hover:bg-slate-700 text-white font-semibold py-2.5 px-4 rounded-lg text-sm transition-colors mb-8" data-c="pricing.institutionalCtaLabel">
             Contact us to inquire
           </a>
 
           <div class="space-y-3 flex-1">
-            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Everything in Pro, plus</p>
-
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Unlimited team members</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Shared team request workspace</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Admin dashboard & user management</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Custom onboarding & training</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Dedicated account manager</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">Volume pricing & annual contracts</span>
-            </div>
-            <div class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
-              <span class="text-sm text-slate-700">SLA & uptime guarantees</span>
-            </div>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4" data-c="pricing.institutionalIncludedLabel">Everything in Pro, plus</p>
+            <div id="institutional-features-list"></div>
           </div>
         </div>
 
@@ -382,29 +296,18 @@
             </svg>
           </div>
           <div>
-            <p class="font-semibold text-slate-900">Student & educator discount</p>
-            <p class="text-slate-600 text-sm mt-0.5">Students and journalism faculty qualify for discounted Pro access. Verification required via your .edu email address.</p>
+            <p class="font-semibold text-slate-900" data-c="pricing.studentTitle">Student & educator discount</p>
+            <p class="text-slate-600 text-sm mt-0.5" data-c="pricing.studentDesc">Students and journalism faculty qualify for discounted Pro access. Verification required via your .edu email address.</p>
           </div>
         </div>
-        <a href="mailto:hello@disclosuredesk.com?subject=Student discount inquiry" class="flex-shrink-0 bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2.5 px-6 rounded-lg text-sm transition-colors whitespace-nowrap">
+        <a id="student-cta" href="mailto:hello@disclosuredesk.com?subject=Student discount inquiry" class="flex-shrink-0 bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2.5 px-6 rounded-lg text-sm transition-colors whitespace-nowrap" data-c="pricing.studentCtaLabel">
           Inquire about discounts
         </a>
       </div>
 
       <!-- FAQ row -->
-      <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-        <div class="p-5">
-          <p class="font-semibold text-slate-900 mb-1">No credit card required</p>
-          <p class="text-slate-500 text-sm">Start with the free plan immediately — no payment info needed to get started.</p>
-        </div>
-        <div class="p-5">
-          <p class="font-semibold text-slate-900 mb-1">Cancel anytime</p>
-          <p class="text-slate-500 text-sm">Upgrade or downgrade at any time. Your data is always yours to export.</p>
-        </div>
-        <div class="p-5">
-          <p class="font-semibold text-slate-900 mb-1">Free trial on Pro</p>
-          <p class="text-slate-500 text-sm">Pro plans include a 14-day free trial. No charge until the trial ends.</p>
-        </div>
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center" id="faq-row">
+        <!-- populated by JS -->
       </div>
 
     </div>
@@ -419,50 +322,95 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         </div>
-        <span class="text-white font-semibold">Disclosure Desk</span>
+        <span class="text-white font-semibold" data-c="brand.name">Disclosure Desk</span>
       </div>
-      <p class="text-sm">&copy; 2026 Disclosure Desk. Built for journalists and public records researchers.</p>
-      <div class="flex items-center gap-5 text-sm">
-        <a href="#" class="hover:text-white transition-colors">Privacy</a>
-        <a href="#" class="hover:text-white transition-colors">Terms</a>
-        <a href="mailto:hello@disclosuredesk.com" class="hover:text-white transition-colors">Contact</a>
+      <p class="text-sm">&copy; <span data-c="footer.copyrightYear">2026</span> <span data-c="brand.name">Disclosure Desk</span>. <span data-c="footer.tagline">Built for journalists and public records researchers.</span></p>
+      <div class="flex items-center gap-5 text-sm" id="footer-links">
+        <!-- populated by JS -->
       </div>
     </div>
   </footer>
 
+  <script src="js/content.js"></script>
+  <script src="js/apply-content.js"></script>
   <script>
-    function handleLogin(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = 'Signing in…';
-      btn.disabled = true;
-      setTimeout(() => {
-        window.location.href = 'dashboard.html';
-      }, 600);
+    // ── Render dynamic lists from COPY ─────────────────────────
+    function checkmark(dark) {
+      var color = dark ? 'text-indigo-200' : 'text-green-500';
+      return '<svg class="w-4 h-4 ' + color + ' mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>';
+    }
+    function xmark() {
+      return '<svg class="w-4 h-4 text-slate-300 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" /></svg>';
+    }
+    function featureItem(html, icon) {
+      return '<div class="flex items-start gap-3">' + icon + '<span class="text-sm ' + (icon.includes('indigo') ? 'text-white' : 'text-slate-700') + '">' + html + '</span></div>';
+    }
+    function xItem(html) {
+      return '<div class="flex items-start gap-3">' + xmark() + '<span class="text-sm text-slate-400">' + html + '</span></div>';
     }
 
+    if (typeof COPY !== 'undefined') {
+      // Free included
+      document.getElementById('free-included-list').innerHTML =
+        COPY.pricing.freeIncluded.map(function(f) { return featureItem(f, checkmark(false)); }).join('');
+      // Free not included
+      document.getElementById('free-not-included-list').innerHTML =
+        COPY.pricing.freeNotIncluded.map(function(f) { return xItem(f); }).join('');
+      // Pro features
+      document.getElementById('pro-features-list').innerHTML =
+        COPY.pricing.proFeatures.map(function(f) { return featureItem(f, checkmark(true)); }).join('');
+      // Institutional features
+      document.getElementById('institutional-features-list').innerHTML =
+        COPY.pricing.institutionalFeatures.map(function(f) { return featureItem(f, checkmark(false)); }).join('');
+      // Institutional CTA email
+      document.getElementById('institutional-cta').href = 'mailto:' + COPY.pricing.institutionalCtaEmail;
+      // Student CTA email
+      document.getElementById('student-cta').href = 'mailto:' + COPY.pricing.studentCtaEmail;
+      // FAQ row
+      document.getElementById('faq-row').innerHTML =
+        COPY.pricing.faqItems.map(function(item) {
+          return '<div class="p-5"><p class="font-semibold text-slate-900 mb-1">' + item.title + '</p><p class="text-slate-500 text-sm">' + item.desc + '</p></div>';
+        }).join('');
+      // Footer links
+      document.getElementById('footer-links').innerHTML =
+        '<a href="#" class="hover:text-white transition-colors">' + COPY.footer.privacyLabel + '</a>' +
+        '<a href="#" class="hover:text-white transition-colors">' + COPY.footer.termsLabel + '</a>' +
+        '<a href="mailto:' + COPY.footer.contactEmail + '" class="hover:text-white transition-colors">' + COPY.footer.contactLabel + '</a>';
+      // Pro price (initial state)
+      document.getElementById('pro-price').textContent = COPY.pricing.proPriceMonthly;
+    }
+
+    // ── Login handler ──────────────────────────────────────────
+    function handleLogin(e) {
+      e.preventDefault();
+      var btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Signing in…';
+      btn.disabled = true;
+      setTimeout(function() { window.location.href = 'dashboard.html'; }, 600);
+    }
+
+    // ── Billing toggle ─────────────────────────────────────────
     function toggleBilling() {
-      const isAnnual = document.getElementById('billingToggle').checked;
-      const price = document.getElementById('pro-price');
-      const note = document.getElementById('pro-billing-note');
-      const labelMonthly = document.getElementById('label-monthly');
-      const labelAnnual = document.getElementById('label-annual');
+      var isAnnual = document.getElementById('billingToggle').checked;
+      var price    = document.getElementById('pro-price');
+      var note     = document.getElementById('pro-billing-note');
+      var labelMonthly = document.getElementById('label-monthly');
+      var labelAnnual  = document.getElementById('label-annual');
+
+      if (typeof COPY !== 'undefined') {
+        price.textContent = isAnnual ? COPY.pricing.proPriceAnnual : COPY.pricing.proPriceMonthly;
+        note.textContent  = isAnnual ? COPY.pricing.proBillingAnnual : COPY.pricing.proBillingMonthly;
+      } else {
+        price.textContent = isAnnual ? '$10' : '$14';
+        note.textContent  = isAnnual ? 'Billed annually ($120/year). Save $48.' : 'Billed monthly. Cancel anytime.';
+      }
 
       if (isAnnual) {
-        price.textContent = '$10';
-        note.textContent = 'Billed annually ($120/year). Save $48.';
-        labelMonthly.classList.remove('text-slate-900');
-        labelMonthly.classList.add('text-slate-500');
-        labelAnnual.querySelector('span:not(.bg-green-100)') // just update styles
-        labelAnnual.classList.remove('text-slate-500');
-        labelAnnual.classList.add('text-slate-900');
+        labelMonthly.classList.replace('text-slate-900', 'text-slate-500');
+        labelAnnual.classList.replace('text-slate-500', 'text-slate-900');
       } else {
-        price.textContent = '$14';
-        note.textContent = 'Billed monthly. Cancel anytime.';
-        labelMonthly.classList.add('text-slate-900');
-        labelMonthly.classList.remove('text-slate-500');
-        labelAnnual.classList.add('text-slate-500');
-        labelAnnual.classList.remove('text-slate-900');
+        labelMonthly.classList.replace('text-slate-500', 'text-slate-900');
+        labelAnnual.classList.replace('text-slate-900', 'text-slate-500');
       }
     }
   </script>
