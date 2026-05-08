@@ -7,7 +7,7 @@ const MOCK_USER = {
   name: 'Jane Doe',
   email: 'jane@example.com',
   initials: 'JD',
-  organization: 'Disclosure Desk News',
+  organization: 'Clearinghouse News',
   role: 'Investigative Reporter'
 };
 
@@ -52,13 +52,14 @@ const STATUS_CONFIG = {
 };
 
 const MOCK_REQUESTS = [
+  // ── City agencies (NY FOIL) ───────────────────────────────────────────────
   {
     id: 1,
-    agency: 'NYPD',
+    agency: 'New York Police Department',
     agencyAbbr: 'NYPD',
-    agencyFull: 'New York Police Department',
+    agencyType: 'city',
     jurisdiction: 'NY FOIL',
-    subject: 'ShotSpotter/SoundThinking contracts, deployment maps, and accuracy data, 2015–present',
+    subject: 'ShotSpotter gunshot detection contracts and performance data, 2015–present',
     description: 'Contracts, payments, deployment maps, and accuracy reports for NYPD\'s gunshot detection program, 2015 to present.',
     submitted: '2026-03-20',
     acknowledged: '2026-03-25',
@@ -68,21 +69,21 @@ const MOCK_REQUESTS = [
     contactName: 'NYPD FOIL Unit',
     contactEmail: 'foil.unit@nypd.org',
     notes: [
-      { date: '2026-03-25', text: 'Acknowledgment received. Case number NYPD-FOIL-2026-04421 assigned.' },
-      { date: '2026-04-10', text: 'Called FOIL unit — request still in queue. Officer said to expect another 2–3 weeks.' },
-      { date: '2026-04-23', text: 'Deadline passed without response. Sent written follow-up.' },
-      { date: '2026-05-01', text: 'No response. Sent second follow-up email and called again — left voicemail.' }
+      { date: '2026-03-25', text: 'Acknowledgment received. Case number assigned.' },
+      { date: '2026-04-10', text: 'Called FOIL unit — still in queue.' },
+      { date: '2026-04-23', text: 'Deadline passed. Sent written follow-up.' },
+      { date: '2026-05-01', text: 'Second follow-up sent. No response.' }
     ],
     documents: [],
     reminderDays: [14, 7, 3, 1]
   },
   {
     id: 2,
-    agency: 'NYPD',
+    agency: 'New York Police Department',
     agencyAbbr: 'NYPD',
-    agencyFull: 'New York Police Department',
+    agencyType: 'city',
     jurisdiction: 'NY FOIL',
-    subject: 'Facial recognition technology usage logs, vendor contracts, and accuracy assessments, 2017–present',
+    subject: 'Facial recognition technology vendor agreements and usage logs, 2017–present',
     description: 'Vendor agreements, usage logs, and internal accuracy assessments for NYPD\'s facial recognition program, 2017 to present.',
     submitted: '2026-01-15',
     acknowledged: '2026-01-20',
@@ -93,20 +94,19 @@ const MOCK_REQUESTS = [
     contactEmail: 'foil.unit@nypd.org',
     notes: [
       { date: '2026-01-20', text: 'Acknowledgment received.' },
-      { date: '2026-02-14', text: 'Received partial response — 312 pages released. Approximately 180 pages withheld under the law enforcement exemption (Public Officers Law §87(2)(e)). Includes some vendor contract language but with pricing redacted.' },
-      { date: '2026-02-28', text: 'Reviewed released documents. Significant gaps — no accuracy data or audit reports provided. Considering appeal for withheld records.' },
-      { date: '2026-03-10', text: 'Filed appeal with NYPD FOIL Appeals Officer citing insufficient justification for withheld accuracy records.' }
+      { date: '2026-02-14', text: 'Partial response received — 312 pages. ~180 pages withheld under law enforcement exemption.' },
+      { date: '2026-03-10', text: 'Filed appeal for withheld accuracy records.' }
     ],
     documents: ['nypd-fr-partial-response-feb14.pdf', 'nypd-fr-vaughn-index.pdf'],
     reminderDays: [7, 3, 1]
   },
   {
     id: 3,
-    agency: 'NYPD',
+    agency: 'New York Police Department',
     agencyAbbr: 'NYPD',
-    agencyFull: 'New York Police Department',
+    agencyType: 'city',
     jurisdiction: 'NY FOIL',
-    subject: 'Criminal Group Database enrollment criteria, demographic data, and removal procedures',
+    subject: 'Criminal Group Database enrollment criteria and demographic breakdown',
     description: 'Enrollment criteria, demographic breakdown, and removal procedures for NYPD\'s Criminal Group Database.',
     submitted: '2025-09-10',
     acknowledged: '2025-09-16',
@@ -117,21 +117,20 @@ const MOCK_REQUESTS = [
     contactEmail: 'foil.unit@nypd.org',
     notes: [
       { date: '2025-09-16', text: 'Acknowledgment received.' },
-      { date: '2025-10-15', text: 'Response received — request denied in full. Agency cited Public Officers Law §87(2)(e) (law enforcement exemption) and §87(2)(b) (unwarranted invasion of personal privacy).' },
-      { date: '2025-10-30', text: 'Filed administrative appeal. Appeal letter argues denial was overbroad and agency failed to segregate non-exempt demographic aggregate data.' },
-      { date: '2025-11-14', text: 'Appeal acknowledged by NYPD Records Access Appeals Officer. 10-business-day response window begins.' },
-      { date: '2025-12-05', text: 'Appeal denied. Agency upheld original determination. Next step: Article 78 proceeding in State Supreme Court.' }
+      { date: '2025-10-15', text: 'Request denied in full — law enforcement exemption claimed.' },
+      { date: '2025-10-30', text: 'Filed administrative appeal.' },
+      { date: '2025-12-05', text: 'Appeal denied. Considering Article 78 proceeding.' }
     ],
-    documents: ['denial-letter-oct15.pdf', 'appeal-letter-oct30.pdf', 'appeal-denial-dec5.pdf'],
+    documents: ['denial-letter-oct15.pdf', 'appeal-denial-dec5.pdf'],
     reminderDays: [7, 3, 1]
   },
   {
     id: 4,
-    agency: 'NYC DOC',
+    agency: 'NYC Department of Correction',
     agencyAbbr: 'NYC DOC',
-    agencyFull: 'NYC Department of Correction',
+    agencyType: 'city',
     jurisdiction: 'NY FOIL',
-    subject: 'Punitive segregation and Enhanced Supervision Housing placement data, Rikers Island, 2020–2024',
+    subject: 'Solitary confinement and isolation placement data at Rikers Island, 2020–2024',
     description: 'Monthly data on isolation placements, incident reports, and compliance records for solitary confinement at NYC detention facilities, 2020–2024.',
     submitted: '2025-11-01',
     acknowledged: '2025-11-08',
@@ -141,21 +140,19 @@ const MOCK_REQUESTS = [
     contactName: 'NYC DOC FOIL Unit',
     contactEmail: 'foilrequests@doc.nyc.gov',
     notes: [
-      { date: '2025-11-08', text: 'Acknowledgment received. Request assigned to Records Access Officer.' },
+      { date: '2025-11-08', text: 'Acknowledgment received.' },
       { date: '2025-12-09', text: 'Deadline passed without response.' },
-      { date: '2025-12-15', text: 'Sent written follow-up. No response.' },
-      { date: '2026-01-10', text: 'Called Records Access Officer. Request still \'under review.\' Was told to expect response \'in the next few weeks.\'' },
-      { date: '2026-02-20', text: 'Still no response. Sent third follow-up. This request is now 74 days overdue.' },
-      { date: '2026-04-01', text: 'Sent formal demand letter citing FOIL obligation and intent to seek court order if no response by April 15.' }
+      { date: '2026-01-10', text: 'Called Records Access Officer — still under review.' },
+      { date: '2026-04-01', text: 'Formal demand letter sent citing FOIL obligations.' }
     ],
     documents: [],
     reminderDays: [14, 7, 3, 1]
   },
   {
     id: 5,
-    agency: 'NYC HPD',
+    agency: 'NYC Dept. of Housing Preservation and Development',
     agencyAbbr: 'NYC HPD',
-    agencyFull: 'NYC Dept. of Housing Preservation and Development',
+    agencyType: 'city',
     jurisdiction: 'NY FOIL',
     subject: 'Lead paint violations in city-subsidized buildings, 2018–2023',
     description: 'Housing code violations for lead paint hazards in city-subsidized buildings, 2018–2023, including compliance status.',
@@ -168,19 +165,19 @@ const MOCK_REQUESTS = [
     contactEmail: 'foil@hpd.nyc.gov',
     notes: [
       { date: '2025-08-20', text: 'Acknowledgment received.' },
-      { date: '2025-09-12', text: 'Response received — data provided as spreadsheet export. 4,217 violation records covering the full request period.' },
-      { date: '2025-09-18', text: 'Reviewed records. Data is complete and usable. Closing request.' }
+      { date: '2025-09-12', text: 'Response received — 4,217 violation records provided as spreadsheet.' },
+      { date: '2025-09-18', text: 'Reviewed records. Data complete. Closing request.' }
     ],
     documents: ['hpd-lead-violations-data.xlsx', 'hpd-response-letter-sept12.pdf'],
     reminderDays: [7, 3, 1]
   },
   {
     id: 6,
-    agency: 'NYC DSS',
+    agency: 'NYC Dept. of Social Services',
     agencyAbbr: 'NYC DSS',
-    agencyFull: 'NYC Dept. of Social Services',
+    agencyType: 'city',
     jurisdiction: 'NY FOIL',
-    subject: 'Inspection reports and violations for city-contracted homeless shelter facilities, 2021–2024',
+    subject: 'Inspection reports and violations for city homeless shelter facilities, 2021–2024',
     description: 'Inspection reports, violations, and corrective action records for city-contracted homeless shelter facilities, 2021–2024.',
     submitted: '2026-02-20',
     acknowledged: '2026-02-26',
@@ -190,43 +187,22 @@ const MOCK_REQUESTS = [
     contactName: 'DSS Records Access Officer',
     contactEmail: 'foil@dss.nyc.gov',
     notes: [
-      { date: '2026-02-26', text: 'Acknowledgment received. Case number DSS-FOIL-2026-1143 assigned.' },
-      { date: '2026-03-27', text: 'Deadline passed without response. Sent follow-up.' },
-      { date: '2026-04-10', text: 'Received extension notice — agency claims \'unusual circumstances\' and needs additional 30 days.' },
-      { date: '2026-04-15', text: 'Contested extension by email — unusual circumstances provision requires specific justification under FOIL.' }
+      { date: '2026-02-26', text: 'Acknowledgment received.' },
+      { date: '2026-03-27', text: 'Deadline passed. Follow-up sent.' },
+      { date: '2026-04-10', text: 'Extension notice received — agency claims unusual circumstances.' },
+      { date: '2026-04-15', text: 'Contested extension notice — insufficient justification under FOIL.' }
     ],
     documents: ['dss-extension-notice.pdf'],
     reminderDays: [14, 7, 3, 1]
   },
   {
     id: 7,
-    agency: 'MTA',
-    agencyAbbr: 'MTA',
-    agencyFull: 'Metropolitan Transportation Authority',
-    jurisdiction: 'NY FOIL',
-    subject: 'Fare evasion enforcement data disaggregated by race, age, and borough, 2019–2023',
-    description: 'Fare evasion enforcement records broken down by race, age, and borough, 2019–2023.',
-    submitted: '2026-04-10',
-    acknowledged: '2026-04-15',
-    deadline: '2026-05-10',
-    trackingNumber: 'MTA-FOIL-2026-0382',
-    status: 'acknowledged',
-    contactName: 'MTA Law Department — FOIL',
-    contactEmail: 'foil@mtahq.org',
-    notes: [
-      { date: '2026-04-15', text: 'Acknowledgment received. Assigned to FOIL coordinator at MTA Law Department.' }
-    ],
-    documents: [],
-    reminderDays: [14, 7, 3, 1]
-  },
-  {
-    id: 8,
-    agency: 'NYC DOE',
+    agency: 'New York City Dept. of Education',
     agencyAbbr: 'NYC DOE',
-    agencyFull: 'New York City Dept. of Education',
+    agencyType: 'city',
     jurisdiction: 'NY FOIL',
-    subject: 'School Safety Agent use-of-force incidents and NYPD responses on school campuses, 2020–2024',
-    description: 'Use-of-force incidents involving school safety agents and NYPD officers on school campuses, 2020–2024.',
+    subject: 'School safety agent use-of-force incidents on school campuses, 2020–2024',
+    description: 'Use-of-force incidents involving school safety agents and NYPD officers on NYC school campuses, 2020–2024.',
     submitted: '2026-04-28',
     acknowledged: null,
     deadline: null,
@@ -241,35 +217,216 @@ const MOCK_REQUESTS = [
     reminderDays: [14, 7, 3, 1]
   },
   {
-    id: 9,
-    agency: 'EPA',
-    agencyAbbr: 'EPA',
-    agencyFull: 'Environmental Protection Agency',
-    jurisdiction: 'Federal FOIA',
-    subject: 'Air quality monitoring data and enforcement records for South Bronx environmental justice communities, 2018–present',
-    description: 'Air quality monitoring data and enforcement records for South Bronx communities, 2018 to present.',
-    submitted: '2026-03-10',
-    acknowledged: '2026-03-14',
-    deadline: '2026-04-11',
-    trackingNumber: 'EPA-R2-2026-003341',
+    id: 8,
+    agency: 'NYC Department of Transportation',
+    agencyAbbr: 'NYC DOT',
+    agencyType: 'city',
+    jurisdiction: 'NY FOIL',
+    subject: 'Speed camera enforcement data by neighborhood and income level, 2019–2024',
+    description: 'Ticketing records from NYC\'s automated speed enforcement program, broken down by community district and median income, 2019–2024.',
+    submitted: '2026-02-14',
+    acknowledged: '2026-02-20',
+    deadline: '2026-06-01',
+    trackingNumber: 'DOT-FOIL-2026-0215',
     status: 'processing',
-    contactName: 'EPA Region 2 FOIA Office',
-    contactEmail: 'r2foia@epa.gov',
+    contactName: 'NYC DOT FOIL Officer',
+    contactEmail: 'foil@dot.nyc.gov',
     notes: [
-      { date: '2026-03-14', text: 'Acknowledgment received from EPA Region 2 FOIA Office. Tracking number EPA-R2-2026-003341.' },
-      { date: '2026-04-12', text: 'Deadline passed. Received notice of 10-day extension citing \'unusual circumstances\' (need to coordinate with multiple program offices).' },
-      { date: '2026-04-24', text: 'Extension expired. No response. Sent follow-up. Request still listed as \'In Progress\' on EPA FOIA Online tracker.' }
+      { date: '2026-02-20', text: 'Acknowledgment received.' },
+      { date: '2026-03-20', text: 'Extension notice — needs additional time to compile neighborhood-level data.' },
+      { date: '2026-04-15', text: 'Checked status — still processing. New deadline June 1.' }
     ],
-    documents: ['epa-extension-notice-apr12.pdf'],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 9,
+    agency: 'New York City Fire Department',
+    agencyAbbr: 'FDNY',
+    agencyType: 'city',
+    jurisdiction: 'NY FOIL',
+    subject: 'Emergency response times by borough and neighborhood, 2020–2024',
+    description: 'Average and median emergency response times by community district and borough, 2020–2024, including breakdown by call type.',
+    submitted: '2025-10-05',
+    acknowledged: '2025-10-10',
+    deadline: '2025-11-07',
+    trackingNumber: 'FDNY-FOIL-2025-3301',
+    status: 'closed',
+    contactName: 'FDNY Records Access Officer',
+    contactEmail: 'foilrequests@fdny.nyc.gov',
+    notes: [
+      { date: '2025-10-10', text: 'Acknowledgment received.' },
+      { date: '2025-11-03', text: 'Full response received — data provided in Excel format for all five boroughs.' },
+      { date: '2025-11-10', text: 'Data verified and downloaded. Request closed.' }
+    ],
+    documents: ['fdny-response-times-2020-2024.xlsx'],
     reminderDays: [7, 3, 1]
   },
   {
     id: 10,
-    agency: 'FBI',
+    agency: 'NYC Department of Buildings',
+    agencyAbbr: 'NYC DOB',
+    agencyType: 'city',
+    jurisdiction: 'NY FOIL',
+    subject: 'Building complaints, violations, and ECB hearings in the Bronx, 2020–2024',
+    description: 'Building code complaints, issued violations, and Environmental Control Board hearing outcomes for Bronx community districts, 2020–2024.',
+    submitted: '2026-03-01',
+    acknowledged: '2026-03-07',
+    deadline: '2026-05-25',
+    trackingNumber: 'DOB-FOIL-2026-0891',
+    status: 'processing',
+    contactName: 'NYC DOB FOIL Officer',
+    contactEmail: 'foil@buildings.nyc.gov',
+    notes: [
+      { date: '2026-03-07', text: 'Acknowledgment received.' },
+      { date: '2026-04-04', text: 'Extension requested — large volume of records requires additional time.' },
+      { date: '2026-04-20', text: 'New deadline confirmed as May 25.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 11,
+    agency: 'NYC Commission on Human Rights',
+    agencyAbbr: 'NYC CCHR',
+    agencyType: 'city',
+    jurisdiction: 'NY FOIL',
+    subject: 'Discrimination complaint filing and resolution times by protected category, 2019–2023',
+    description: 'Volume, type, and resolution timelines for discrimination complaints filed with NYC Commission on Human Rights, by protected category and borough, 2019–2023.',
+    submitted: '2026-03-15',
+    acknowledged: '2026-03-20',
+    deadline: '2026-05-10',
+    trackingNumber: 'CCHR-FOIL-2026-0441',
+    status: 'acknowledged',
+    contactName: 'CCHR Records Officer',
+    contactEmail: 'foil@cchr.nyc.gov',
+    notes: [
+      { date: '2026-03-20', text: 'Acknowledgment received. Deadline set as May 10.' },
+      { date: '2026-04-28', text: 'Sent status inquiry — awaiting coordinator response.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 12,
+    agency: 'NYC Mayor\'s Office',
+    agencyAbbr: 'Mayor\'s Office',
+    agencyType: 'city',
+    jurisdiction: 'NY FOIL',
+    subject: 'Internal communications on homeless shelter relocation and community notification policy',
+    description: 'Memos and communications on the city\'s policy for relocating homeless shelter sites and notifying affected communities, 2023–2025.',
+    submitted: '2026-03-10',
+    acknowledged: '2026-03-16',
+    deadline: '2026-05-20',
+    trackingNumber: 'MAYOR-FOIL-2026-0012',
+    status: 'processing',
+    contactName: 'Mayor\'s Office FOIL Coordinator',
+    contactEmail: 'foil@cityhall.nyc.gov',
+    notes: [
+      { date: '2026-03-16', text: 'Acknowledgment received.' },
+      { date: '2026-04-15', text: 'Status check — told request is under legal review.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  // ── State agencies (NY FOIL) ──────────────────────────────────────────────
+  {
+    id: 13,
+    agency: 'Metropolitan Transportation Authority',
+    agencyAbbr: 'MTA',
+    agencyType: 'state',
+    jurisdiction: 'NY FOIL',
+    subject: 'Fare evasion enforcement records disaggregated by race and borough, 2019–2023',
+    description: 'Fare evasion enforcement records broken down by race, age, and borough, 2019–2023.',
+    submitted: '2026-04-10',
+    acknowledged: '2026-04-15',
+    deadline: '2026-05-10',
+    trackingNumber: 'MTA-FOIL-2026-0382',
+    status: 'acknowledged',
+    contactName: 'MTA Law Department — FOIL',
+    contactEmail: 'foil@mtahq.org',
+    notes: [
+      { date: '2026-04-15', text: 'Acknowledgment received. Assigned to FOIL coordinator.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 14,
+    agency: 'NYS Dept. of Environmental Conservation',
+    agencyAbbr: 'NYS DEC',
+    agencyType: 'state',
+    jurisdiction: 'NY FOIL',
+    subject: 'Toxic waste facility inspection records and enforcement actions, 2020–2023',
+    description: 'Inspection reports, violation notices, and enforcement actions for registered hazardous waste facilities in New York State, 2020–2023.',
+    submitted: '2025-12-01',
+    acknowledged: '2025-12-08',
+    deadline: '2026-01-05',
+    trackingNumber: 'DEC-FOIL-2025-7823',
+    status: 'responded',
+    contactName: 'NYS DEC FOIL Officer',
+    contactEmail: 'foil@dec.ny.gov',
+    notes: [
+      { date: '2025-12-08', text: 'Acknowledgment received.' },
+      { date: '2025-12-30', text: 'Response received ahead of deadline — 892 pages of inspection records provided.' },
+      { date: '2026-01-08', text: 'Reviewing documents. Significant number of violations with no follow-up enforcement noted.' }
+    ],
+    documents: ['nys-dec-inspection-records.pdf'],
+    reminderDays: [7, 3, 1]
+  },
+  {
+    id: 15,
+    agency: 'NYS Dept. of Corrections and Community Supervision',
+    agencyAbbr: 'NYS DOCCS',
+    agencyType: 'state',
+    jurisdiction: 'NY FOIL',
+    subject: 'Parole denial rates and decision data by race and supervising officer, 2018–2023',
+    description: 'Parole board denial rates and decision records, broken down by race and assigned parole officer, 2018–2023.',
+    submitted: '2026-03-18',
+    acknowledged: '2026-03-24',
+    deadline: '2026-05-09',
+    trackingNumber: 'DOCCS-FOIL-2026-0221',
+    status: 'acknowledged',
+    contactName: 'NYS DOCCS FOIL Officer',
+    contactEmail: 'foil@doccs.ny.gov',
+    notes: [
+      { date: '2026-03-24', text: 'Acknowledgment received. Deadline set as May 9.' },
+      { date: '2026-04-22', text: 'Status check sent — no response yet.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 16,
+    agency: 'NYS Department of Health',
+    agencyAbbr: 'NYS DOH',
+    agencyType: 'state',
+    jurisdiction: 'NY FOIL',
+    subject: 'Nursing home staffing ratios and death reporting during COVID-19, 2020–2021',
+    description: 'Nursing home staffing data and COVID-19 death reporting for New York State facilities, 2020–2021.',
+    submitted: '2025-06-01',
+    acknowledged: '2025-06-08',
+    deadline: '2025-07-06',
+    trackingNumber: 'DOH-FOIL-2025-4411',
+    status: 'closed',
+    contactName: 'NYS DOH FOIL Unit',
+    contactEmail: 'foil@health.ny.gov',
+    notes: [
+      { date: '2025-06-08', text: 'Acknowledgment received.' },
+      { date: '2025-07-01', text: 'Full response received — data provided for all 619 registered nursing facilities.' },
+      { date: '2025-07-10', text: 'Data downloaded and verified. Request closed.' }
+    ],
+    documents: ['nys-nursing-home-data.xlsx', 'doh-response-july1.pdf'],
+    reminderDays: [7, 3, 1]
+  },
+  // ── Federal agencies (Federal FOIA) ──────────────────────────────────────
+  {
+    id: 17,
+    agency: 'Federal Bureau of Investigation',
     agencyAbbr: 'FBI',
-    agencyFull: 'Federal Bureau of Investigation',
+    agencyType: 'federal',
     jurisdiction: 'Federal FOIA',
-    subject: 'NYC-area surveillance records targeting Muslim community organizations, 2008–2020',
+    subject: 'Surveillance records on Muslim community organizations in New York City, 2008–2020',
     description: 'Surveillance and intelligence records related to monitoring of Muslim community organizations in New York City, 2008–2020.',
     submitted: '2025-03-01',
     acknowledged: '2025-03-10',
@@ -279,14 +436,192 @@ const MOCK_REQUESTS = [
     contactName: 'FBI Record/Information Dissemination Section',
     contactEmail: 'rids@fbi.gov',
     notes: [
-      { date: '2025-03-10', text: 'Acknowledgment received. Assigned to FBI RIDS queue. Estimated processing time: 6–18 months.' },
-      { date: '2025-04-09', text: 'Statutory deadline passed. FBI routinely misses deadlines on sensitive surveillance requests.' },
-      { date: '2025-07-15', text: 'Filed a status check via FBI eFOIPA portal. Still listed as \'pending.\'' },
-      { date: '2025-11-01', text: 'Still no response. Request is now 7 months overdue. Consulting legal counsel about potential litigation.' },
-      { date: '2026-03-20', text: 'Request is now over a year old. No substantive response received. Considering FOIA lawsuit.' }
+      { date: '2025-03-10', text: 'Acknowledgment received. Estimated 6–18 month processing time.' },
+      { date: '2025-07-15', text: 'Status check via eFOIPA portal — still pending.' },
+      { date: '2026-03-20', text: 'Request now over a year old. No substantive response. Consulting legal counsel.' }
     ],
     documents: [],
     reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 18,
+    agency: 'Environmental Protection Agency',
+    agencyAbbr: 'EPA',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'Air quality data and enforcement records for South Bronx communities, 2018–present',
+    description: 'Air quality monitoring data and enforcement records for South Bronx communities, 2018 to present.',
+    submitted: '2026-03-10',
+    acknowledged: '2026-03-14',
+    deadline: '2026-05-25',
+    trackingNumber: 'EPA-R2-2026-003341',
+    status: 'processing',
+    contactName: 'EPA Region 2 FOIA Office',
+    contactEmail: 'r2foia@epa.gov',
+    notes: [
+      { date: '2026-03-14', text: 'Acknowledgment received from EPA Region 2.' },
+      { date: '2026-04-12', text: 'Extension notice — coordinating across multiple program offices.' },
+      { date: '2026-04-24', text: 'Follow-up sent. Still listed as in progress on EPA FOIA Online.' }
+    ],
+    documents: ['epa-extension-notice-apr12.pdf'],
+    reminderDays: [7, 3, 1]
+  },
+  {
+    id: 19,
+    agency: 'Drug Enforcement Administration',
+    agencyAbbr: 'DEA',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'Asset forfeiture records for seizures in the New York metro area, 2018–2023',
+    description: 'Asset forfeiture case records and seizure data for DEA operations in the New York metropolitan area, 2018–2023.',
+    submitted: '2026-03-22',
+    acknowledged: '2026-03-28',
+    deadline: '2026-05-08',
+    trackingNumber: 'DEA-FOIA-2026-00714',
+    status: 'acknowledged',
+    contactName: 'DEA FOIA/Records Management Section',
+    contactEmail: 'dea.foia@usdoj.gov',
+    notes: [
+      { date: '2026-03-28', text: 'Acknowledgment received. Deadline set as May 8.' },
+      { date: '2026-04-30', text: 'Status check sent — no response yet.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 20,
+    agency: 'Dept. of Homeland Security — ICE',
+    agencyAbbr: 'DHS/ICE',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'Arrest and detention records for individuals processed at New York field offices, 2021–2024',
+    description: 'ICE arrest and detention records for individuals processed through New York area field offices, 2021–2024.',
+    submitted: '2025-09-15',
+    acknowledged: '2025-09-22',
+    deadline: '2025-10-22',
+    trackingNumber: 'DHS-FOIA-2025-04812',
+    status: 'overdue',
+    contactName: 'ICE FOIA Office',
+    contactEmail: 'ice-foia@dhs.gov',
+    notes: [
+      { date: '2025-09-22', text: 'Acknowledgment received.' },
+      { date: '2025-10-23', text: 'Deadline passed without response.' },
+      { date: '2026-01-15', text: 'Third follow-up sent. No substantive response.' },
+      { date: '2026-04-01', text: 'Sent formal demand letter. Considering FOIA lawsuit.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 21,
+    agency: 'Dept. of Housing and Urban Development',
+    agencyAbbr: 'HUD',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'NYCHA inspection scores, repair backlogs, and capital improvement records, 2019–2024',
+    description: 'HUD inspection records and capital repair data for NYCHA public housing developments, 2019–2024.',
+    submitted: '2026-01-20',
+    acknowledged: '2026-01-26',
+    deadline: '2026-02-24',
+    trackingNumber: 'HUD-FOIA-2026-00234',
+    status: 'responded',
+    contactName: 'HUD FOIA Division',
+    contactEmail: 'foiarequest@hud.gov',
+    notes: [
+      { date: '2026-01-26', text: 'Acknowledgment received.' },
+      { date: '2026-02-20', text: 'Response received — 1,204 pages of inspection reports. Several developments failed multiple inspections.' },
+      { date: '2026-03-01', text: 'Reviewed key documents. Strong data for story on repair backlog.' }
+    ],
+    documents: ['hud-nycha-inspections-2019-2024.pdf', 'hud-response-letter.pdf'],
+    reminderDays: [7, 3, 1]
+  },
+  {
+    id: 22,
+    agency: 'U.S. Citizenship and Immigration Services',
+    agencyAbbr: 'USCIS',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'Application processing times by field office and category, 2020–2024',
+    description: 'USCIS application processing time data by field office, application type, and year, 2020–2024.',
+    submitted: '2026-04-03',
+    acknowledged: null,
+    deadline: null,
+    trackingNumber: null,
+    status: 'submitted',
+    contactName: 'USCIS FOIA/PA Program',
+    contactEmail: 'uscis.foia@uscis.dhs.gov',
+    notes: [
+      { date: '2026-04-03', text: 'Request submitted via online FOIA portal. Confirmation number received.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 23,
+    agency: 'U.S. Customs and Border Protection',
+    agencyAbbr: 'CBP',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'Enforcement actions and traveler detentions at JFK and Newark airports, 2020–2024',
+    description: 'CBP enforcement records and secondary screening detentions at JFK International and Newark Liberty airports, 2020–2024.',
+    submitted: '2026-03-28',
+    acknowledged: '2026-04-03',
+    deadline: '2026-06-10',
+    trackingNumber: 'CBP-FOIA-2026-012341',
+    status: 'processing',
+    contactName: 'CBP FOIA Division',
+    contactEmail: 'cbp-foia@cbp.dhs.gov',
+    notes: [
+      { date: '2026-04-03', text: 'Acknowledgment received.' },
+      { date: '2026-04-28', text: 'Extension claimed — large volume of records requires additional review time.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 24,
+    agency: 'Department of Justice',
+    agencyAbbr: 'DOJ',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'Civil rights investigation referrals and resolutions for New York State, 2018–2023',
+    description: 'Civil rights division investigation referrals, case resolutions, and outcomes for matters originating in New York State, 2018–2023.',
+    submitted: '2026-04-15',
+    acknowledged: '2026-04-21',
+    deadline: '2026-06-05',
+    trackingNumber: 'DOJ-FOIA-2026-8821',
+    status: 'acknowledged',
+    contactName: 'DOJ FOIA/PA Unit',
+    contactEmail: 'foia.mail@usdoj.gov',
+    notes: [
+      { date: '2026-04-21', text: 'Acknowledgment received. Assigned case number.' }
+    ],
+    documents: [],
+    reminderDays: [14, 7, 3, 1]
+  },
+  {
+    id: 25,
+    agency: 'Federal Communications Commission',
+    agencyAbbr: 'FCC',
+    agencyType: 'federal',
+    jurisdiction: 'Federal FOIA',
+    subject: 'Cell-site simulator and IMSI catcher usage authorization records for New York State',
+    description: 'Records authorizing the use of cell-site simulators (Stingrays) and IMSI catchers by law enforcement in New York State, including any FCC authorizations or waivers.',
+    submitted: '2025-07-10',
+    acknowledged: '2025-07-15',
+    deadline: '2025-08-13',
+    trackingNumber: 'FCC-FOIA-2025-0441',
+    status: 'appealed',
+    contactName: 'FCC FOIA Branch',
+    contactEmail: 'foia@fcc.gov',
+    notes: [
+      { date: '2025-07-15', text: 'Acknowledgment received.' },
+      { date: '2025-08-13', text: 'Response received — request denied in full. Cited law enforcement exemption.' },
+      { date: '2025-08-28', text: 'Filed administrative appeal arguing overbroad exemption application.' },
+      { date: '2025-10-01', text: 'Appeal pending. No response from FCC appeals officer.' }
+    ],
+    documents: ['fcc-denial-aug13.pdf', 'fcc-appeal-aug28.pdf'],
+    reminderDays: [7, 3, 1]
   }
 ];
 
