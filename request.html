@@ -4,12 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Request — Disclosure Desk</title>
-  <script>
-    (function(){var s=localStorage.getItem('dd-theme');if(s==='dark'||(s===null&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}})();
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/dark.css" />
   <style>
     body { font-family: 'Inter', sans-serif; }
     .serif { font-family: 'Playfair Display', Georgia, serif; }
@@ -79,22 +75,15 @@
         </svg>
         Settings
       </a>
-      <div class="mt-2 pt-2 border-t border-white/10">
-        <button onclick="toggleTheme()" class="theme-toggle-btn nav-item w-full" style="background:none;border:0;cursor:pointer;text-align:left">
-          <svg class="theme-icon-moon w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-          <svg class="theme-icon-sun w-4 h-4 flex-shrink-0" style="display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
-          <span class="theme-toggle-label">Dark mode</span>
-        </button>
-      </div>
     </nav>
     <div class="px-3 py-4 border-t border-white/10">
       <div class="flex items-center gap-3 px-2">
         <div class="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center flex-shrink-0">
-          <span class="text-white text-xs font-bold">JD</span>
+          <span id="sidebar-user-initials" class="text-white text-xs font-bold">JD</span>
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-white text-sm font-medium truncate">Jane Doe</p>
-          <p class="text-indigo-300 text-xs truncate">jane@example.com</p>
+          <p id="sidebar-user-name" class="text-white text-sm font-medium truncate">Jane Doe</p>
+          <p id="sidebar-user-email" class="text-indigo-300 text-xs truncate">jane@example.com</p>
         </div>
         <a href="index.html" class="text-indigo-300 hover:text-white transition-colors" title="Log out">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,7 +100,7 @@
   </main>
 
   <script src="js/data.js"></script>
-  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
   <script src="js/content.js"></script>
   <script src="js/apply-content.js"></script>
   <script>
@@ -149,8 +138,8 @@
 
     function renderRequest() {
       const hash = window.location.hash.replace('#', '');
-      const requestId = hash ? parseInt(hash) : 1;
-      const req = getRequestById(requestId);
+      const requestId = hash || '1';
+      const req = Store.getRequest(requestId);
       if (!req) return;
 
       document.title = `${req.agency} — Disclosure Desk`;
@@ -368,16 +357,17 @@
               ${remindersHTML ? `<section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
                 <h2 class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Email Reminders</h2>
                 <div class="space-y-2">${remindersHTML}</div>
-                <p class="text-[10px] text-slate-400 mt-3">Sent to jane@example.com</p>
+                <p class="text-[10px] text-slate-400 mt-3">Sent to ${Store.getUser().email || 'jane@example.com'}</p>
               </section>` : ''}
 
               <!-- Quick actions -->
               <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
                 <h2 class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3">Actions</h2>
                 <div class="space-y-1.5">
-                  <button onclick="alert('Status updated — demo only')" class="w-full text-left text-sm text-slate-600 hover:text-emerald-700 py-1 font-medium transition-colors">Mark as responded</button>
-                  <button onclick="alert('Appeal filed — demo only')" class="w-full text-left text-sm text-slate-600 hover:text-orange-700 py-1 font-medium transition-colors">File appeal</button>
-                  <button onclick="alert('Request closed — demo only')" class="w-full text-left text-sm text-slate-600 hover:text-slate-900 py-1 font-medium transition-colors">Close request</button>
+                  <button onclick="markResponded()" class="w-full text-left text-sm text-slate-600 hover:text-emerald-700 py-1 font-medium transition-colors">Mark as responded</button>
+                  <button onclick="fileAppeal()" class="w-full text-left text-sm text-slate-600 hover:text-orange-700 py-1 font-medium transition-colors">File appeal</button>
+                  <button onclick="closeRequest()" class="w-full text-left text-sm text-slate-600 hover:text-slate-900 py-1 font-medium transition-colors">Close request</button>
+                  <button onclick="deleteReq()" class="w-full text-left text-sm text-rose-400 hover:text-rose-600 py-1 font-medium transition-colors mt-2 pt-2 border-t border-slate-100">Delete request</button>
                 </div>
               </section>
 
@@ -396,14 +386,40 @@
       document.getElementById('mainContent').innerHTML = html;
     }
 
+    function currentId() {
+      return window.location.hash.replace('#', '') || '1';
+    }
+
     function addNote() {
       const textarea = document.getElementById('newNoteText');
-      if (!textarea || !textarea.value.trim()) {
-        alert('Please enter a note before saving.');
-        return;
-      }
-      alert('Note saved — demo only. In production this would be stored.');
+      const text = textarea ? textarea.value.trim() : '';
+      if (!text) { alert('Please enter a note before saving.'); return; }
+      Store.addNote(currentId(), text);
       textarea.value = '';
+      renderRequest();
+    }
+
+    function markResponded() {
+      Store.updateStatus(currentId(), 'responded');
+      renderRequest();
+    }
+
+    function fileAppeal() {
+      Store.addNote(currentId(), 'Appeal filed.');
+      Store.updateStatus(currentId(), 'appealed');
+      renderRequest();
+    }
+
+    function closeRequest() {
+      if (!confirm('Close this request?')) return;
+      Store.updateStatus(currentId(), 'closed');
+      renderRequest();
+    }
+
+    function deleteReq() {
+      if (!confirm('Permanently delete this request?')) return;
+      Store.deleteRequest(currentId());
+      window.location.href = 'dashboard.html';
     }
 
     renderRequest();

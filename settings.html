@@ -4,12 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Settings — Disclosure Desk</title>
-  <script>
-    (function(){var s=localStorage.getItem('dd-theme');if(s==='dark'||(s===null&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}})();
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/dark.css" />
   <style>
     body { font-family: 'Inter', sans-serif; }
     .serif { font-family: 'Playfair Display', Georgia, serif; }
@@ -92,22 +88,15 @@
         </svg>
         Settings
       </a>
-      <div class="mt-2 pt-2 border-t border-white/10">
-        <button onclick="toggleTheme()" class="theme-toggle-btn nav-item w-full" style="background:none;border:0;cursor:pointer;text-align:left">
-          <svg class="theme-icon-moon w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-          <svg class="theme-icon-sun w-4 h-4 flex-shrink-0" style="display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
-          <span class="theme-toggle-label">Dark mode</span>
-        </button>
-      </div>
     </nav>
     <div class="px-3 py-4 border-t border-white/10">
       <div class="flex items-center gap-3 px-2">
         <div class="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center flex-shrink-0">
-          <span class="text-white text-xs font-bold">JD</span>
+          <span id="sidebar-user-initials" class="text-white text-xs font-bold">JD</span>
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-white text-sm font-medium truncate">Jane Doe</p>
-          <p class="text-indigo-300 text-xs truncate">jane@example.com</p>
+          <p id="sidebar-user-name" class="text-white text-sm font-medium truncate">Jane Doe</p>
+          <p id="sidebar-user-email" class="text-indigo-300 text-xs truncate">jane@example.com</p>
         </div>
         <a href="index.html" class="text-indigo-300 hover:text-white transition-colors" title="Log out">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,7 +147,7 @@
               <input type="text" id="jobTitle" class="field-input" value="Investigative Reporter" />
             </div>
           </div>
-          <button onclick="showSaved(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
+          <button onclick="saveProfile(this)" class="mt-7 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
             Save changes
           </button>
         </div>
@@ -168,7 +157,7 @@
       <div id="tab-notifications" class="tab-panel">
         <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-7">
           <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">When should we email you?</h2>
-          <p class="text-sm text-slate-500 mb-6 mt-1.5">Reminders go to <span class="font-medium text-slate-700">jane@example.com</span></p>
+          <p class="text-sm text-slate-500 mb-6 mt-1.5">Reminders go to <span id="notif-user-email" class="font-medium text-slate-700">jane@example.com</span></p>
 
           <div class="space-y-4 mb-7">
             <label class="flex items-center gap-3 cursor-pointer">
@@ -233,7 +222,7 @@
           <h2 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Export your data</h2>
           <p class="text-sm text-slate-500 mb-5">Download all your FOIA requests and notes as a CSV file.</p>
           <button
-            onclick="alert('CSV export — demo only. In production this would download all 10 requests.')"
+            onclick="exportCSV()"
             class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
           >
             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -248,7 +237,7 @@
           <h2 class="text-xs font-semibold text-rose-600 uppercase tracking-wider mb-2">Danger zone</h2>
           <p class="text-sm text-slate-500 mb-5">These actions cannot be undone.</p>
           <button
-            onclick="alert('Account deletion — demo only. Your account and all data would be permanently removed.')"
+            onclick="deleteAccount()"
             class="px-4 py-2.5 text-sm font-medium text-white bg-rose-600 hover:bg-rose-700 rounded-lg transition-colors"
           >
             Delete my account
@@ -259,7 +248,8 @@
     </div>
   </main>
 
-  <script src="js/theme.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
   <script src="js/content.js"></script>
   <script src="js/apply-content.js"></script>
   <script>
@@ -290,6 +280,47 @@
         btn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
       }, 2000);
     }
+
+    function loadProfile() {
+      const u = Store.getUser();
+      if (u.fullName)      document.getElementById('fullName').value      = u.fullName;
+      if (u.email)         document.getElementById('profileEmail').value  = u.email;
+      if (u.organization)  document.getElementById('organization').value  = u.organization;
+      if (u.jobTitle)      document.getElementById('jobTitle').value      = u.jobTitle;
+    }
+
+    function saveProfile(btn) {
+      Store.saveUser({
+        fullName:     document.getElementById('fullName').value.trim(),
+        email:        document.getElementById('profileEmail').value.trim(),
+        organization: document.getElementById('organization').value.trim(),
+        jobTitle:     document.getElementById('jobTitle').value.trim(),
+      });
+      Store.updateUserDisplay();
+      showSaved(btn);
+    }
+
+    function exportCSV() {
+      const reqs = Store.getRequests();
+      const headers = ['ID','Agency','Subject','Jurisdiction','Submitted','Deadline','Status','Tracking #'];
+      const rows = reqs.map(r => [
+        r.id, r.agency, r.subject, r.jurisdiction,
+        r.submitted, r.deadline, r.status, r.trackingNumber || ''
+      ].map(v => '"' + String(v || '').replace(/"/g, '""') + '"'));
+      const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+      a.download = 'disclosure-desk-requests.csv';
+      a.click();
+    }
+
+    function deleteAccount() {
+      if (!confirm('Permanently delete all your data? This cannot be undone.')) return;
+      Store.clearAll();
+      window.location.href = 'index.html';
+    }
+
+    loadProfile();
   </script>
 </body>
 </html>

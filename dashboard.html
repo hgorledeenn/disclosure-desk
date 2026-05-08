@@ -4,12 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard — Disclosure Desk</title>
-  <script>
-    (function(){var s=localStorage.getItem('dd-theme');if(s==='dark'||(s===null&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}})();
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/dark.css" />
   <style>
     body { font-family: 'Inter', sans-serif; }
     .serif { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
@@ -80,24 +76,17 @@
         </svg>
         Settings
       </a>
-      <div class="mt-2 pt-2 border-t border-white/10">
-        <button onclick="toggleTheme()" class="theme-toggle-btn nav-item w-full" style="background:none;border:0;cursor:pointer;text-align:left">
-          <svg class="theme-icon-moon w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-          <svg class="theme-icon-sun w-4 h-4 flex-shrink-0" style="display:none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707.707M6.343 6.343l-.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
-          <span class="theme-toggle-label">Dark mode</span>
-        </button>
-      </div>
     </nav>
 
     <!-- User -->
     <div class="px-3 py-4 border-t border-white/10">
       <div class="flex items-center gap-3 px-2">
         <div class="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center flex-shrink-0">
-          <span class="text-white text-xs font-bold">JD</span>
+          <span id="sidebar-user-initials" class="text-white text-xs font-bold">JD</span>
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-white text-sm font-medium truncate">Jane Doe</p>
-          <p class="text-indigo-300 text-xs truncate">jane@example.com</p>
+          <p id="sidebar-user-name" class="text-white text-sm font-medium truncate">Jane Doe</p>
+          <p id="sidebar-user-email" class="text-indigo-300 text-xs truncate">jane@example.com</p>
         </div>
         <a href="index.html" class="text-indigo-300 hover:text-white transition-colors" title="Log out">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,25 +119,25 @@
       <!-- In Progress -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-indigo-400">
         <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statInProgress">In Progress</p>
-        <p class="text-3xl font-bold text-indigo-600">14</p>
+        <p id="stat-inprogress" class="text-3xl font-bold text-indigo-600">—</p>
         <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statInProgressNote">active requests</p>
       </div>
       <!-- Upcoming Deadlines -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-amber-400">
         <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statUpcoming">Upcoming Deadlines</p>
-        <p class="text-3xl font-bold text-amber-600">4</p>
+        <p id="stat-upcoming" class="text-3xl font-bold text-amber-600">—</p>
         <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statUpcomingNote">due within 7 days</p>
       </div>
       <!-- Overdue -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-rose-400">
         <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statOverdue">Overdue</p>
-        <p class="text-3xl font-bold text-rose-600">5</p>
+        <p id="stat-overdue" class="text-3xl font-bold text-rose-600">—</p>
         <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statOverdueNote">need follow-up</p>
       </div>
       <!-- Completed -->
       <div class="bg-white rounded-xl border border-slate-100 shadow-sm p-5 border-t-4 border-emerald-400">
         <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1" data-c="dashboard.statCompleted">Completed</p>
-        <p class="text-3xl font-bold text-emerald-600">6</p>
+        <p id="stat-completed" class="text-3xl font-bold text-emerald-600">—</p>
         <p class="text-sm text-slate-500 mt-1" data-c="dashboard.statCompletedNote">requests resolved</p>
       </div>
     </div>
@@ -211,7 +200,7 @@
   </main>
 
   <script src="js/data.js"></script>
-  <script src="js/theme.js"></script>
+  <script src="js/store.js"></script>
   <script src="js/content.js"></script>
   <script src="js/apply-content.js"></script>
   <script>
@@ -241,7 +230,10 @@
     }
 
     function isOverdue(r) {
-      return r.status === 'overdue';
+      if (r.status === 'overdue') return true;
+      if (r.status === 'closed' || r.status === 'responded') return false;
+      const d = getDaysUntilDeadline(r.deadline);
+      return d !== null && d < 0;
     }
 
     function isActive(r) {
@@ -311,31 +303,33 @@
 
     /* ── Jurisdiction badge ───────────────────────────────────── */
     function jurisdictionBadge(r) {
-      if (r.jurisdiction === 'Federal FOIA') {
+      const jx = r.jurisdiction || '';
+      if (!jx || jx === 'Federal FOIA') {
         return '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-100 text-sky-700 flex-shrink-0 w-12 text-center">Fed</span>';
       }
-      return '<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 flex-shrink-0 w-12 text-center">NY FOIL</span>';
+      const short = jx.split(/[\s\/]/)[0].slice(0, 4);
+      return `<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 flex-shrink-0 w-12 text-center">${short}</span>`;
     }
 
     /* ── Sort requests ────────────────────────────────────────── */
     function sortedRequests() {
-      const overdue  = MOCK_REQUESTS.filter(isOverdue).sort((a, b) => {
+      const overdue  = Store.getRequests().filter(isOverdue).sort((a, b) => {
         // most overdue first (most negative days first)
         const da = getDaysUntilDeadline(a.deadline) ?? 0;
         const db = getDaysUntilDeadline(b.deadline) ?? 0;
         return da - db;
       });
-      const dueSoon  = MOCK_REQUESTS.filter(isDueSoon).sort((a, b) => {
+      const dueSoon  = Store.getRequests().filter(isDueSoon).sort((a, b) => {
         // nearest deadline first
         const da = getDaysUntilDeadline(a.deadline) ?? 999;
         const db = getDaysUntilDeadline(b.deadline) ?? 999;
         return da - db;
       });
-      const active   = MOCK_REQUESTS.filter(isActive).sort((a, b) => {
+      const active   = Store.getRequests().filter(isActive).sort((a, b) => {
         // most recently submitted first
         return b.submitted.localeCompare(a.submitted);
       });
-      const done     = MOCK_REQUESTS.filter(isDone).sort((a, b) => {
+      const done     = Store.getRequests().filter(isDone).sort((a, b) => {
         return b.submitted.localeCompare(a.submitted);
       });
       return [...overdue, ...dueSoon, ...active, ...done];
@@ -364,7 +358,7 @@
 
     function getDisplayRequests() {
       if (sortCol === null) return sortedRequests();
-      return [...MOCK_REQUESTS].sort((a, b) => {
+      return [...Store.getRequests()].sort((a, b) => {
         if (sortCol === 'org')   return sortDir * (a.agencyAbbr || '').localeCompare(b.agencyAbbr || '');
         if (sortCol === 'filed') return sortDir * (a.submitted || '').localeCompare(b.submitted || '');
         if (sortCol === 'status') {
@@ -441,7 +435,7 @@
     function renderRecentUpdates() {
       // Flatten all notes with request context
       const allNotes = [];
-      MOCK_REQUESTS.forEach(r => {
+      Store.getRequests().forEach(r => {
         r.notes.forEach(note => {
           allNotes.push({ date: note.date, text: note.text, agency: r.agencyAbbr, subject: r.subject });
         });
@@ -467,11 +461,11 @@
     /* ── Dynamic pill counts ─────────────────────────────────── */
     function updatePillCounts() {
       const counts = {
-        all:     MOCK_REQUESTS.length,
-        overdue: MOCK_REQUESTS.filter(isOverdue).length,
-        duesoon: MOCK_REQUESTS.filter(isDueSoon).length,
-        active:  MOCK_REQUESTS.filter(isActive).length,
-        done:    MOCK_REQUESTS.filter(isDone).length,
+        all:     Store.getRequests().length,
+        overdue: Store.getRequests().filter(isOverdue).length,
+        duesoon: Store.getRequests().filter(isDueSoon).length,
+        active:  Store.getRequests().filter(isActive).length,
+        done:    Store.getRequests().filter(isDone).length,
       };
       const labels = {
         all:     'All',
@@ -486,12 +480,34 @@
       });
     }
 
+    /* ── Stat boxes ───────────────────────────────────────────── */
+    function updateStatBoxes() {
+      const reqs = Store.getRequests();
+      document.getElementById('stat-inprogress').textContent = reqs.filter(r => !isDone(r)).length;
+      document.getElementById('stat-upcoming').textContent   = reqs.filter(isDueSoon).length;
+      document.getElementById('stat-overdue').textContent    = reqs.filter(isOverdue).length;
+      document.getElementById('stat-completed').textContent  = reqs.filter(isDone).length;
+    }
+
     /* ── Init ─────────────────────────────────────────────────── */
     renderRequests();
+    updateStatBoxes();
     updatePillCounts();
     initFilterPills();
     initSortHeaders();
     renderRecentUpdates();
+
+    // Runs after apply-content.js so it overwrites the hardcoded greeting last
+    document.addEventListener('DOMContentLoaded', function () {
+      const user   = Store.getUser();
+      const first  = (user.fullName || 'Jane').trim().split(/\s+/)[0];
+      const nyHour = parseInt(new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York', hour: 'numeric', hour12: false
+      }).format(new Date()), 10);
+      const tod    = nyHour < 5 ? 'night' : nyHour < 12 ? 'morning' : nyHour < 17 ? 'afternoon' : 'evening';
+      const greet  = document.querySelector('[data-c="dashboard.greeting"]');
+      if (greet) greet.textContent = `Good ${tod}, ${first}.`;
+    });
   </script>
 </body>
 </html>
